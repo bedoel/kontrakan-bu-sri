@@ -27,44 +27,46 @@
             @if (session('success'))
                 <div class="alert alert-success">{{ session('success') }}</div>
             @endif
-            <table class="table table-bordered align-middle datatable" id="transaksiTable">
 
-                <thead class="table-light">
-                    <tr>
-                        <th>Invoice</th>
-                        <th>Kontrakan</th>
-                        <th>Metode</th>
-                        <th>Total Bayar</th>
-                        <th>Status</th>
-                        <th>Waktu</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($transaksis as $trx)
+            <div class="table-responsive">
+                <table class="table table-bordered align-middle datatable" id="transaksiTable">
+                    <thead class="table-light">
                         <tr>
-                            <td>{{ $trx->invoice_number }}</td>
-                            <td>{{ $trx->sewa->kontrakan->nama }}</td>
-                            <td>{{ ucfirst($trx->metode) }}</td>
-                            <td>Rp {{ number_format($trx->total_bayar) }}</td>
-                            <td>
-                                {!! statusBadge($trx->status) !!}
-                            </td>
-                            <td>{{ $trx->created_at->format('d M Y H:i') }}</td>
-                            <td>
-                                <a href="{{ route('user.transaksi.show', $trx->id) }}" class="btn btn-sm btn-outline-info">
-                                    <i class="bi bi-eye"></i> Detail
-                                </a>
-                                <a href="{{ route('user.transaksi.invoice', $trx->id) }}" target="_blank"
-                                    class="btn btn-sm btn-outline-primary">
-                                    <i class="bi bi-printer"></i> Invoice
-                                </a>
-                            </td>
+                            <th>Invoice</th>
+                            <th>Kontrakan</th>
+                            <th>Metode</th>
+                            <th>Total Bayar</th>
+                            <th>Status</th>
+                            <th>Waktu</th>
+                            <th>Aksi</th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach ($transaksis as $trx)
+                            <tr>
+                                <td>{{ $trx->invoice_number }}</td>
+                                <td>{{ $trx->sewa->kontrakan->nama }}</td>
+                                <td>{{ ucfirst($trx->metode) }}</td>
+                                <td>Rp {{ number_format($trx->total_bayar) }}</td>
+                                <td>{!! statusBadge($trx->status) !!}</td>
+                                <td>{{ $trx->created_at->format('d M Y H:i') }}</td>
+                                <td>
+                                    <a href="{{ route('user.transaksi.show', $trx->id) }}"
+                                        class="btn btn-sm btn-outline-info">
+                                        <i class="bi bi-eye"></i> Detail
+                                    </a>
+                                    <a href="{{ route('user.transaksi.invoice', $trx->id) }}" target="_blank"
+                                        class="btn btn-sm btn-outline-primary">
+                                        <i class="bi bi-printer"></i> Invoice
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
+
     </section>
 @endsection
 
