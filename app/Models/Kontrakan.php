@@ -1,0 +1,15 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Kontrakan extends Model
+{
+    protected $fillable = ['nama', 'slug', 'harga', 'deskripsi', 'status'];
+
+    public function foto_kontrakans()
+    {
+        return $this->hasMany(FotoKontrakan::class);
+    }
+}
