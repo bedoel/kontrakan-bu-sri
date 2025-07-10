@@ -21,49 +21,51 @@
     @endif
 
     <div class="card shadow">
-        <div class="card-body table-responsive">
-            <table class="table table-bordered datatable">
-                <thead class="table-dark">
-                    <tr>
-                        <th>Invoice</th>
-                        <th>Penyewa</th> <!-- Tambahkan ini -->
-                        <th>Kontrakan</th>
-                        <th>Total</th>
-                        <th>Status</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($transaksis as $trx)
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered datatable">
+                    <thead class="table-dark">
                         <tr>
-                            <td>{{ $trx->invoice_number }}</td>
-                            <td>
-                                @if ($trx->sewa && $trx->sewa->user)
-                                    <a href="{{ route('admin.users.show', $trx->sewa->user->id) }}">
-                                        {{ $trx->sewa->user->name }}
-                                    </a>
-                                @else
-                                    -
-                                @endif
-                            </td>
-
-                            <td>{{ $trx->sewa->kontrakan->nama }}</td>
-                            <td>Rp {{ number_format($trx->total_bayar) }}</td>
-                            <td>{!! statusBadge($trx->status) !!}</td>
-                            <td>
-                                <a href="{{ route('admin.transaksi.edit', $trx->id) }}"
-                                    class="btn btn-warning btn-sm">Edit</a>
-                                <form action="{{ route('admin.transaksi.destroy', $trx->id) }}" method="POST"
-                                    class="d-inline">
-                                    @csrf @method('DELETE')
-                                    <button class="btn btn-danger btn-sm"
-                                        onclick="return confirm('Yakin hapus?')">Hapus</button>
-                                </form>
-                            </td>
+                            <th>Invoice</th>
+                            <th>Penyewa</th> <!-- Tambahkan ini -->
+                            <th>Kontrakan</th>
+                            <th>Total</th>
+                            <th>Status</th>
+                            <th>Aksi</th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach ($transaksis as $trx)
+                            <tr>
+                                <td>{{ $trx->invoice_number }}</td>
+                                <td>
+                                    @if ($trx->sewa && $trx->sewa->user)
+                                        <a href="{{ route('admin.users.show', $trx->sewa->user->id) }}">
+                                            {{ $trx->sewa->user->name }}
+                                        </a>
+                                    @else
+                                        -
+                                    @endif
+                                </td>
+
+                                <td>{{ $trx->sewa->kontrakan->nama }}</td>
+                                <td>Rp {{ number_format($trx->total_bayar) }}</td>
+                                <td>{!! statusBadge($trx->status) !!}</td>
+                                <td>
+                                    <a href="{{ route('admin.transaksi.edit', $trx->id) }}"
+                                        class="btn btn-warning btn-sm">Edit</a>
+                                    <form action="{{ route('admin.transaksi.destroy', $trx->id) }}" method="POST"
+                                        class="d-inline">
+                                        @csrf @method('DELETE')
+                                        <button class="btn btn-danger btn-sm"
+                                            onclick="return confirm('Yakin hapus?')">Hapus</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 @endsection

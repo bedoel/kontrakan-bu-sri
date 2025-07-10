@@ -26,8 +26,9 @@
                                 <tr>
                                     <th>Gambar</th>
                                     <td>
-                                        <img src="{{ asset('storage/' . $pengaduan->gambar) }}" class="img-fluid rounded"
-                                            style="max-width: 300px;" alt="Bukti Pengaduan">
+                                        <img src="{{ asset('storage/' . $pengaduan->gambar) }}"
+                                            class="img-fluid rounded mx-auto d-block" style="max-width: 100%; height: auto;"
+                                            alt="Bukti Pengaduan">
                                     </td>
                                 </tr>
                             @endif

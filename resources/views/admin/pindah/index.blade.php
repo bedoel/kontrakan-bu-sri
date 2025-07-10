@@ -21,45 +21,47 @@
     @endif
 
     <div class="card shadow">
-        <div class="card-body table-responsive">
-            <table class="table table-bordered datatable">
-                <thead class="table-dark">
-                    <tr>
-                        <th>Nama User</th>
-                        <th>Kontrakan Lama</th>
-                        <th>Kontrakan Baru</th>
-                        <th>Alasan</th>
-                        <th>Status</th>
-                        <th>Catatan</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($permintaan as $p)
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered datatable">
+                    <thead class="table-dark">
                         <tr>
-                            <td>{{ $p->user->name }}</td>
-                            <td>{{ $p->kontrakanLama->nama }}</td>
-                            <td>{{ $p->kontrakanBaru->nama }}</td>
-                            <td>{{ $p->alasan }}</td>
-                            <td>{!! statusBadge($p->status) !!}</td>
-                            <td>{{ $p->catatan ?? '-' }}</td>
-                            <td>
-                                <a href="{{ route('admin.pindah.show', $p->id) }}"
-                                    class="btn btn-sm btn-info mb-1">Detail</a>
-
-                                @if ($p->status == 'menunggu')
-                                    <form action="{{ route('admin.pindah.destroy', $p->id) }}" method="POST"
-                                        onsubmit="return confirmDelete(this)">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
-                                    </form>
-                                @endif
-                            </td>
+                            <th>Nama User</th>
+                            <th>Kontrakan Lama</th>
+                            <th>Kontrakan Baru</th>
+                            <th>Alasan</th>
+                            <th>Status</th>
+                            <th>Catatan</th>
+                            <th>Aksi</th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach ($permintaan as $p)
+                            <tr>
+                                <td>{{ $p->user->name }}</td>
+                                <td>{{ $p->kontrakanLama->nama }}</td>
+                                <td>{{ $p->kontrakanBaru->nama }}</td>
+                                <td>{{ $p->alasan }}</td>
+                                <td>{!! statusBadge($p->status) !!}</td>
+                                <td>{{ $p->catatan ?? '-' }}</td>
+                                <td>
+                                    <a href="{{ route('admin.pindah.show', $p->id) }}"
+                                        class="btn btn-sm btn-info mb-1">Detail</a>
+
+                                    @if ($p->status == 'menunggu')
+                                        <form action="{{ route('admin.pindah.destroy', $p->id) }}" method="POST"
+                                            onsubmit="return confirmDelete(this)">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
+                                        </form>
+                                    @endif
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 @endsection

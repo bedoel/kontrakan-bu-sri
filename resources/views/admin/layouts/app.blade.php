@@ -57,8 +57,8 @@
                     info: "Menampilkan _START_ - _END_ dari _TOTAL_ data",
                     infoEmpty: "Tidak ada data tersedia",
                     paginate: {
-                        previous: "Sebelumnya",
-                        next: "Berikutnya"
+                        previous: '<i class="bi bi-chevron-left"></i>',
+                        next: '<i class="bi bi-chevron-right"></i>'
                     }
                 }
             });
