@@ -32,35 +32,37 @@
                     <i class="bi bi-plus-circle"></i> Buat Pengaduan
                 </a>
             </div>
-
-            <table class="table table-bordered align-middle datatable" id="pengaduanTable">
-                <thead class="table-light">
-                    <tr>
-                        <th>Pesan</th>
-                        <th>Status</th>
-                        <th>Balasan</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($pengaduans as $p)
+            <div class="table-responsive">
+                <table class="table table-bordered align-middle datatable" id="pengaduanTable">
+                    <thead class="table-light">
                         <tr>
-                            <td>{{ Str::limit($p->pesan, 50) }}</td>
-                            <td>
-                                {!! statusBadge($p->status) !!}
-                            </td>
-                            <td>
-                                {{ $p->balasan->count() > 0 ? $p->balasan->count() . ' Balasan' : 'Belum ada balasan' }}
-                            </td>
-                            <td>
-                                <a href="{{ route('user.pengaduan.show', $p->id) }}" class="btn btn-sm btn-outline-info">
-                                    <i class="bi bi-eye"></i> Detail
-                                </a>
-                            </td>
+                            <th>Pesan</th>
+                            <th>Status</th>
+                            <th>Balasan</th>
+                            <th>Aksi</th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach ($pengaduans as $p)
+                            <tr>
+                                <td>{{ Str::limit($p->pesan, 50) }}</td>
+                                <td>
+                                    {!! statusBadge($p->status) !!}
+                                </td>
+                                <td>
+                                    {{ $p->balasan->count() > 0 ? $p->balasan->count() . ' Balasan' : 'Belum ada balasan' }}
+                                </td>
+                                <td>
+                                    <a href="{{ route('user.pengaduan.show', $p->id) }}"
+                                        class="btn btn-sm btn-outline-info">
+                                        <i class="bi bi-eye"></i> Detail
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
     </section>
 @endsection
