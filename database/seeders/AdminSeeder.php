@@ -17,7 +17,7 @@ class AdminSeeder extends Seeder
     {
         Admin::create([
             'name' => 'Admin Kontrakan',
-            'email' => 'admin@example.com',
+            'email' => 'gamefadlur1969@gmail.com',
             'nomor_hp' => '089999999999',
             'poto_profil' => null,
             'email_verified_at' => Carbon::now(),
