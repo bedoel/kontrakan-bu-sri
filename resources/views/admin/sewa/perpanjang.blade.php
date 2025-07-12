@@ -1,5 +1,7 @@
 @extends('admin.layouts.app')
 
+@section('title', 'Perpanjang Sewa - Admin')
+
 @section('content')
     <h4 class="mb-4">Perpanjangan Sewa</h4>
 

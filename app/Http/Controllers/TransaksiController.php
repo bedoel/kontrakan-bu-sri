@@ -70,7 +70,7 @@ class TransaksiController extends Controller
         }
 
         $harga = $sewa->kontrakan->harga;
-        $durasi = $sewa->tanggal_mulai->diffInMonths($sewa->tanggal_akhir);
+        $durasi = $sewa->lama_sewa_bulan;
         $diskon = $sewa->diskon ?? 0;
 
         $total = ($harga * $durasi) - $diskon;

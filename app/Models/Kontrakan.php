@@ -12,4 +12,15 @@ class Kontrakan extends Model
     {
         return $this->hasMany(FotoKontrakan::class);
     }
+
+    public function sewaAktif()
+    {
+        return $this->hasOne(Sewa::class)
+            ->where('status', 'aktif');
+    }
+
+    public function admin()
+    {
+        return $this->belongsTo(Admin::class, 'admin_id'); // jika kontrakan ditambahkan oleh admin
+    }
 }

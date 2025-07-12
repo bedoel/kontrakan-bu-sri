@@ -117,14 +117,14 @@
                     </div>
                 </div>
 
-                <!-- Ulasan Testimoni -->
+                <!-- Ulasan -->
                 <div class="col-lg-3 col-md-6">
                     <div class="stats-item d-flex align-items-center w-100 h-100">
                         <i class="bi bi-chat-left-quote color-pink flex-shrink-0"></i>
                         <div>
                             <span data-purecounter-start="0" data-purecounter-end="{{ $jumlahTestimoni }}"
                                 data-purecounter-duration="1" class="purecounter"></span>
-                            <p>Testimoni Penghuni</p>
+                            <p>Ulasan Penghuni</p>
                         </div>
                     </div>
                 </div>
@@ -236,7 +236,7 @@
                     @empty
                         <div class="swiper-slide">
                             <div class="testimonial-item">
-                                <h3>Belum ada testimoni</h3>
+                                <h3>Belum ada Ulasan</h3>
                                 <p>
                                     <i class="bi bi-quote quote-icon-left"></i>
                                     <span>Penghuni belum memberikan ulasan.</span>
@@ -263,11 +263,11 @@
 
 
     @if (auth('user')->check() && !$userHasTestimoni)
-        <!-- Form Testimoni -->
+        <!-- Form Ulasan -->
         <section class="starter-section section">
             <div class="container" data-aos="fade-up">
                 <div class="section-title">
-                    <h2>Kirim Testimoni</h2>
+                    <h2>Kirim Ulasan</h2>
                     <p>Bagikan pengalaman Anda menyewa di kontrakan Bu Sri</p>
                 </div>
 
@@ -295,7 +295,7 @@
                                 <input type="file" name="gambar" class="form-control">
                             </div>
 
-                            <button class="btn btn-success"><i class="bi bi-send"></i> Kirim Testimoni</button>
+                            <button class="btn btn-success"><i class="bi bi-send"></i> Kirim Ulasan</button>
                         </form>
                     </div>
                 </div>

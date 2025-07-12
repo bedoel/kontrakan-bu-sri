@@ -1,5 +1,7 @@
 @extends('admin.layouts.app')
 
+@section('title', 'Kelola Kontrakan - Admin')
+
 @section('content')
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Data Kontrakan</h1>
@@ -19,6 +21,8 @@
                             <th>Nama</th>
                             <th>Harga</th>
                             <th>Status</th>
+                            <th>Disewa Oleh</th>
+                            <th>Ditambahkan Oleh</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -28,6 +32,13 @@
                                 <td>{{ $kontrakan->nama }}</td>
                                 <td>Rp {{ number_format($kontrakan->harga) }}</td>
                                 <td>{!! statusBadge($kontrakan->status) !!}</td>
+                                <td>
+                                    {{ $kontrakan->sewaAktif ? $kontrakan->sewaAktif->user->name : '-' }}
+                                </td>
+                                <td>
+                                    {{ $kontrakan->admin->name ?? '-' }}
+                                </td>
+
                                 <td>
                                     <a href="{{ route('admin.kontrakan.edit', $kontrakan->id) }}"
                                         class="btn btn-sm btn-warning">Edit</a>

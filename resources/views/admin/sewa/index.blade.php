@@ -1,5 +1,7 @@
 @extends('admin.layouts.app')
 
+@section('title', 'Kelola Sewa - Admin')
+
 @section('content')
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1 class="h3 text-gray-800">Daftar Sewa</h1>

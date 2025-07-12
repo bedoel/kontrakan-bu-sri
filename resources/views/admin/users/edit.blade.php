@@ -1,7 +1,9 @@
 @extends('admin.layouts.app')
 
+@section('title', 'Edit Penyewa - Admin')
+
 @section('content')
-    <h1 class="h3 mb-4 text-gray-800">Edit Data User</h1>
+    <h1 class="h3 mb-4 text-gray-800">Edit Data Penyewa</h1>
 
     <div class="card shadow-sm">
         <div class="card-body">
@@ -48,6 +50,17 @@
                             <label class="form-label">Nomor HP</label>
                             <input name="nomor_hp" class="form-control" value="{{ $user->nomor_hp }}">
                         </div>
+
+                        <hr>
+                        <h6 class="text-danger">Ubah Password (Opsional)</h6>
+                        <div class="mb-3">
+                            <input type="password" name="password" class="form-control" placeholder="Password baru">
+                        </div>
+                        <div class="mb-3">
+                            <input type="password" name="password_confirmation" class="form-control"
+                                placeholder="Konfirmasi password">
+                        </div>
+                        <small class="text-muted">Kosongkan jika tidak ingin mengubah password.</small>
                     </div>
                 </div>
 

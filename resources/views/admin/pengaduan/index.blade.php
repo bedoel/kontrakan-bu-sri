@@ -1,5 +1,7 @@
 @extends('admin.layouts.app')
 
+@section('title', 'Tanggapi Pengaduan - Admin')
+
 @section('content')
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1 class="h3 text-gray-800">Daftar Pengaduan</h1>
@@ -29,7 +31,7 @@
                             <th scope="col">User</th>
                             <th scope="col">Pesan</th>
                             <th scope="col">Status</th>
-                            <th scope="col">Ubah Status</th>
+                            <th scope="col">Balasan</th>
                             <th scope="col">Aksi</th>
                         </tr>
                     </thead>
@@ -52,29 +54,16 @@
                                 <td>
                                     {!! statusBadge($p->status) !!}
                                 </td>
-                                <td>
-                                    <form action="{{ route('admin.pengaduan.ubah-status', $p->id) }}" method="POST">
-                                        @csrf
-                                        @method('PATCH')
-                                        <select name="status" class="form-control form-select-sm"
-                                            onchange="this.form.submit()">
-                                            <option disabled selected>Ubah...</option>
-                                            <option value="menunggu" {{ $p->status == 'menunggu' ? 'selected' : '' }}>
-                                                Menunggu
-                                            </option>
-                                            <option value="diproses" {{ $p->status == 'diproses' ? 'selected' : '' }}>
-                                                Diproses
-                                            </option>
-                                            <option value="selesai" {{ $p->status == 'selesai' ? 'selected' : '' }}>Selesai
-                                            </option>
-                                        </select>
-                                    </form>
-                                </td>
+                                <td><span class="badge bg-info text-white">{{ $p->balasan->count() }} Balasan</span></td>
                                 <td>
                                     <a href="{{ route('admin.pengaduan.show', $p->id) }}"
-                                        class="btn btn-sm btn-outline-primary">
-                                        <i class="bi bi-eye"></i> Detail
-                                    </a>
+                                        class="btn btn-primary btn-sm">Detail</a>
+                                    <form action="{{ route('admin.pengaduan.destroy', $p->id) }}" method="POST"
+                                        class="d-inline">
+                                        @csrf @method('DELETE')
+                                        <button class="btn btn-danger btn-sm"
+                                            onclick="return confirm('Yakin hapus?')">Hapus</button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach

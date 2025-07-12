@@ -1,5 +1,7 @@
 @extends('admin.layouts.app')
 
+@section('title', 'Konfirmasi Transaksi - Admin')
+
 @section('content')
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1 class="h3 text-gray-800">Daftar Transaksi</h1>
@@ -31,6 +33,7 @@
                             <th>Kontrakan</th>
                             <th>Total</th>
                             <th>Status</th>
+                            <th>Dikonfirmasi Oleh</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -51,6 +54,7 @@
                                 <td>{{ $trx->sewa->kontrakan->nama }}</td>
                                 <td>Rp {{ number_format($trx->total_bayar) }}</td>
                                 <td>{!! statusBadge($trx->status) !!}</td>
+                                <td>{{ $trx->admin->name ?? '-' }}</td>
                                 <td>
                                     <a href="{{ route('admin.transaksi.edit', $trx->id) }}"
                                         class="btn btn-warning btn-sm">Edit</a>

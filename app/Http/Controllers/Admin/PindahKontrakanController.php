@@ -13,7 +13,7 @@ class PindahKontrakanController extends Controller
 {
     public function index()
     {
-        $permintaan = PermintaanPindahKontrakan::with(['user', 'kontrakanLama', 'kontrakanBaru'])->latest()->get();
+        $permintaan = PermintaanPindahKontrakan::with(['user', 'kontrakanLama', 'kontrakanBaru', 'admin'])->latest()->get();
         return view('admin.pindah.index', compact('permintaan'));
     }
 

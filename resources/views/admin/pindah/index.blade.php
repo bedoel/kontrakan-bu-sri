@@ -1,5 +1,7 @@
 @extends('admin.layouts.app')
 
+@section('title', 'Konfirmasi Pindah - Admin')
+
 @section('content')
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1 class="h3 text-gray-800">Daftar Permintaan Pindah</h1>
@@ -31,6 +33,7 @@
                             <th>Kontrakan Baru</th>
                             <th>Alasan</th>
                             <th>Status</th>
+                            <th>Dikonfirmasi Oleh</th>
                             <th>Catatan</th>
                             <th>Aksi</th>
                         </tr>
@@ -43,6 +46,7 @@
                                 <td>{{ $p->kontrakanBaru->nama }}</td>
                                 <td>{{ $p->alasan }}</td>
                                 <td>{!! statusBadge($p->status) !!}</td>
+                                <td>{{ $p->admin ? $p->admin->name : '-' }}</td>
                                 <td>{{ $p->catatan ?? '-' }}</td>
                                 <td>
                                     <a href="{{ route('admin.pindah.show', $p->id) }}"

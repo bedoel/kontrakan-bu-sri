@@ -13,7 +13,7 @@ class KontrakanController extends Controller
 {
     public function index()
     {
-        $kontrakans = Kontrakan::with('foto_kontrakans')->latest()->get();
+        $kontrakans = Kontrakan::with(['sewaAktif.user', 'admin'])->latest()->get();
         return view('admin.kontrakan.index', compact('kontrakans'));
     }
 

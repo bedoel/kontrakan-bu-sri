@@ -137,8 +137,9 @@ Route::middleware(['auth:admin'])->prefix('admin')->name('admin.')->group(functi
     // Pengaduan
     Route::get('/pengaduan', [AdminPengaduanController::class, 'index'])->name('pengaduan.index');
     Route::get('/pengaduan/{pengaduan}', [AdminPengaduanController::class, 'show'])->name('pengaduan.show');
+    Route::delete('/pengaduan/{pengaduan}', [AdminPengaduanController::class, 'destroy'])->name('pengaduan.destroy');
     Route::post('/pengaduan/{pengaduan}/balas', [AdminPengaduanController::class, 'balas'])->name('pengaduan.balas');
-    Route::patch('/pengaduan/{pengaduan}/ubah-status', [AdminPengaduanController::class, 'ubahStatus'])->name('pengaduan.ubah-status');
+    Route::post('/pengaduan/{pengaduan}/ubah-status', [AdminPengaduanController::class, 'ubahStatus'])->name('pengaduan.ubahStatus');
 
     Route::get('/testimoni', [\App\Http\Controllers\Admin\TestimoniController::class, 'index'])->name('testimoni.index');
     Route::get('/testimoni/{id}', [\App\Http\Controllers\Admin\TestimoniController::class, 'show'])->name('testimoni.show');

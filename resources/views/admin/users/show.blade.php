@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
 @section('content')
-    <h1 class="h3 mb-4 text-gray-800">Detail User</h1>
+    <h1 class="h3 mb-4 text-gray-800">Detail Penyewa</h1>
 
     @if (session('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -52,37 +52,6 @@
                     </table>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <!-- Reset Password -->
-    <div class="card shadow-sm mb-4">
-        <div class="card-header">
-            <h5 class="m-0 font-weight-bold text-danger">Reset Password</h5>
-        </div>
-        <div class="card-body">
-            <form action="{{ route('admin.users.reset-password', $user->id) }}" method="POST">
-                @csrf
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul class="mb-0">
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-                <div class="row g-3">
-                    <div class="col-md-6">
-                        <input type="password" name="password" class="form-control" placeholder="Password baru" required>
-                    </div>
-                    <div class="col-md-6">
-                        <input type="password" name="password_confirmation" class="form-control"
-                            placeholder="Konfirmasi password" required>
-                    </div>
-                </div>
-                <button class="btn btn-danger mt-3">Reset Password</button>
-            </form>
         </div>
     </div>
 

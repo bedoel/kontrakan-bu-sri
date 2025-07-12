@@ -1,8 +1,10 @@
 @extends('admin.layouts.app')
 
+@section('title', 'Tambah Penyewa - Admin')
+
 @section('content')
     <div class="container-fluid">
-        <h1 class="h3 mb-4 text-gray-800">Tambah User Baru</h1>
+        <h1 class="h3 mb-4 text-gray-800">Tambah Penyewa Baru</h1>
 
         <div class="card shadow-sm">
             <div class="card-body">

@@ -70,4 +70,17 @@ class TransaksiController extends Controller
 
         return redirect()->route('admin.transaksi.index')->with('success', 'Transaksi diperbarui.');
     }
+
+    public function destroy(Transaksi $transaksi)
+    {
+
+        // Jika transaksi ditolak atau menunggu, maka sewa juga bisa dihapus
+        if ($transaksi->status === 'menunggu_konfirmasi' || $transaksi->status === 'ditolak') {
+            $transaksi->delete();
+
+            return back()->with('success', 'Transaksi berhasil dihapus.');
+        }
+
+        return back()->with('error', 'Transaksi tidak dapat dihapus karena sudah disetujui.');
+    }
 }

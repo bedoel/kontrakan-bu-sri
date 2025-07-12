@@ -1,7 +1,9 @@
 @extends('admin.layouts.app')
 
+@section('title', 'Detail Ulasan - Admin')
+
 @section('content')
-    <h1 class="h3 mb-4 text-gray-800">Detail Testimoni</h1>
+    <h1 class="h3 mb-4 text-gray-800">Detail Ulasan</h1>
 
     <div class="card shadow-sm mb-4">
         <div class="card-body">

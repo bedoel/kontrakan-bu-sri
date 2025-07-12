@@ -1,14 +1,21 @@
 @extends('admin.layouts.app')
 
+@section('title', 'Detail Pengaduan - Admin')
+
 @section('content')
     <div class="container-fluid">
         <h1 class="h5 mb-3 text-gray-800 text-center text-md-start">Detail Pengaduan</h1>
 
+        @if (session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+            </div>
+        @endif
         <!-- Info Pengaduan -->
         <div class="card shadow-sm mb-4">
             <div class="card-body">
                 <div class="row g-4">
-                    <div class="col-12 col-md-8">
+                    <div class="col-12">
                         <h5 class="mb-3 fs-6">Informasi Pengaduan</h5>
                         <div class="table-responsive">
                             <table class="table table-sm table-borderless">
@@ -36,6 +43,23 @@
                                 @endif
                             </table>
                         </div>
+                        <form action="{{ route('admin.pengaduan.ubahStatus', $pengaduan->id) }}" method="POST">
+                            @csrf
+                            <div class="mb-3">
+                                <label class="form-label">Ubah Status:</label>
+                                <select name="status" class="form-control form-control-sm">
+                                    <option value="menunggu" {{ $pengaduan->status == 'menunggu' ? 'selected' : '' }}>
+                                        Menunggu</option>
+                                    <option value="diproses" {{ $pengaduan->status == 'diproses' ? 'selected' : '' }}>
+                                        Diproses</option>
+                                    <option value="selesai" {{ $pengaduan->status == 'selesai' ? 'selected' : '' }}>
+                                        Selesai</option>
+                                </select>
+                            </div>
+                            <div class="text-end">
+                                <button type="submit" class="btn btn-primary btn-sm">Update</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -59,37 +83,37 @@
             </div>
         </div>
 
-        <!-- Form Balas -->
-        <div class="card shadow-sm">
-            <div class="card-header bg-warning">
-                <h6 class="mb-0 text-white fs-6"><i class="bi bi-reply-fill"></i> Balas Pengaduan</h6>
-            </div>
-            <div class="card-body">
-                <form action="{{ route('admin.pengaduan.balas', $pengaduan->id) }}" method="POST">
-                    @csrf
-                    @if ($errors->any())
-                        <div class="alert alert-danger small">
-                            <ul class="mb-0">
-                                @foreach ($errors->all() as $error)
-                                    <li class="small">{{ $error }}</li>
-                                @endforeach
-                            </ul>
+        @if ($pengaduan->status !== 'selesai')
+            <!-- Form Balas -->
+            <div class="card shadow-sm">
+                <div class="card-header bg-warning">
+                    <h6 class="mb-0 text-white fs-6"><i class="bi bi-reply-fill"></i> Balas Pengaduan</h6>
+                </div>
+                <div class="card-body">
+                    <form action="{{ route('admin.pengaduan.balas', $pengaduan->id) }}" method="POST">
+                        @csrf
+                        @if ($errors->any())
+                            <div class="alert alert-danger small">
+                                <ul class="mb-0">
+                                    @foreach ($errors->all() as $error)
+                                        <li class="small">{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        <div class="mb-3">
+                            <label for="pesan" class="form-label small">Pesan Balasan</label>
+                            <textarea name="pesan" id="pesan" class="form-control form-control-sm" rows="4" required></textarea>
                         </div>
-                    @endif
-                    <div class="mb-3">
-                        <label for="pesan" class="form-label small">Pesan Balasan</label>
-                        <textarea name="pesan" id="pesan" class="form-control form-control-sm" rows="4" required></textarea>
-                    </div>
-                    <div class="text-end">
-                        <button class="btn btn-success btn-sm">
-                            <i class="bi bi-send"></i> Kirim Balasan
-                        </button>
-                        <a href="{{ route('admin.pengaduan.index') }}" class="btn btn-secondary btn-sm">
-                            <i class="bi bi-arrow-left-circle"></i> Kembali
-                        </a>
-                    </div>
-                </form>
+                        <div class="text-end">
+                            <button class="btn btn-success btn-sm">
+                                <i class="bi bi-send"></i> Kirim Balasan
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </div>
+        @endif
+
     </div>
 @endsection

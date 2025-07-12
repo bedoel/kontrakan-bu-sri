@@ -81,7 +81,8 @@ class UserController extends Controller
             'name' => 'required|string|max:100',
             'email' => 'required|email|unique:users,email,' . $user->id,
             'nomor_hp' => 'required|numeric|digits_between:10,15',
-            'poto_profil' => 'nullable|mimes:jpg,jpeg,png|max:2048', // Ganti image jadi mimes
+            'poto_profil' => 'nullable|mimes:jpg,jpeg,png|max:2048',
+            'password' => 'nullable|string|min:6|confirmed',
         ], [
             'name.required' => 'Nama wajib diisi.',
             'name.string' => 'Nama harus berupa teks.',
@@ -97,16 +98,24 @@ class UserController extends Controller
 
             'poto_profil.mimes' => 'Foto profil harus berupa file JPG, JPEG, atau PNG.',
             'poto_profil.max' => 'Ukuran foto maksimal 2MB.',
-        ]);
 
+            'password.min' => 'Password minimal 6 karakter.',
+            'password.confirmed' => 'Konfirmasi password tidak cocok.',
+        ]);
 
         $data = $request->only(['name', 'email', 'nomor_hp']);
 
+        // Update poto_profil jika ada
         if ($request->hasFile('poto_profil')) {
-            if ($user->poto_profil) {
-                Storage::delete($user->poto_profil);
+            if ($user->poto_profil && Storage::disk('public')->exists($user->poto_profil)) {
+                Storage::disk('public')->delete($user->poto_profil);
             }
             $data['poto_profil'] = $request->file('poto_profil')->store('foto_profil', 'public');
+        }
+
+        // Update password jika diisi
+        if ($request->filled('password')) {
+            $data['password'] = Hash::make($request->password);
         }
 
         $user->update($data);
@@ -123,19 +132,19 @@ class UserController extends Controller
         return redirect()->route('admin.users.index')->with('success', 'User berhasil dihapus.');
     }
 
-    public function resetPassword(Request $request, User $user)
-    {
-        $request->validate([
-            'password' => 'required|string|min:6|confirmed',
-        ], [
-            'password.required' => 'Password wajib diisi.',
-            'password.string' => 'Password harus berupa teks.',
-            'password.min' => 'Password minimal 6 karakter.',
-            'password.confirmed' => 'Konfirmasi password tidak cocok.',
-        ]);
+    // public function resetPassword(Request $request, User $user)
+    // {
+    //     $request->validate([
+    //         'password' => 'required|string|min:6|confirmed',
+    //     ], [
+    //         'password.required' => 'Password wajib diisi.',
+    //         'password.string' => 'Password harus berupa teks.',
+    //         'password.min' => 'Password minimal 6 karakter.',
+    //         'password.confirmed' => 'Konfirmasi password tidak cocok.',
+    //     ]);
 
-        $user->update(['password' => Hash::make($request->password)]);
+    //     $user->update(['password' => Hash::make($request->password)]);
 
-        return redirect()->route('admin.users.show', $user->id)->with('success', 'Password berhasil direset.');
-    }
+    //     return redirect()->route('admin.users.show', $user->id)->with('success', 'Password berhasil direset.');
+    // }
 }

@@ -1,5 +1,7 @@
 @extends('admin.layouts.app')
 
+@section('title', 'Edit Transaksi - Admin')
+
 @section('content')
     <div class="container-fluid">
         <h1 class="h3 mb-4 text-gray-800">Konfirmasi Transaksi</h1>
@@ -55,6 +57,11 @@
                                 <th>Catatan</th>
                                 <td>{{ $transaksi->catatan ?? '-' }}</td>
                             </tr>
+                            <tr>
+                                <th>Dikonfirmasi Oleh</th>
+                                <td>{{ $transaksi->admin->name ?? '-' }}</td>
+                            </tr>
+
                         </table>
                     </div>
 

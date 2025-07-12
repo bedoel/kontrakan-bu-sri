@@ -1,5 +1,7 @@
 @extends('admin.layouts.app')
 
+@section('title', 'Detail Permintaan Pindah Kontrakan - Admin')
+
 @section('content')
     <h1 class="h3 mb-4 text-gray-800">Detail Permintaan Pindah Kontrakan</h1>
 
@@ -27,6 +29,11 @@
 
                 <dt class="col-sm-4">Status</dt>
                 <dd class="col-sm-8">{!! statusBadge($pindah->status) !!}</dd>
+
+                @if ($pindah->admin)
+                    <dt class="col-sm-4">Dikonfirmasi Oleh</dt>
+                    <dd class="col-sm-8">{{ $pindah->admin->name }}</dd>
+                @endif
 
                 @if ($pindah->catatan)
                     <dt class="col-sm-4">Catatan Admin</dt>

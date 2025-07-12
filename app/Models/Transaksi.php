@@ -25,4 +25,9 @@ class Transaksi extends Model
     {
         return $this->belongsTo(Sewa::class);
     }
+
+    public function admin()
+    {
+        return $this->belongsTo(Admin::class);
+    }
 }

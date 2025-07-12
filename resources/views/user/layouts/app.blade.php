@@ -101,7 +101,7 @@
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
             @guest('user')
-                <a href="{{ route('user.register') }}" class="cta-btn">Register</a>
+                <a href="{{ route('user.register') }}" class="cta-btn">Daftar</a>
             @endguest
         </div>
     </header>
@@ -129,7 +129,7 @@
                             <strong>Telp:</strong> <span>+62 812 3456 7890</span>
                         </p>
                         <p>
-                            <strong>Email:</strong> <span>kontak@kontrakanbusri.com</span>
+                            <strong>Email:</strong> <span>kontrakanbusri@gmail.com</span>
                         </p>
                     </div>
                     <div class="social-links d-flex mt-4">
@@ -148,7 +148,6 @@
                                 Kontrakan</a></li>
                         <li><i class="bi bi-chevron-right"></i> <a href="{{ route('testimoni.index') }}">Testimoni</a>
                         </li>
-                        <li><i class="bi bi-chevron-right"></i> <a href="#">Kebijakan Privasi</a></li>
                     </ul>
                 </div>
 

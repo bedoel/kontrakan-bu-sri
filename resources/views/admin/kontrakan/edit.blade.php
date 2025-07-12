@@ -1,5 +1,7 @@
 @extends('admin.layouts.app')
 
+@section('title', 'Edit Kontrakan - Admin')
+
 @section('content')
     <h1 class="h3 mb-4 text-gray-800">Edit Kontrakan</h1>
 

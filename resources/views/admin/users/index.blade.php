@@ -1,7 +1,9 @@
 @extends('admin.layouts.app')
 
+@section('title', 'Kelola Penyewa - Admin')
+
 @section('content')
-    <h1 class="h3 mb-4 text-gray-800">Kelola Pengguna</h1>
+    <h1 class="h3 mb-4 text-gray-800">Kelola Penyewa</h1>
 
     @if (session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
