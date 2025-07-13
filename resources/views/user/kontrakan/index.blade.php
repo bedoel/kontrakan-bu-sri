@@ -3,8 +3,6 @@
 @section('title', 'Daftar Kontrakan')
 
 @section('content')
-
-    <!-- Page Title -->
     <div class="page-title dark-background" data-aos="fade"
         style="background-image: url('{{ asset('front/assets/img/hero-2.jpg') }}');">
         <div class="container position-relative">
@@ -17,12 +15,9 @@
                 </ol>
             </nav>
         </div>
-    </div><!-- End Page Title -->
+    </div>
 
-    <!-- Kontrakan Section -->
     <section id="portfolio" class="portfolio section">
-
-        <!-- Section Title -->
         <div class="container section-title" data-aos="fade-up">
             <h2>Kontrakan Tersedia</h2>
             <p>Cek daftar kontrakan yang dapat Anda sewa</p>
@@ -82,10 +77,6 @@
                 <div class="d-flex justify-content-center mt-4">
                     {{ $kontrakans->links('pagination::bootstrap-5') }}
                 </div>
-
-
-                <!-- End Portfolio Container -->
-
             </div>
         </div>
     </section>

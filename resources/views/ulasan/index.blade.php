@@ -1,7 +1,8 @@
 @extends('user.layouts.app')
 
+@section('title', 'Ulasan')
+
 @section('content')
-    <!-- Page Title -->
     <div class="page-title dark-background" data-aos="fade"
         style="background-image: url('{{ asset('front/assets/img/hero-2.jpg') }}');">
         <div class="container position-relative">

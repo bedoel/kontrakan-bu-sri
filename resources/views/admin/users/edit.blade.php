@@ -20,7 +20,6 @@
                 @endif
 
                 <div class="row">
-                    <!-- Kolom Kiri: Foto Profil -->
                     <div class="col-md-4 text-center mb-3">
                         @if ($user->poto_profil)
                             <img src="{{ asset('storage/' . $user->poto_profil) }}"
@@ -34,7 +33,6 @@
                         <small class="text-muted d-block mt-2">Upload jika ingin mengganti</small>
                     </div>
 
-                    <!-- Kolom Kanan: Form -->
                     <div class="col-md-8">
                         <div class="mb-3">
                             <label class="form-label">Nama</label>

@@ -29,7 +29,7 @@
                     <thead class="table-dark">
                         <tr>
                             <th>Invoice</th>
-                            <th>Penyewa</th> <!-- Tambahkan ini -->
+                            <th>Penyewa</th>
                             <th>Kontrakan</th>
                             <th>Total</th>
                             <th>Status</th>

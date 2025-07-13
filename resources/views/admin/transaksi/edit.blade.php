@@ -29,8 +29,6 @@
             </div>
             <div class="card-body">
                 <div class="row g-4">
-
-                    <!-- Kiri: Detail Transaksi -->
                     <div class="col-md-7">
                         <table class="table table-borderless">
                             <tr>
@@ -65,7 +63,6 @@
                         </table>
                     </div>
 
-                    <!-- Kanan: Bukti Transfer -->
                     @if ($transaksi->bukti_transfer)
                         <div class="col-md-5 text-center">
                             <p class="fw-bold mb-2">Bukti Transfer</p>
@@ -78,7 +75,6 @@
             </div>
         </div>
 
-        <!-- Form Konfirmasi -->
         <div class="card shadow-sm">
             <div class="card-header bg-warning text-dark">
                 <h6 class="mb-0"><i class="bi bi-pencil-square"></i> Form Konfirmasi</h6>

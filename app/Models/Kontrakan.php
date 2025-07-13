@@ -21,6 +21,6 @@ class Kontrakan extends Model
 
     public function admin()
     {
-        return $this->belongsTo(Admin::class, 'admin_id'); // jika kontrakan ditambahkan oleh admin
+        return $this->belongsTo(Admin::class, 'admin_id');
     }
 }

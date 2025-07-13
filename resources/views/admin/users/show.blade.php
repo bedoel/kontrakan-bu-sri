@@ -13,7 +13,6 @@
     <div class="card shadow-sm mb-4">
         <div class="card-body">
             <div class="row align-items-center">
-                <!-- Foto Profil -->
                 <div class="col-md-3 text-center mb-3 mb-md-0">
                     @if ($user->poto_profil)
                         <img src="{{ asset('storage/' . $user->poto_profil) }}" class="img-thumbnail rounded-circle shadow"
@@ -24,7 +23,6 @@
                     @endif
                 </div>
 
-                <!-- Info User -->
                 <div class="col-md-9">
                     <table class="table table-borderless">
                         <tr>

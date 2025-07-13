@@ -27,27 +27,23 @@ class SewaController extends Controller
             ->latest('tanggal_akhir')
             ->get();
 
-        $punyaPermintaanMenunggu = \App\Models\PermintaanPindahKontrakan::where('user_id', $user->id)
+        $punyaPermintaanMenunggu = PermintaanPindahKontrakan::where('user_id', $user->id)
             ->where('status', 'menunggu')
             ->exists();
 
-        // Ambil semua permintaan yang disetujui
-        $permintaanDisetujui = \App\Models\PermintaanPindahKontrakan::where('user_id', $user->id)
+        $permintaanDisetujui = PermintaanPindahKontrakan::where('user_id', $user->id)
             ->where('status', 'disetujui')
             ->get()
-            ->keyBy('sewa_id'); // agar bisa diakses cepat
+            ->keyBy('sewa_id');
 
         return view('user.sewa.index', compact('sewaAktif', 'riwayatSewa', 'punyaPermintaanMenunggu', 'permintaanDisetujui'));
     }
 
-
-    // Tampilkan form sewa
     public function create(Kontrakan $kontrakan)
     {
         return view('user.sewa.create', compact('kontrakan'));
     }
 
-    // Proses penyimpanan sewa
     public function store(Request $request)
     {
         $request->validate([
@@ -73,7 +69,6 @@ class SewaController extends Controller
             return redirect()->route('login')->with('error', 'Silakan login terlebih dahulu.');
         }
 
-        // ✅ Cek apakah user sudah memiliki sewa aktif
         $existing = Sewa::where('user_id', $user->id)
             ->whereIn('status', ['menunggu_pembayaran', 'menunggu_konfirmasi', 'aktif'])
             ->first();
@@ -87,7 +82,6 @@ class SewaController extends Controller
         $jumlahBulan = (int) $request->jumlah_bulan;
         $tanggalAkhir = $tanggalMulai->copy()->addMonthsNoOverflow($jumlahBulan);
 
-        // Hitung diskon
         $diskon = 0;
         if ($jumlahBulan >= 3 && $jumlahBulan <= 5) {
             $diskon = 25000 * $jumlahBulan;
@@ -106,7 +100,6 @@ class SewaController extends Controller
             'diskon' => $diskon,
         ]);
 
-        // Ubah status kontrakan jadi "disewa"
         $kontrakan->update([
             'status' => 'disewa',
         ]);
@@ -116,7 +109,6 @@ class SewaController extends Controller
     }
 
 
-    // Tampilkan detail sewa
     public function show(Sewa $sewa)
     {
         if ($sewa->user_id !== auth('user')->id()) {
@@ -136,7 +128,6 @@ class SewaController extends Controller
         $sewa->status = 'batal';
         $sewa->save();
 
-        // Update status kontrakan kembali ke tersedia
         $sewa->kontrakan->update(['status' => 'tersedia']);
 
         return redirect()->route('user.sewa.index')->with('success', 'Sewa berhasil dibatalkan.');
@@ -150,7 +141,6 @@ class SewaController extends Controller
             abort(403, 'Unauthorized');
         }
 
-        // Validasi jumlah bulan
         $request->validate([
             'jumlah_bulan' => 'required|integer|min:1|max:12',
         ], [
@@ -160,7 +150,6 @@ class SewaController extends Controller
             'jumlah_bulan.max' => 'Jumlah bulan maksimal 12 bulan.',
         ]);
 
-        // Periksa apakah sewa masih dalam status disetujui
         if ($sewa->status !== 'aktif') {
             return back()->with('error', 'Sewa tidak dapat diperpanjang.');
         }
@@ -178,7 +167,6 @@ class SewaController extends Controller
             $diskon = 50000 * $jumlahBulan;
         }
 
-        // Buat entri sewa baru
         $sewaBaru = Sewa::create([
             'user_id' => $user->id,
             'kontrakan_id' => $sewa->kontrakan_id,

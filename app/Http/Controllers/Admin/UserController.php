@@ -27,7 +27,7 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
             'nomor_hp' => 'required|numeric|digits_between:10,15',
-            'poto_profil' => 'nullable|mimes:jpg,jpeg,png|max:2048', // Ganti image jadi mimes
+            'poto_profil' => 'nullable|mimes:jpg,jpeg,png|max:2048',
             'password' => 'required|string|min:6|confirmed',
         ], [
             'name.required' => 'Nama wajib diisi.',
@@ -131,20 +131,4 @@ class UserController extends Controller
         $user->delete();
         return redirect()->route('admin.users.index')->with('success', 'User berhasil dihapus.');
     }
-
-    // public function resetPassword(Request $request, User $user)
-    // {
-    //     $request->validate([
-    //         'password' => 'required|string|min:6|confirmed',
-    //     ], [
-    //         'password.required' => 'Password wajib diisi.',
-    //         'password.string' => 'Password harus berupa teks.',
-    //         'password.min' => 'Password minimal 6 karakter.',
-    //         'password.confirmed' => 'Konfirmasi password tidak cocok.',
-    //     ]);
-
-    //     $user->update(['password' => Hash::make($request->password)]);
-
-    //     return redirect()->route('admin.users.show', $user->id)->with('success', 'Password berhasil direset.');
-    // }
 }

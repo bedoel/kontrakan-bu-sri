@@ -22,20 +22,6 @@ class TransaksiController extends Controller
         $query = Transaksi::with('sewa.kontrakan')
             ->whereHas('sewa', fn($q) => $q->where('user_id', $userId));
 
-        // Filter berdasarkan status
-        if ($request->filled('status')) {
-            $query->where('status', $request->status);
-        }
-
-        // Filter berdasarkan tanggal dari dan sampai
-        if ($request->filled('tanggal_dari')) {
-            $query->whereDate('created_at', '>=', $request->tanggal_dari);
-        }
-
-        if ($request->filled('tanggal_sampai')) {
-            $query->whereDate('created_at', '<=', $request->tanggal_sampai);
-        }
-
         $transaksis = $query->latest()->get();
 
         return view('user.transaksi.index', compact('transaksis'));
@@ -80,7 +66,6 @@ class TransaksiController extends Controller
 
     public function store(Request $request, Sewa $sewa)
     {
-        // Validasi
         $request->validate([
             'metode' => 'required|in:transfer,cash',
             'bukti_transfer' => 'nullable|mimes:jpg,jpeg,png|max:2048',
@@ -120,7 +105,6 @@ class TransaksiController extends Controller
             $buktiPath = $request->file('bukti_transfer')->store('bukti_transfer', 'public');
         }
 
-        // Simpan transaksi
         Transaksi::create([
             'invoice_number' => 'INV-' . strtoupper(Str::random(6)),
             'sewa_id' => $sewa->id,
@@ -133,7 +117,6 @@ class TransaksiController extends Controller
             'catatan' => $request->catatan,
         ]);
 
-        // Update status sewa
         $sewa->status = 'menunggu_konfirmasi';
         $sewa->save();
 

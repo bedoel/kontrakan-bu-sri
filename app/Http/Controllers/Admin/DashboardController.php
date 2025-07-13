@@ -26,7 +26,7 @@ class DashboardController extends Controller
         // Data transaksi per bulan (chart area)
         $data = Transaksi::selectRaw('MONTH(created_at) as bulan, SUM(total_bayar) as total')
             ->whereYear('created_at', date('Y'))
-            ->where('status', 'disetujui') // ✅ hanya transaksi yang disetujui
+            ->where('status', 'disetujui')
             ->groupBy('bulan')
             ->orderBy('bulan')
             ->get();

@@ -26,7 +26,6 @@
                 @endif
 
                 <div class="row">
-                    <!-- Kolom Kiri: Foto Profil -->
                     <div class="col-md-4 text-center mb-4">
                         <div class="mb-3">
                             @if ($admin->poto_profil)
@@ -42,7 +41,6 @@
                         <small class="text-muted d-block mt-2">Unggah untuk mengganti foto</small>
                     </div>
 
-                    <!-- Kolom Kanan: Form -->
                     <div class="col-md-8">
                         <div class="mb-3">
                             <label class="form-label">Nama</label>

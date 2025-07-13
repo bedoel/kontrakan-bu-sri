@@ -1,7 +1,8 @@
 @extends('user.layouts.app')
 
+@section('title', 'Detail Kontrakan')
+
 @section('content')
-    <!-- Page Title -->
     <div class="page-title dark-background" data-aos="fade"
         style="background-image: url('{{ asset('front/assets/img/hero-2.jpg') }}');">
         <div class="container position-relative">
@@ -15,9 +16,7 @@
             </nav>
         </div>
     </div>
-    <!-- End Page Title -->
 
-    <!-- Portfolio Details Section -->
     <section id="portfolio-details" class="portfolio-details section">
 
         <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -97,5 +96,4 @@
         </div>
 
     </section>
-    <!-- /Portfolio Details Section -->
 @endsection

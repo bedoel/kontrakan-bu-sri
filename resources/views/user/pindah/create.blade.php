@@ -1,7 +1,8 @@
 @extends('user.layouts.app')
 
+@section('title', 'Pengajuan Pindah Kontrakan')
+
 @section('content')
-    <!-- Page Title -->
     <div class="page-title dark-background" data-aos="fade"
         style="background-image: url('{{ asset('assets/img/page-title-bg.webp') }}');">
         <div class="container position-relative">
@@ -15,7 +16,6 @@
             </nav>
         </div>
     </div>
-    <!-- End Page Title -->
 
     <!-- Form Section -->
     <section class="starter-section section">

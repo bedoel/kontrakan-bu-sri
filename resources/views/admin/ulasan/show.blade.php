@@ -8,7 +8,6 @@
     <div class="card shadow-sm mb-4">
         <div class="card-body">
             <div class="row gy-4">
-                <!-- Kolom Kiri: Info User -->
                 <div class="col-md-7">
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
@@ -25,7 +24,6 @@
                     </ul>
                 </div>
 
-                <!-- Kolom Kanan: Gambar -->
                 @if ($ulasan->gambar)
                     <div class="col-md-5 text-center">
                         <h6 class="fw-bold">Gambar</h6>

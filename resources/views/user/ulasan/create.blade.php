@@ -1,5 +1,7 @@
 @extends('user.layouts.app')
 
+@section('title', 'Buat Ulasan')
+
 @section('content')
     <!-- Page Title -->
     <div class="page-title dark-background" data-aos="fade"

@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Sewa;
+use App\Models\Admin;
 use App\Models\Kontrakan;
-use App\Mail\PindahKontrakanRequest;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Mail\PindahKontrakanRequest;
+use Illuminate\Support\Facades\Mail;
 use App\Models\PermintaanPindahKontrakan;
 
 class PindahKontrakanController extends Controller
@@ -65,7 +66,7 @@ class PindahKontrakanController extends Controller
         ]);
 
         // Kirim email ke semua admin
-        $adminEmails = \App\Models\Admin::pluck('email')->toArray();
+        $adminEmails = Admin::pluck('email')->toArray();
 
         foreach ($adminEmails as $email) {
             Mail::to($email)->send(new PindahKontrakanRequest($permintaan));

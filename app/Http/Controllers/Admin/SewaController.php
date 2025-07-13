@@ -192,7 +192,6 @@ class SewaController extends Controller
             $diskon = 50000 * $jumlahBulan;
         }
 
-        // Buat sewa baru
         $sewaBaru = Sewa::create([
             'user_id'           => $sewa->user_id,
             'slug'              => Str::uuid(),
@@ -204,7 +203,6 @@ class SewaController extends Controller
             'admin_id' => auth('admin')->id(),
         ]);
 
-        // Jika cash, langsung buat transaksi dan setujui
         if ($metode === 'cash') {
             Transaksi::create([
                 'invoice_number'    => 'INV-' . strtoupper(Str::random(8)),

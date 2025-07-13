@@ -26,7 +26,7 @@ class PengaduanController extends Controller
                 'icon' => 'error',
                 'title' => 'Akses Ditolak!',
                 'text' => 'Anda tidak memiliki sewa aktif untuk mengakses fitur ini.',
-                'redirect' => route('user.home') // arahkan ke halaman sesuai kebutuhan
+                'redirect' => route('user.home')
             ]);
         }
 
@@ -100,7 +100,6 @@ class PengaduanController extends Controller
             'pesan' => 'required|string|max:1000',
         ]);
 
-        // Pastikan user hanya bisa membalas pengaduannya sendiri
         if ($pengaduan->user_id !== auth('user')->id()) {
             abort(403, 'Anda tidak berhak membalas pengaduan ini.');
         }
@@ -112,7 +111,6 @@ class PengaduanController extends Controller
             'pesan' => $request->pesan,
         ]);
 
-        // Kirim email ke admin yang menangani (jika ada)
         $admins = Admin::all();
         foreach ($admins as $admin) {
             Mail::to($admin->email)->send(new AdminBalasanPengaduan($balasan));
