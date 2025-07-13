@@ -23,7 +23,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($testimonis as $t)
+                        @foreach ($ulasans as $t)
                             <tr>
                                 <td>{{ $t->user->name }}</td>
                                 <td>{{ Str::limit($t->pesan, 50) }}</td>
@@ -36,10 +36,9 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{ route('admin.testimoni.show', $t->id) }}"
-                                        class="btn btn-sm btn-info">Lihat</a>
-                                    <form action="{{ route('admin.testimoni.destroy', $t->id) }}" method="POST"
-                                        class="d-inline" onsubmit="return confirm('Hapus testimoni ini?')">
+                                    <a href="{{ route('admin.ulasan.show', $t->id) }}" class="btn btn-sm btn-info">Lihat</a>
+                                    <form action="{{ route('admin.ulasan.destroy', $t->id) }}" method="POST"
+                                        class="d-inline" onsubmit="return confirm('Hapus ulasan ini?')">
                                         @csrf @method('DELETE')
                                         <button class="btn btn-sm btn-danger">Hapus</button>
                                     </form>

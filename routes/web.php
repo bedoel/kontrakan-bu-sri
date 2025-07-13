@@ -6,7 +6,7 @@ use App\Http\Controllers\SewaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserHomeController;
 use App\Http\Controllers\PengaduanController;
-use App\Http\Controllers\TestimoniController;
+use App\Http\Controllers\UlasanController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\Admin\LaporanController;
 use App\Http\Controllers\Auth\UserAuthController;
@@ -45,7 +45,7 @@ Route::post('/email/verification-notification', function (Request $request) {
 // Guest Routes
 // ===================================
 Route::get('/', [UserHomeController::class, 'index'])->name('user.home');
-Route::get('/testimoni', [TestimoniController::class, 'index'])->name('testimoni.index');
+Route::get('/ulasan', [UlasanController::class, 'index'])->name('ulasan.index');
 
 // ===================================
 // User Auth Routes
@@ -99,14 +99,14 @@ Route::middleware(['auth:user', 'verified'])->group(function () {
         Route::get('/pengaduan/{pengaduan}', [PengaduanController::class, 'show'])->name('pengaduan.show');
         Route::post('/pengaduan/{pengaduan}/balas', [PengaduanController::class, 'balas'])->name('pengaduan.balas');
 
-        // Testimoni
-        Route::prefix('testimoni')->name('testimoni.')->group(function () {
-            Route::get('/saya', [TestimoniController::class, 'mytestimoni'])->name('index');
-            Route::get('/create', [TestimoniController::class, 'create'])->name('create');
-            Route::post('/store', [TestimoniController::class, 'store'])->name('store');
-            Route::get('/{testimoni}/edit', [TestimoniController::class, 'edit'])->name('edit');
-            Route::put('/{testimoni}', [TestimoniController::class, 'update'])->name('update');
-            Route::delete('/{testimoni}', [TestimoniController::class, 'destroy'])->name('destroy');
+        // Ulasan
+        Route::prefix('ulasan')->name('ulasan.')->group(function () {
+            Route::get('/saya', [UlasanController::class, 'myulasan'])->name('index');
+            Route::get('/create', [UlasanController::class, 'create'])->name('create');
+            Route::post('/store', [UlasanController::class, 'store'])->name('store');
+            Route::get('/{ulasan}/edit', [UlasanController::class, 'edit'])->name('edit');
+            Route::put('/{ulasan}', [UlasanController::class, 'update'])->name('update');
+            Route::delete('/{ulasan}', [UlasanController::class, 'destroy'])->name('destroy');
         });
     });
 });
@@ -141,9 +141,9 @@ Route::middleware(['auth:admin'])->prefix('admin')->name('admin.')->group(functi
     Route::post('/pengaduan/{pengaduan}/balas', [AdminPengaduanController::class, 'balas'])->name('pengaduan.balas');
     Route::post('/pengaduan/{pengaduan}/ubah-status', [AdminPengaduanController::class, 'ubahStatus'])->name('pengaduan.ubahStatus');
 
-    Route::get('/testimoni', [\App\Http\Controllers\Admin\TestimoniController::class, 'index'])->name('testimoni.index');
-    Route::get('/testimoni/{id}', [\App\Http\Controllers\Admin\TestimoniController::class, 'show'])->name('testimoni.show');
-    Route::delete('/testimoni/{id}', [\App\Http\Controllers\Admin\TestimoniController::class, 'destroy'])->name('testimoni.destroy');
+    Route::get('/ulasan', [\App\Http\Controllers\Admin\UlasanController::class, 'index'])->name('ulasan.index');
+    Route::get('/ulasan/{id}', [\App\Http\Controllers\Admin\UlasanController::class, 'show'])->name('ulasan.show');
+    Route::delete('/ulasan/{id}', [\App\Http\Controllers\Admin\UlasanController::class, 'destroy'])->name('ulasan.destroy');
 });
 
 // ===================================

@@ -5,12 +5,12 @@
     <div class="page-title dark-background" data-aos="fade"
         style="background-image: url('{{ asset('front/assets/img/hero-2.jpg') }}');">
         <div class="container position-relative">
-            <h1>Buat Testimoni</h1>
+            <h1>Buat Ulasan</h1>
             <p>Berikan penilaian dan pengalaman Anda menyewa kontrakan</p>
             <nav class="breadcrumbs">
                 <ol>
                     <li><a href="{{ route('user.home') }}">Home</a></li>
-                    <li><a href="{{ route('user.testimoni.index') }}">Testimoni</a></li>
+                    <li><a href="{{ route('user.ulasan.index') }}">Ulasan</a></li>
                     <li class="current">Buat</li>
                 </ol>
             </nav>
@@ -20,7 +20,7 @@
     <!-- Form Section -->
     <section class="starter-section section">
         <div class="container section-title" data-aos="fade-up">
-            <h2>Kirim Testimoni</h2>
+            <h2>Kirim Ulasan</h2>
             <p>Isi form berikut untuk berbagi pengalaman Anda</p>
         </div>
 
@@ -35,7 +35,7 @@
                 </div>
             @endif
 
-            <form action="{{ route('user.testimoni.store') }}" method="POST" enctype="multipart/form-data"
+            <form action="{{ route('user.ulasan.store') }}" method="POST" enctype="multipart/form-data"
                 class="card shadow-sm p-4 border-0">
                 @csrf
 
@@ -50,7 +50,7 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="pesan" class="form-label">Pesan Testimoni</label>
+                    <label for="pesan" class="form-label">Pesan Ulasan</label>
                     <textarea name="pesan" id="pesan" rows="4" class="form-control" required
                         placeholder="Ceritakan pengalaman Anda...">{{ old('pesan') }}</textarea>
                 </div>
@@ -62,11 +62,11 @@
                 </div>
 
                 <div class="d-flex justify-content-between">
-                    <a href="{{ route('user.testimoni.index') }}" class="btn btn-secondary">
+                    <a href="{{ route('user.ulasan.index') }}" class="btn btn-secondary">
                         <i class="bi bi-arrow-left-circle"></i> Kembali
                     </a>
                     <button class="btn btn-primary">
-                        <i class="bi bi-send-check"></i> Kirim Testimoni
+                        <i class="bi bi-send-check"></i> Kirim Ulasan
                     </button>
                 </div>
             </form>

@@ -122,7 +122,7 @@
                     <div class="stats-item d-flex align-items-center w-100 h-100">
                         <i class="bi bi-chat-left-quote color-pink flex-shrink-0"></i>
                         <div>
-                            <span data-purecounter-start="0" data-purecounter-end="{{ $jumlahTestimoni }}"
+                            <span data-purecounter-start="0" data-purecounter-end="{{ $jumlahUlasan }}"
                                 data-purecounter-duration="1" class="purecounter"></span>
                             <p>Ulasan Penghuni</p>
                         </div>
@@ -212,7 +212,7 @@
             </script>
 
                 <div class="swiper-wrapper">
-                    @forelse($testimonis as $t)
+                    @forelse($ulasans as $t)
                         <div class="swiper-slide">
                             <div class="testimonial-item">
                                 <img src="{{ $t->user->poto_profil
@@ -252,7 +252,7 @@
 
             <!-- Tombol Lihat Semua Ulasan -->
             <div class="text-center mt-4">
-                <a href="{{ route('testimoni.index') }}" class="btn btn-outline-light">
+                <a href="{{ route('ulasan.index') }}" class="btn btn-outline-light">
                     <i class="bi bi-chat-left-text"></i> Lihat Lebih Banyak Ulasan
                 </a>
             </div>
@@ -262,7 +262,7 @@
 
 
 
-    @if (auth('user')->check() && !$userHasTestimoni)
+    @if (auth('user')->check() && !$userHasUlasan)
         <!-- Form Ulasan -->
         <section class="starter-section section">
             <div class="container" data-aos="fade-up">
@@ -273,7 +273,7 @@
 
                 <div class="card shadow-sm">
                     <div class="card-body">
-                        <form action="{{ route('user.testimoni.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('user.ulasan.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
 
                             <div class="mb-3">

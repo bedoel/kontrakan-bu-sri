@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SewaController;
 use App\Http\Controllers\UserHomeController;
 use App\Http\Controllers\PengaduanController;
-use App\Http\Controllers\TestimoniController;
+use App\Http\Controllers\UlasanController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\Auth\UserAuthController;
 use App\Http\Controllers\UserKontrakanController;
@@ -129,9 +129,9 @@ Route::middleware(['auth:admin'])->prefix('admin')->group(function () {
     Route::patch('/pengaduan/{pengaduan}/ubah-status', [AdminPengaduanController::class, 'ubahStatus'])->name('admin.pengaduan.ubah-status');
 });
 
-// USER TESTIMONI
-Route::prefix('user/testimoni')->middleware('auth:user')->name('user.testimoni.')->group(function () {
-    Route::get('/', [TestimoniController::class, 'index'])->name('index');
-    Route::get('create', [TestimoniController::class, 'create'])->name('create');
-    Route::post('store', [TestimoniController::class, 'store'])->name('store');
+// USER ULASAN
+Route::prefix('user/ulasan')->middleware('auth:user')->name('user.ulasan.')->group(function () {
+    Route::get('/', [UlasanController::class, 'index'])->name('index');
+    Route::get('create', [UlasanController::class, 'create'])->name('create');
+    Route::post('store', [UlasanController::class, 'store'])->name('store');
 });

@@ -3,27 +3,27 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Testimoni;
+use App\Models\Ulasan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
-class TestimoniController extends Controller
+class UlasanController extends Controller
 {
     public function index()
     {
-        $testimonis = Testimoni::latest()->get();
-        return view('testimoni.index', compact('testimonis'));
+        $ulasans = Ulasan::latest()->get();
+        return view('ulasan.index', compact('ulasans'));
     }
 
-    public function mytestimoni()
+    public function myulasan()
     {
-        $testimonis = Testimoni::where('user_id', Auth::id())->latest()->get();
-        return view('user.testimoni.index', compact('testimonis'));
+        $ulasans = Ulasan::where('user_id', Auth::id())->latest()->get();
+        return view('user.ulasan.index', compact('ulasans'));
     }
 
     public function create()
     {
-        return view('user.testimoni.create');
+        return view('user.ulasan.create');
     }
 
     public function store(Request $request)
@@ -39,33 +39,33 @@ class TestimoniController extends Controller
             'gambar.mimes' => 'Format gambar harus JPG, JPEG, atau PNG.',
         ]);
 
-        $gambar = $request->file('gambar') ? $request->file('gambar')->store('testimoni', 'public') : null;
+        $gambar = $request->file('gambar') ? $request->file('gambar')->store('ulasan', 'public') : null;
 
-        Testimoni::create([
+        Ulasan::create([
             'user_id' => Auth::id(),
             'pesan' => $request->pesan,
             'rating' => $request->rating,
             'gambar' => $gambar,
         ]);
 
-        return redirect()->route('user.testimoni.index')->with('success', 'Testimoni berhasil dikirim.');
+        return redirect()->route('user.ulasan.index')->with('success', 'Ulasan berhasil dikirim.');
     }
 
-    public function edit(Testimoni $testimoni)
+    public function edit(Ulasan $ulasan)
     {
-        if ($testimoni->user_id !== auth('user')->id()) {
+        if ($ulasan->user_id !== auth('user')->id()) {
             abort(403, 'Anda tidak berhak mengakses ulasan ini.');
         }
-        $this->authorizeTestimoni($testimoni);
-        return view('user.testimoni.edit', compact('testimoni'));
+        $this->authorizeUlasan($ulasan);
+        return view('user.ulasan.edit', compact('ulasan'));
     }
 
-    public function update(Request $request, Testimoni $testimoni)
+    public function update(Request $request, Ulasan $ulasan)
     {
-        if ($testimoni->user_id !== auth('user')->id()) {
+        if ($ulasan->user_id !== auth('user')->id()) {
             abort(403, 'Anda tidak berhak mengakses ulasan ini.');
         }
-        $this->authorizeTestimoni($testimoni);
+        $this->authorizeUlasan($ulasan);
 
         $request->validate([
             'pesan' => 'required|string|max:1000',
@@ -81,24 +81,24 @@ class TestimoniController extends Controller
         $data = $request->only(['pesan', 'rating']);
 
         if ($request->hasFile('gambar')) {
-            $data['gambar'] = $request->file('gambar')->store('testimoni', 'public');
+            $data['gambar'] = $request->file('gambar')->store('ulasan', 'public');
         }
 
-        $testimoni->update($data);
+        $ulasan->update($data);
 
-        return redirect()->route('user.testimoni.index')->with('success', 'Testimoni berhasil diperbarui.');
+        return redirect()->route('user.ulasan.index')->with('success', 'ulasan berhasil diperbarui.');
     }
 
-    public function destroy(Testimoni $testimoni)
+    public function destroy(Ulasan $ulasan)
     {
-        $this->authorizeTestimoni($testimoni);
-        $testimoni->delete();
-        return redirect()->route('user.testimoni.index')->with('success', 'Testimoni berhasil dihapus.');
+        $this->authorizeUlasan($ulasan);
+        $ulasan->delete();
+        return redirect()->route('user.ulasan.index')->with('success', 'Ulasan berhasil dihapus.');
     }
 
-    protected function authorizeTestimoni(Testimoni $testimoni)
+    protected function authorizeUlasan(Ulasan $ulasan)
     {
-        if ($testimoni->user_id !== auth('user')->id()) {
+        if ($ulasan->user_id !== auth('user')->id()) {
             abort(403);
         }
     }

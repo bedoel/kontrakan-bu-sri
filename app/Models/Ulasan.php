@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Testimoni extends Model
+class Ulasan extends Model
 {
     protected $fillable = [
         'user_id',

@@ -69,11 +69,11 @@
             <span>Kelola Users</span>
         </a>
     </li>
-    <!-- Kelola Testimoni -->
-    <li class="nav-item {{ request()->is('admin/testimoni*') ? 'active' : '' }}">
-        <a class="nav-link" href="{{ route('admin.testimoni.index') }}">
+    <!-- Kelola Ulasan -->
+    <li class="nav-item {{ request()->is('admin/ulasan*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('admin.ulasan.index') }}">
             <i class="fas fa-comments"></i>
-            <span>Kelola Testimoni</span>
+            <span>Kelola Ulasan</span>
         </a>
     </li>
 

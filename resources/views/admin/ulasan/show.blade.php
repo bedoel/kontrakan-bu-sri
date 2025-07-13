@@ -12,32 +12,32 @@
                 <div class="col-md-7">
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
-                            <strong>Nama User:</strong> {{ $testimoni->user->name }}
+                            <strong>Nama User:</strong> {{ $ulasan->user->name }}
                         </li>
                         <li class="list-group-item">
                             <strong>Rating:</strong>
-                            <span class="badge bg-warning text-dark">{{ $testimoni->rating }} / 5</span>
+                            <span class="badge bg-warning text-dark">{{ $ulasan->rating }} / 5</span>
                         </li>
                         <li class="list-group-item">
                             <strong>Pesan:</strong><br>
-                            <div class="mt-2">{{ $testimoni->pesan }}</div>
+                            <div class="mt-2">{{ $ulasan->pesan }}</div>
                         </li>
                     </ul>
                 </div>
 
                 <!-- Kolom Kanan: Gambar -->
-                @if ($testimoni->gambar)
+                @if ($ulasan->gambar)
                     <div class="col-md-5 text-center">
                         <h6 class="fw-bold">Gambar</h6>
-                        <img src="{{ asset('storage/' . $testimoni->gambar) }}" class="img-fluid rounded shadow-sm border"
-                            style="max-height: 300px; object-fit: contain;" alt="Gambar Testimoni">
+                        <img src="{{ asset('storage/' . $ulasan->gambar) }}" class="img-fluid rounded shadow-sm border"
+                            style="max-height: 300px; object-fit: contain;" alt="Gambar Ulasan">
                     </div>
                 @endif
             </div>
         </div>
     </div>
 
-    <a href="{{ route('admin.testimoni.index') }}" class="btn btn-secondary">
+    <a href="{{ route('admin.ulasan.index') }}" class="btn btn-secondary">
         <i class="bi bi-arrow-left-circle"></i> Kembali
     </a>
 @endsection

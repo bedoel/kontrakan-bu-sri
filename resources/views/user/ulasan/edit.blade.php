@@ -5,12 +5,12 @@
     <div class="page-title dark-background" data-aos="fade"
         style="background-image: url('{{ asset('front/assets/img/hero-2.jpg') }}');">
         <div class="container position-relative">
-            <h1>Edit Testimoni</h1>
+            <h1>Edit Ulasan</h1>
             <p>Perbarui pesan dan rating pengalaman Anda menyewa kontrakan</p>
             <nav class="breadcrumbs">
                 <ol>
                     <li><a href="{{ route('user.home') }}">Home</a></li>
-                    <li><a href="{{ route('user.testimoni.index') }}">Testimoni</a></li>
+                    <li><a href="{{ route('user.ulasan.index') }}">Ulasan</a></li>
                     <li class="current">Edit</li>
                 </ol>
             </nav>
@@ -29,16 +29,16 @@
 
                     <div class="card shadow-sm border-0">
                         <div class="card-body">
-                            <h4 class="mb-4">Form Edit Testimoni</h4>
+                            <h4 class="mb-4">Form Edit Ulasan</h4>
 
-                            <form action="{{ route('user.testimoni.update', $testimoni->id) }}" method="POST"
+                            <form action="{{ route('user.ulasan.update', $ulasan->id) }}" method="POST"
                                 enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
 
                                 <div class="mb-3">
                                     <label for="pesan" class="form-label">Pesan</label>
-                                    <textarea name="pesan" class="form-control" rows="4" required>{{ old('pesan', $testimoni->pesan) }}</textarea>
+                                    <textarea name="pesan" class="form-control" rows="4" required>{{ old('pesan', $ulasan->pesan) }}</textarea>
                                 </div>
 
                                 <div class="mb-3">
@@ -46,7 +46,7 @@
                                     <select name="rating" class="form-select" required>
                                         @for ($i = 1; $i <= 5; $i++)
                                             <option value="{{ $i }}"
-                                                {{ $testimoni->rating == $i ? 'selected' : '' }}>
+                                                {{ $ulasan->rating == $i ? 'selected' : '' }}>
                                                 {{ $i }} Bintang</option>
                                         @endfor
                                     </select>
@@ -55,15 +55,15 @@
                                 <div class="mb-3">
                                     <label for="gambar" class="form-label">Gambar (Opsional)</label>
                                     <input type="file" name="gambar" class="form-control">
-                                    @if ($testimoni->gambar)
-                                        <img src="{{ asset('storage/' . $testimoni->gambar) }}" class="img-thumbnail mt-2"
+                                    @if ($ulasan->gambar)
+                                        <img src="{{ asset('storage/' . $ulasan->gambar) }}" class="img-thumbnail mt-2"
                                             width="150">
                                     @endif
                                 </div>
 
                                 <div class="d-flex justify-content-between">
-                                    <a href="{{ route('user.testimoni.index') }}" class="btn btn-secondary">Batal</a>
-                                    <button type="submit" class="btn btn-success">Update Testimoni</button>
+                                    <a href="{{ route('user.ulasan.index') }}" class="btn btn-secondary">Batal</a>
+                                    <button type="submit" class="btn btn-success">Update Ulasan</button>
                                 </div>
                             </form>
                         </div>

@@ -83,7 +83,7 @@
                             </a>
                             <ul>
                                 <li><a href="{{ route('user.profile.edit') }}">Profil</a></li>
-                                <li><a href="{{ route('user.testimoni.index') }}">Ulasan Saya</a></li>
+                                <li><a href="{{ route('user.ulasan.index') }}">Ulasan Saya</a></li>
                                 <li>
                                     <a href="#"
                                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
@@ -146,7 +146,7 @@
                         <li><i class="bi bi-chevron-right"></i> <a href="{{ route('user.home') }}">Beranda</a></li>
                         <li><i class="bi bi-chevron-right"></i> <a href="{{ route('user.kontrakan.index') }}">Daftar
                                 Kontrakan</a></li>
-                        <li><i class="bi bi-chevron-right"></i> <a href="{{ route('testimoni.index') }}">Testimoni</a>
+                        <li><i class="bi bi-chevron-right"></i> <a href="{{ route('ulasan.index') }}">Ulasan</a>
                         </li>
                     </ul>
                 </div>
