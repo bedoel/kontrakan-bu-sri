@@ -23,7 +23,6 @@ class UserHomeController extends Controller
             ? Ulasan::where('user_id', auth('user')->id())->exists()
             : false;
 
-        // Tambahkan statistik
         $jumlahPenghuni   = User::count();
         $jumlahUnit       = Kontrakan::count();
         $totalSewa        = Sewa::where('status', 'aktif')->count();
