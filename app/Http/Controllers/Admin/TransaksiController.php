@@ -56,7 +56,6 @@ class TransaksiController extends Controller
             }
         } elseif ($request->status === 'ditolak') {
             $sewa->update(['status' => 'ditolak']);
-            $sewa->update(['admin_id' => auth('admin')->id()]);
 
             $sewa->kontrakan->update(['status' => 'tersedia']);
         }

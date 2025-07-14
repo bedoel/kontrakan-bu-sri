@@ -15,6 +15,7 @@
                 <table class="table table-bordered datatable">
                     <thead class="table-dark">
                         <tr>
+                            <th>No</th>
                             <th>Nama</th>
                             <th>Pesan</th>
                             <th>Rating</th>
@@ -25,6 +26,7 @@
                     <tbody>
                         @foreach ($ulasans as $t)
                             <tr>
+                                <td>{{ $loop->iteration }}</td>
                                 <td>{{ $t->user->name }}</td>
                                 <td>{{ Str::limit($t->pesan, 50) }}</td>
                                 <td>{{ $t->rating }}/5</td>

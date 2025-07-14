@@ -69,57 +69,7 @@
             </select>
         </div>
 
-        <div class="form-group">
-            <label>Estimasi Diskon</label>
-            <input type="text" id="diskonDisplay" class="form-control" readonly>
-        </div>
-
-        <div class="form-group">
-            <label>Estimasi Total Bayar</label>
-            <input type="text" id="totalBayarDisplay" class="form-control" readonly>
-        </div>
-
         <button class="btn btn-primary">Simpan Perubahan</button>
         <a href="{{ route('admin.sewa.index') }}" class="btn btn-secondary">Kembali</a>
     </form>
 @endsection
-
-@push('scripts')
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const kontrakanSelect = document.getElementById('kontrakanSelect');
-            const tanggalMulai = document.querySelector('[name="tanggal_mulai"]');
-            const tanggalAkhir = document.querySelector('[name="tanggal_akhir"]');
-            const diskonDisplay = document.getElementById('diskonDisplay');
-            const totalBayarDisplay = document.getElementById('totalBayarDisplay');
-
-            function hitung() {
-                const selectedOption = kontrakanSelect.options[kontrakanSelect.selectedIndex];
-                const harga = parseInt(selectedOption.getAttribute('data-harga')) || 0;
-
-                const start = new Date(tanggalMulai.value);
-                const end = new Date(tanggalAkhir.value);
-                const bulan = (end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth());
-
-                let diskon = 0;
-                if (bulan >= 3 && bulan <= 5) {
-                    diskon = 25000 * bulan;
-                } else if (bulan >= 6) {
-                    diskon = 50000 * bulan;
-                }
-
-                const total = (harga * bulan) - diskon;
-
-                diskonDisplay.value = 'Rp ' + diskon.toLocaleString();
-                totalBayarDisplay.value = 'Rp ' + total.toLocaleString();
-            }
-
-            kontrakanSelect.addEventListener('change', hitung);
-            tanggalMulai.addEventListener('change', hitung);
-            tanggalAkhir.addEventListener('change', hitung);
-
-            // Hitung awal saat halaman dibuka
-            hitung();
-        });
-    </script>
-@endpush

@@ -83,10 +83,15 @@
 
                         {{-- Perpanjang --}}
                         @php
-                            $hariTersisa = \Carbon\Carbon::now()->diffInDays($sewa->tanggal_akhir, false);
+                            $now = \Carbon\Carbon::now();
+                            $tanggalAkhir = \Carbon\Carbon::parse($sewa->tanggal_akhir);
+                            $hMin7 = $tanggalAkhir->copy()->subDays(7);
+                            $hPlus7 = $tanggalAkhir->copy()->addDays(7);
+                            $hariTersisa = $now->diffInDays($tanggalAkhir, false);
                         @endphp
 
-                        @if ($sewa->status == 'aktif' && $hariTersisa <= 7 && $hariTersisa >= 0)
+
+                        @if ($sewa->status == 'aktif' && $now->between($hMin7, $hPlus7))
                             <button type="button" class="btn btn-sm btn-outline-success mt-2" data-bs-toggle="modal"
                                 data-bs-target="#perpanjangModal{{ $sewa->id }}">Perpanjang</button>
 
@@ -111,10 +116,12 @@
                                                         class="form-select" required
                                                         onchange="updateTotalBayar{{ $sewa->id }}()">
                                                         @for ($i = 1; $i <= 12; $i++)
-                                                            <option value="{{ $i }}">{{ $i }} bulan
+                                                            <option value="{{ $i }}"
+                                                                {{ $i == 1 ? 'selected' : '' }}>{{ $i }} bulan
                                                             </option>
                                                         @endfor
                                                     </select>
+
                                                 </div>
                                                 <small class="text-muted">
                                                     <ul class="mb-2 small">
@@ -165,6 +172,10 @@
                                     document.getElementById('total_bayar_{{ $sewa->id }}').innerText = 'Rp ' + new Intl.NumberFormat('id-ID')
                                         .format(total);
                                 }
+
+                                document.addEventListener('DOMContentLoaded', function() {
+                                    updateTotalBayar{{ $sewa->id }}();
+                                });
                             </script>
                         @endif
                     </div>

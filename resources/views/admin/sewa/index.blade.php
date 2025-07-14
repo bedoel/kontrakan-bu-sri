@@ -34,22 +34,29 @@
                 <table class="table table-bordered datatable">
                     <thead class="table-dark">
                         <tr>
+                            <th>No</th>
                             <th>Nama User</th>
                             <th>Kontrakan</th>
                             <th>Mulai</th>
                             <th>Akhir</th>
                             <th>Status</th>
+                            <th>Dibuat Oleh</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
+
                     <tbody>
                         @foreach ($sewas as $sewa)
                             <tr>
+                                <td>{{ $loop->iteration }}</td>
                                 <td>{{ $sewa->user->name }}</td>
                                 <td>{{ $sewa->kontrakan->nama }}</td>
                                 <td>{{ $sewa->tanggal_mulai->format('d M Y') }}</td>
                                 <td>{{ $sewa->tanggal_akhir->format('d M Y') }}</td>
                                 <td>{!! statusBadge($sewa->status) !!}</td>
+                                <td>
+                                    {{ $sewa->admin ? $sewa->admin->name : '-' }}
+                                </td>
                                 <td>
                                     <a href="{{ route('admin.sewa.show', $sewa->id) }}"
                                         class="btn btn-info btn-sm">Detail</a>
@@ -67,6 +74,7 @@
                             </tr>
                         @endforeach
                     </tbody>
+
                 </table>
             </div>
         </div>

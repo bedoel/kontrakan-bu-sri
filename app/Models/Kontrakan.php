@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Kontrakan extends Model
 {
-    protected $fillable = ['nama', 'slug', 'harga', 'deskripsi', 'status'];
+    protected $fillable = ['nama', 'slug', 'harga', 'deskripsi', 'status', 'admin_id'];
 
     public function foto_kontrakans()
     {

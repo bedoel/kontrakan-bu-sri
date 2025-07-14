@@ -58,8 +58,9 @@ class TransaksiController extends Controller
         $harga = $sewa->kontrakan->harga;
         $durasi = $sewa->lama_sewa_bulan;
         $diskon = $sewa->diskon ?? 0;
+        $denda = $sewa->denda ?? 0;
 
-        $total = ($harga * $durasi) - $diskon;
+        $total = ($harga * $durasi) - $diskon + $denda;
 
         return view('user.transaksi.create', compact('sewa', 'total', 'diskon'));
     }
@@ -93,11 +94,11 @@ class TransaksiController extends Controller
         }
 
         // Ambil nilai total dan diskon dari sewa
-        $jumlahBulan = $sewa->tanggal_mulai->diffInMonths($sewa->tanggal_akhir);
+        $jumlahBulan = $sewa->lama_sewa_bulan;
         $hargaPerBulan = $sewa->kontrakan->harga;
         $totalBayar = $hargaPerBulan * $jumlahBulan;
         $diskon = $sewa->diskon ?? 0;
-        $denda = 0;
+        $denda = $sewa->denda ?? 0;
 
         // Upload bukti jika transfer
         $buktiPath = null;

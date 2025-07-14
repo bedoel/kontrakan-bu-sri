@@ -28,6 +28,7 @@
                 <table class="table table-bordered datatable">
                     <thead class="table-dark">
                         <tr>
+                            <th>No</th>
                             <th>Nama User</th>
                             <th>Kontrakan Lama</th>
                             <th>Kontrakan Baru</th>
@@ -41,6 +42,7 @@
                     <tbody>
                         @foreach ($permintaan as $p)
                             <tr>
+                                <td>{{ $loop->iteration }}</td>
                                 <td>{{ $p->user->name }}</td>
                                 <td>{{ $p->kontrakanLama->nama }}</td>
                                 <td>{{ $p->kontrakanBaru->nama }}</td>

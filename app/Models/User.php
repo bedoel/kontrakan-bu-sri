@@ -52,7 +52,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function sewas()
     {
-        return $this->hasMany(Sewa::class);
+        return $this->hasOne(Sewa::class);
     }
 
     public function pengaduans()

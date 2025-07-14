@@ -21,6 +21,7 @@
                 <table class="table table-bordered datatable">
                     <thead class="table-dark">
                         <tr>
+                            <th>No</th>
                             <th>Nama</th>
                             <th>Email</th>
                             <th>Nomor HP</th>
@@ -30,6 +31,7 @@
                     <tbody>
                         @forelse ($users as $u)
                             <tr>
+                                <td>{{ $loop->iteration }}</td>
                                 <td>
                                     <div class="d-flex align-items-center">
                                         <div class="avatar me-2">

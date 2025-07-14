@@ -16,13 +16,15 @@ class SewaController extends Controller
 {
     public function index()
     {
-        $sewas = Sewa::with(['user', 'kontrakan'])->latest()->get();
+        $sewas = Sewa::with(['user', 'kontrakan', 'admin'])->latest()->get();
         return view('admin.sewa.index', compact('sewas'));
     }
 
     public function create()
     {
-        $users = User::all();
+        $users = User::whereDoesntHave('sewas', function ($query) {
+            $query->whereIn('status', ['aktif', 'menunggu_pembayaran', 'menunggu_konfirmasi']);
+        })->get();
         $kontrakans = Kontrakan::where('status', 'tersedia')->get();
         return view('admin.sewa.create', compact('users', 'kontrakans'));
     }
@@ -63,6 +65,17 @@ class SewaController extends Controller
         } elseif ($jumlahBulan >= 6 && $jumlahBulan <= 12) {
             $diskon = 50000 * $jumlahBulan;
         }
+
+        $cekSewaAktif = Sewa::where('user_id', $request->user_id)
+            ->whereIn('status', ['aktif', 'menunggu_pembayaran', 'menunggu_konfirmasi'])
+            ->exists();
+
+        if ($cekSewaAktif) {
+            return redirect()->back()
+                ->withInput()
+                ->withErrors(['user_id' => 'User ini sudah memiliki sewa aktif atau dalam proses pembayaran.']);
+        }
+
 
         $sewa = Sewa::create([
             'user_id' => $request->user_id,
@@ -184,13 +197,19 @@ class SewaController extends Controller
         // Hitung harga dan diskon
         $hargaPerBulan = $sewa->kontrakan->harga;
         $totalBayar = $hargaPerBulan * $jumlahBulan;
-        $diskon = 0;
 
+        $diskon = 0;
         if ($jumlahBulan >= 3 && $jumlahBulan <= 5) {
             $diskon = 25000 * $jumlahBulan;
         } elseif ($jumlahBulan >= 6) {
             $diskon = 50000 * $jumlahBulan;
         }
+
+        $denda = 0;
+        if (now()->greaterThan($sewa->tanggal_akhir)) {
+            $denda = 25000;
+        }
+
 
         $sewaBaru = Sewa::create([
             'user_id'           => $sewa->user_id,
@@ -200,6 +219,8 @@ class SewaController extends Controller
             'tanggal_akhir'     => $tanggalAkhir,
             'lama_sewa_bulan'   => $jumlahBulan,
             'status'            => $metode === 'cash' ? 'aktif' : 'menunggu_pembayaran',
+            'diskon'            => $diskon,
+            'denda'             => $denda,
             'admin_id' => auth('admin')->id(),
         ]);
 
@@ -208,9 +229,9 @@ class SewaController extends Controller
                 'invoice_number'    => 'INV-' . strtoupper(Str::random(8)),
                 'sewa_id'           => $sewaBaru->id,
                 'metode'            => 'cash',
-                'total_bayar'       => $totalBayar - $diskon,
+                'total_bayar'       => $totalBayar - $diskon + $denda,
                 'diskon'            => $diskon,
-                'denda'             => 0,
+                'denda'             => $denda,
                 'status'            => 'disetujui',
                 'admin_id' => auth('admin')->id(),
             ]);

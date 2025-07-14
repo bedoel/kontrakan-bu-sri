@@ -51,8 +51,14 @@
                         <li class="list-group-item"><strong>Diskon:</strong>
                             Rp {{ number_format($sewa->diskon ?? 0) }}
                         </li>
-                        <li class="list-group-item"><strong>Total Setelah Diskon:</strong>
-                            Rp {{ number_format($sewa->kontrakan->harga * $sewa->lama_sewa_bulan - ($sewa->diskon ?? 0)) }}
+                        @if ($sewa->denda > 0)
+                            <li class="list-group-item"><strong>Denda:</strong>
+                                Rp {{ number_format($sewa->denda ?? 0) }}
+                            </li>
+                        @endif
+                        <li class="list-group-item"><strong>Total yang harus dibayar:</strong>
+                            Rp
+                            {{ number_format($sewa->kontrakan->harga * $sewa->lama_sewa_bulan - ($sewa->diskon ?? 0) + ($sewa->denda ?? 0)) }}
                         </li>
                     </ul>
 

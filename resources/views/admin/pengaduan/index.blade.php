@@ -28,16 +28,18 @@
                 <table class="table table-bordered datatable">
                     <thead class="table-dark">
                         <tr>
-                            <th scope="col">User</th>
-                            <th scope="col">Pesan</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Balasan</th>
-                            <th scope="col">Aksi</th>
+                            <th>No</th>
+                            <th>User</th>
+                            <th>Pesan</th>
+                            <th>Status</th>
+                            <th>Balasan</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($pengaduans as $p)
                             <tr>
+                                <td>{{ $loop->iteration }}</td>
                                 <td>
                                     <div class="d-flex align-items-center">
                                         <div class="avatar me-2">

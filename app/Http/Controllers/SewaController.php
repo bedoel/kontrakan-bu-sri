@@ -167,6 +167,12 @@ class SewaController extends Controller
             $diskon = 50000 * $jumlahBulan;
         }
 
+        $denda = 0;
+        if (now()->greaterThan($sewa->tanggal_akhir)) {
+            $denda = 25000; // misal denda tetap
+        }
+
+
         $sewaBaru = Sewa::create([
             'user_id' => $user->id,
             'kontrakan_id' => $sewa->kontrakan_id,
@@ -176,6 +182,7 @@ class SewaController extends Controller
             'lama_sewa_bulan' => $jumlahBulan,
             'status' => 'menunggu_pembayaran',
             'diskon' => $diskon,
+            'denda'             => $denda,
         ]);
 
         return redirect()->route('user.sewa.show', $sewaBaru->id)->with('success', 'Pengajuan perpanjangan berhasil.');

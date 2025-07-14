@@ -15,6 +15,7 @@ class Sewa extends Model
         'lama_sewa_bulan',
         'status',
         'diskon',
+        'denda',
         'admin_id',
     ];
 
@@ -33,7 +34,6 @@ class Sewa extends Model
         return $this->belongsTo(Kontrakan::class);
     }
 
-
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -43,5 +43,10 @@ class Sewa extends Model
     {
         return $query->where('status', 'aktif')
             ->whereDate('tanggal_akhir', '<=', now()->subDays(7));
+    }
+
+    public function admin()
+    {
+        return $this->belongsTo(Admin::class, 'admin_id');
     }
 }

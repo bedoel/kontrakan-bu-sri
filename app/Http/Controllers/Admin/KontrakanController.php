@@ -57,6 +57,7 @@ class KontrakanController extends Controller
             'harga' => $request->harga,
             'deskripsi' => $request->deskripsi,
             'status' => $request->status,
+            'admin_id' => auth('admin')->id()
         ]);
 
         if ($request->hasFile('foto_kontrakans')) {

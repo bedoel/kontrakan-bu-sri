@@ -18,6 +18,7 @@
                 <table class="table table-bordered datatable" width="100%" cellspacing="0">
                     <thead class="table-dark">
                         <tr>
+                            <th>No</th>
                             <th>Nama</th>
                             <th>Harga</th>
                             <th>Status</th>
@@ -29,6 +30,7 @@
                     <tbody>
                         @foreach ($kontrakans as $kontrakan)
                             <tr>
+                                <td>{{ $loop->iteration }}</td>
                                 <td>{{ $kontrakan->nama }}</td>
                                 <td>Rp {{ number_format($kontrakan->harga) }}</td>
                                 <td>{!! statusBadge($kontrakan->status) !!}</td>

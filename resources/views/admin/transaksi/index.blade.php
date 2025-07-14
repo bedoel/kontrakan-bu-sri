@@ -28,6 +28,7 @@
                 <table class="table table-bordered datatable">
                     <thead class="table-dark">
                         <tr>
+                            <th>No</th>
                             <th>Invoice</th>
                             <th>Penyewa</th>
                             <th>Kontrakan</th>
@@ -40,6 +41,7 @@
                     <tbody>
                         @foreach ($transaksis as $trx)
                             <tr>
+                                <td>{{ $loop->iteration }}</td>
                                 <td>{{ $trx->invoice_number }}</td>
                                 <td>
                                     @if ($trx->sewa && $trx->sewa->user)
