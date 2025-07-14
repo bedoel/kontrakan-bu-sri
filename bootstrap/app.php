@@ -48,7 +48,7 @@ return Application::configure(basePath: dirname(__DIR__))
     })
     ->withSchedule(function (Schedule $schedule) {
         $schedule->command('reminder:jatuh-tempo')->dailyAt('07:00'); // atau '08:00' sesuai kebutuhan
-        $schedule->command('sewa:tandai-selesai')->daily();
+        $schedule->command('sewa:tandai-selesai')->everyFiveMinutes();
     })
     ->create();
 

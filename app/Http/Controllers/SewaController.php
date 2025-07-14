@@ -24,7 +24,7 @@ class SewaController extends Controller
         $riwayatSewa = \App\Models\Sewa::with('kontrakan')
             ->where('user_id', $user->id)
             ->whereIn('status', ['selesai', 'kadaluarsa', 'batal', 'ditolak'])
-            ->latest('tanggal_akhir')
+            ->latest()
             ->get();
 
         $punyaPermintaanMenunggu = PermintaanPindahKontrakan::where('user_id', $user->id)
