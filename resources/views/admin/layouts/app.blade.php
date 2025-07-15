@@ -38,6 +38,7 @@
 
     @include('admin.partials.logout-modal')
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ asset('back/assets/vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('back/assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('back/assets/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
@@ -45,6 +46,17 @@
     <script src="{{ asset('back/assets/vendor/datatables/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('back/assets/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
     <script src="{{ asset('back/assets/vendor/chart.js/Chart.min.js') }}"></script>
+
+    @if (session('error'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Akses Ditolak',
+                text: '{{ session('error') }}',
+            });
+        </script>
+    @endif
+
     <script>
         $(document).ready(function() {
             $('.datatable').DataTable({

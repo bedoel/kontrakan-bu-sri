@@ -41,6 +41,15 @@ class SewaController extends Controller
 
     public function create(Kontrakan $kontrakan)
     {
+        $user = Auth::guard('user')->user();
+        $existing = Sewa::where('user_id', $user->id)
+            ->whereIn('status', ['menunggu_pembayaran', 'menunggu_konfirmasi', 'aktif'])
+            ->first();
+
+        if ($existing) {
+            return redirect()->route('user.sewa.index')->with('error', 'Anda sudah memiliki sewa yang sedang berlangsung.');
+        }
+
         return view('user.sewa.create', compact('kontrakan'));
     }
 
@@ -112,7 +121,7 @@ class SewaController extends Controller
     public function show(Sewa $sewa)
     {
         if ($sewa->user_id !== auth('user')->id()) {
-            abort(403, 'Anda tidak memiliki akses ke data ini.');
+            return redirect()->route('user.sewa.index')->with('error', 'Anda tidak memiliki akses ke data ini.');
         }
 
         return view('user.sewa.show', compact('sewa'));
@@ -125,6 +134,10 @@ class SewaController extends Controller
             ->whereIn('status', ['menunggu_pembayaran'])
             ->firstOrFail();
 
+        if ($sewa->user_id !== auth('user')->id()) {
+            return redirect()->route('user.sewa.index')->with('error', 'Anda tidak memiliki akses ke data ini.');
+        }
+
         $sewa->status = 'batal';
         $sewa->save();
 
@@ -136,6 +149,10 @@ class SewaController extends Controller
     public function perpanjang(Request $request, Sewa $sewa)
     {
         $user = auth('user')->user();
+
+        if ($sewa->user_id !== $user->id) {
+            return redirect()->route('user.sewa.index')->with('error', 'Anda tidak memiliki akses ke data ini.');
+        }
 
         if ($sewa->user_id !== $user->id) {
             abort(403, 'Unauthorized');

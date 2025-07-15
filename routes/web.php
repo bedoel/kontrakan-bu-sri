@@ -3,11 +3,12 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SewaController;
+use App\Http\Controllers\UlasanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserHomeController;
 use App\Http\Controllers\PengaduanController;
-use App\Http\Controllers\UlasanController;
 use App\Http\Controllers\TransaksiController;
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\LaporanController;
 use App\Http\Controllers\Auth\UserAuthController;
 use App\Http\Controllers\UserKontrakanController;
@@ -18,8 +19,8 @@ use App\Http\Controllers\Admin\SewaController as AdminSewaController;
 use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\KontrakanController as AdminKontrakanController;
-use App\Http\Controllers\Admin\PengaduanController as AdminPengaduanController;
 
+use App\Http\Controllers\Admin\PengaduanController as AdminPengaduanController;
 use App\Http\Controllers\Admin\TransaksiController as AdminTransaksiController;
 use App\Http\Controllers\Admin\PindahKontrakanController as AdminPindahKontrakanController;
 
@@ -188,4 +189,8 @@ Route::prefix('admin/laporan')->name('admin.laporan.')->group(function () {
 Route::prefix('admin/sewa')->name('admin.sewa.')->middleware('auth:admin')->group(function () {
     Route::get('/{sewa}/perpanjang', [AdminSewaController::class, 'formPerpanjang'])->name('perpanjang.form');
     Route::post('/{sewa}/perpanjang', [AdminSewaController::class, 'simpanPerpanjang'])->name('perpanjang.simpan');
+});
+
+Route::prefix('admin')->middleware(['auth:admin', 'superadmin'])->name('admin.')->group(function () {
+    Route::resource('admins', AdminController::class);
 });

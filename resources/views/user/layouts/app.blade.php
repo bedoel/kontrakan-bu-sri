@@ -198,8 +198,16 @@
         </script>
     @endif
 
-
-
+    @if (session('error'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: '{{ session('error') }}',
+                confirmButtonColor: '#d33'
+            });
+        </script>
+    @endif
 
     <!-- Scripts -->
     <script src="{{ asset('front/assets') }}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

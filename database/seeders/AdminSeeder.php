@@ -20,7 +20,7 @@ class AdminSeeder extends Seeder
             'email' => 'gamefadlur1969@gmail.com',
             'nomor_hp' => '089999999999',
             'poto_profil' => null,
-            'email_verified_at' => Carbon::now(),
+            'role' => 'super_admin',
             'password' => Hash::make('123123123'),
         ]);
     }

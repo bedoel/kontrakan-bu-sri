@@ -25,6 +25,9 @@ class PindahKontrakanController extends Controller
     {
         $user = auth('user')->user();
         $sewa = Sewa::where('user_id', $user->id)->where('status', 'aktif')->firstOrFail();
+        if ($sewa->user_id !== auth('user')->id()) {
+            return redirect()->route('user.sewa.index')->with('error', 'Anda tidak berhak mengakses data ini.');
+        }
         $kontrakans = Kontrakan::where('status', 'tersedia')->get();
 
         return view('user.pindah.create', compact('kontrakans', 'sewa'));

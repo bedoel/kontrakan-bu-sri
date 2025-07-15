@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('nomor_hp')->nullable();
             $table->string('poto_profil')->nullable();
-            $table->timestamp('email_verified_at')->nullable();
+            $table->string('role')->default('admin');
             $table->string('password');
             $table->timestamps();
         });

@@ -54,8 +54,9 @@ class UlasanController extends Controller
     public function edit(Ulasan $ulasan)
     {
         if ($ulasan->user_id !== auth('user')->id()) {
-            abort(403, 'Anda tidak berhak mengakses ulasan ini.');
+            return redirect()->route('user.ulasan.index')->with('error', 'Anda tidak berhak mengakses ulasan ini.');
         }
+
         $this->authorizeUlasan($ulasan);
         return view('user.ulasan.edit', compact('ulasan'));
     }
@@ -63,7 +64,7 @@ class UlasanController extends Controller
     public function update(Request $request, Ulasan $ulasan)
     {
         if ($ulasan->user_id !== auth('user')->id()) {
-            abort(403, 'Anda tidak berhak mengakses ulasan ini.');
+            return redirect()->route('user.ulasan.index')->with('error', 'Anda tidak berhak mengakses ulasan ini.');
         }
         $this->authorizeUlasan($ulasan);
 

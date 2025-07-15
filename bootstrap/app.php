@@ -1,16 +1,17 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Application;
 use App\Http\Middleware\UserMiddleware;
 use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Foundation\Console\Kernel;
+use Illuminate\Console\Scheduling\Schedule;
 use App\Console\Commands\ReminderJatuhTempo;
+use Illuminate\Auth\AuthenticationException;
+use Illuminate\Http\Middleware\TrustProxies;
+use App\Http\Middleware\SuperAdminMiddleware;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
-use Illuminate\Auth\AuthenticationException;
-use Illuminate\Console\Scheduling\Schedule;
-use Illuminate\Http\Middleware\TrustProxies;
-use Illuminate\Http\Request;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -22,6 +23,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'user.auth' => UserMiddleware::class,
             'admin.auth' => AdminMiddleware::class,
+            'superadmin' => SuperAdminMiddleware::class,
         ]);
         $middleware->trustProxies(
             at: '*',

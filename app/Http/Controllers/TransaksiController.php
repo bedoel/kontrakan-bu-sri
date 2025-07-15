@@ -30,6 +30,10 @@ class TransaksiController extends Controller
 
     public function show(Transaksi $transaksi)
     {
+        if ($transaksi->sewa->user_id !== auth('user')->id()) {
+            return redirect()->route('user.transaksi.index')->with('error', 'Anda tidak memiliki akses ke data ini.');
+        }
+
         if ($transaksi->sewa->user_id !== Auth::guard('user')->id()) {
             abort(403, 'Unauthorized access to this transaksi.');
         }
@@ -39,10 +43,13 @@ class TransaksiController extends Controller
 
     public function invoice(Transaksi $transaksi)
     {
+        if ($transaksi->sewa->user_id !== auth('user')->id()) {
+            return redirect()->route('user.transaksi.index')->with('error', 'Anda tidak memiliki akses ke data ini.');
+        }
+
         if ($transaksi->sewa->user_id !== Auth::guard('user')->id()) {
             abort(403, 'Unauthorized access to this transaksi.');
         }
-
 
         $pdf = Pdf::loadView('user.transaksi.invoice', compact('transaksi'));
         return $pdf->download('invoice-' . $transaksi->invoice_number . '.pdf');
@@ -51,6 +58,10 @@ class TransaksiController extends Controller
     public function create(Sewa $sewa)
     {
         $user = auth('user')->user();
+        if ($sewa->user_id !== auth('user')->id()) {
+            return redirect()->route('user.transaksi.index')->with('error', 'Anda tidak memiliki akses ke data ini.');
+        }
+
         if ($user->id !== $sewa->user_id) {
             abort(403, 'Anda tidak memiliki akses ke data ini.');
         }
@@ -86,6 +97,10 @@ class TransaksiController extends Controller
                 'bukti_transfer.mimes' => 'Format gambar harus JPG, JPEG, atau PNG.',
 
             ]);
+        }
+
+        if ($sewa->user_id !== auth('user')->id()) {
+            return redirect()->route('user.transaksi.index')->with('error', 'Anda tidak memiliki akses ke data ini.');
         }
 
         // Cegah transaksi ganda

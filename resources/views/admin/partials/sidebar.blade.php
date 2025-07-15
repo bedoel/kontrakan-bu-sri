@@ -61,14 +61,6 @@
             <span>Tanggapi Pengaduan</span>
         </a>
     </li>
-
-    <!-- Kelola Users -->
-    <li class="nav-item {{ request()->is('admin/users*') ? 'active' : '' }}">
-        <a class="nav-link" href="{{ route('admin.users.index') }}">
-            <i class="fas fa-users-cog"></i>
-            <span>Kelola Users</span>
-        </a>
-    </li>
     <!-- Kelola Ulasan -->
     <li class="nav-item {{ request()->is('admin/ulasan*') ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('admin.ulasan.index') }}">
@@ -76,6 +68,43 @@
             <span>Kelola Ulasan</span>
         </a>
     </li>
+
+    @php
+        $admin = auth()->guard('admin')->user();
+    @endphp
+
+    <!-- Kelola Users -->
+    @if ($admin->role === 'admin')
+        <li class="nav-item {{ request()->is('admin/users*') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('admin.users.index') }}">
+                <i class="fas fa-users-cog"></i>
+                <span>Kelola Users</span>
+            </a>
+        </li>
+    @endif
+
+    <!-- Akun -->
+    @if ($admin->role === 'super_admin')
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+                aria-expanded="true" aria-controls="collapsePages">
+                <i class="fas fa-users-cog"></i>
+                <span>Kelola Akun</span>
+            </a>
+            <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item {{ request()->is('admin/admins*') ? 'active' : '' }}"
+                        href="{{ route('admin.admins.index') }}">
+                        <span>Kelola Admin</span>
+                    </a>
+                    <a class="collapse-item {{ request()->is('admin/users*') ? 'active' : '' }}"
+                        href="{{ route('admin.users.index') }}">
+                        <span>Kelola Users</span>
+                    </a>
+                </div>
+            </div>
+        </li>
+    @endif
 
 
 
