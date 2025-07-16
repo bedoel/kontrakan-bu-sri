@@ -26,8 +26,9 @@ class AdminAuthController extends Controller
             'password.min' => 'Password minimal 6 karakter.',
         ]);
         $credentials = $request->only('email', 'password');
+        $remember = $request->has('remember');
 
-        if (Auth::guard('admin')->attempt($credentials)) {
+        if (Auth::guard('admin')->attempt($credentials, $remember)) {
             $request->session()->regenerate();
             return redirect()->route('admin.dashboard');
         }

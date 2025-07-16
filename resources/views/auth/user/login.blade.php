@@ -55,6 +55,13 @@
                     <input type="password" name="password" class="form-control" required>
                 </div>
 
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="remember" id="remember">
+                    <label class="form-check-label" for="remember">
+                        Remember Me
+                    </label>
+                </div>
+
                 <button type="submit" class="btn w-100 text-white" style="background-color: #6c63ff;">Masuk</button>
                 <div class="mt-3 text-center">
                     <a href="{{ route('user.register') }}" class="text-decoration-none">Belum punya akun? Daftar</a>

@@ -27,7 +27,7 @@ class PengaduanController extends Controller
     public function balas(Request $request, Pengaduan $pengaduan)
     {
         $request->validate([
-            'pesan' => 'required|string|max:1000',
+            'pesan' => 'required|string|max:255',
         ]);
 
         // Simpan balasan

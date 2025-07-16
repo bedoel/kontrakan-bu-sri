@@ -13,14 +13,24 @@ return new class extends Migration
     {
         Schema::create('sewas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('kontrakan_id')->constrained()->onDelete('cascade');
-            $table->string('slug')->unique();
+            $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
+            $table->foreignId('kontrakan_id')->nullable()->constrained('kontrakans')->nullOnDelete();
+            $table->string('slug', 100)->unique();
             $table->date('tanggal_mulai');
             $table->date('tanggal_akhir');
-            $table->enum('status', ['menunggu_pembayaran', 'menunggu_konfirmasi', 'aktif', 'selesai', 'ditolak', 'kadaluarsa', 'batal'])->default('menunggu_pembayaran');
-            $table->unsignedBigInteger('admin_id')->nullable();
-            $table->foreign('admin_id')->references('id')->on('admins')->nullOnDelete();
+            $table->unsignedTinyInteger('lama_sewa_bulan')->nullable();
+            $table->enum('status', [
+                'menunggu_pembayaran',
+                'menunggu_konfirmasi',
+                'aktif',
+                'selesai',
+                'ditolak',
+                'kadaluarsa',
+                'batal'
+            ])->default('menunggu_pembayaran');
+            $table->unsignedInteger('denda')->default(0);
+            $table->unsignedInteger('diskon')->default(0);
+            $table->foreignId('admin_id')->nullable()->constrained('admins')->nullOnDelete();
             $table->timestamps();
         });
     }

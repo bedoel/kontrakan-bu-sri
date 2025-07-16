@@ -29,7 +29,7 @@ class UlasanController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'pesan' => 'required|string|max:1000',
+            'pesan' => 'required|text|max:500',
             'rating' => 'required|integer|min:1|max:5',
             'gambar' => 'nullable|mimes:jpg,jpeg,png|max:2048'
         ], [
@@ -69,7 +69,7 @@ class UlasanController extends Controller
         $this->authorizeUlasan($ulasan);
 
         $request->validate([
-            'pesan' => 'required|string|max:1000',
+            'pesan' => 'required|string|max:500',
             'rating' => 'required|integer|min:1|max:5',
             'gambar' => 'nullable|mimes:jpg,jpeg,png|max:2048',
         ], [

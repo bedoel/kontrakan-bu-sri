@@ -26,7 +26,7 @@ class PindahKontrakanController extends Controller
     {
         $request->validate([
             'status' => 'required|in:disetujui,ditolak',
-            'catatan' => 'nullable|string|max:1000'
+            'catatan' => 'nullable|string|max:500'
         ]);
 
         $permintaan = PermintaanPindahKontrakan::findOrFail($id);

@@ -37,7 +37,7 @@ class PindahKontrakanController extends Controller
     {
         $request->validate([
             'kontrakan_baru_id' => 'required|exists:kontrakans,id',
-            'alasan' => 'required|string|max:1000'
+            'alasan' => 'required|string|max:500'
         ], [
             'kontrakan_baru_id' => 'Kontrakan wajib diisi.',
             'alasan' => 'Alasan wajib diisi.',

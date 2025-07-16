@@ -27,7 +27,7 @@ class TransaksiController extends Controller
     {
         $request->validate([
             'status' => 'required|in:menunggu_konfirmasi,disetujui,ditolak',
-            'pesan' => 'nullable|max:1000',
+            'pesan' => 'nullable|string|max:500',
         ]);
 
         $transaksi->update([

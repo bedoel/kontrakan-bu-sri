@@ -13,12 +13,15 @@ return new class extends Migration
     {
         Schema::create('kontrakans', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
-            $table->string('slug')->unique();
-            $table->integer('harga');
-            $table->text('deskripsi')->nullable();
+            $table->string('nama', 150);
+            $table->string('slug', 100)->unique();
+            $table->unsignedInteger('harga');
+            $table->text('deskripsi', 500)->nullable();
             $table->enum('status', ['tersedia', 'disewa'])->default('tersedia');
-            $table->foreignId('admin_id')->nullable()->constrained('admins')->nullOnDelete();
+            $table->foreignId('admin_id')
+                ->nullable()
+                ->constrained('admins')
+                ->nullOnDelete();
             $table->timestamps();
         });
     }

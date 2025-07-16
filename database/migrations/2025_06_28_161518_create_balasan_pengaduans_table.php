@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('pengaduan_id')->constrained('pengaduans');
             $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
             $table->foreignId('admin_id')->nullable()->constrained('admins')->nullOnDelete();
-            $table->text('pesan');
+            $table->text('pesan', 255);
             $table->timestamps();
         });
     }

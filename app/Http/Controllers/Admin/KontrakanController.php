@@ -139,6 +139,15 @@ class KontrakanController extends Controller
 
     public function destroy(Kontrakan $kontrakan)
     {
+        $sedangDisewa = $kontrakan->sewas()
+            ->whereIn('status', ['aktif', 'menunggu_konfirmasi', 'menunggu_pembayaran'])
+            ->exists();
+
+        if ($sedangDisewa) {
+            return redirect()->route('admin.kontrakan.index')
+                ->with('error', 'Kontrakan tidak dapat dihapus karena sedang disewa.');
+        }
+
         foreach ($kontrakan->foto_kontrakans as $foto) {
             Storage::disk('public')->delete($foto->path);
             $foto->delete();

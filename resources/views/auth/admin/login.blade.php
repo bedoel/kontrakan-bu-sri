@@ -61,6 +61,12 @@
                     <label>Password</label>
                     <input type="password" name="password" class="form-control" required>
                 </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="remember" id="remember">
+                    <label class="form-check-label" for="remember">
+                        Remember Me
+                    </label>
+                </div>
 
                 <button type="submit" class="btn btn-primary w-100">Masuk</button>
                 <div class="mt-3 text-center">

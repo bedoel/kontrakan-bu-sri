@@ -13,12 +13,13 @@ return new class extends Migration
     {
         Schema::create('admins', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('nomor_hp')->nullable();
-            $table->string('poto_profil')->nullable();
-            $table->string('role')->default('admin');
-            $table->string('password');
+            $table->string('name', 100);
+            $table->string('email', 150)->unique();
+            $table->string('nomor_hp', 20);
+            $table->string('poto_profil', 255)->nullable();
+            $table->enum('role', ['admin', 'super_admin'])->default('admin');
+            $table->string('password', 255);
+            $table->rememberToken();
             $table->timestamps();
         });
     }

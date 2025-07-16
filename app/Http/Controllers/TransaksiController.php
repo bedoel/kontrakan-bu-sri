@@ -81,7 +81,7 @@ class TransaksiController extends Controller
         $request->validate([
             'metode' => 'required|in:transfer,cash',
             'bukti_transfer' => 'nullable|mimes:jpg,jpeg,png|max:2048',
-            'catatan' => 'nullable|string|max:1000',
+            'catatan' => 'nullable|string|max:500',
         ], [
             'metode.required' => 'Metode pembayaran wajib diisi.',
             'bukti_transfer.max' => 'Ukuran file maksimal 2MB.',

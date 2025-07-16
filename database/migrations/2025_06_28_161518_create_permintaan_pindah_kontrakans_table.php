@@ -13,15 +13,15 @@ return new class extends Migration
     {
         Schema::create('permintaan_pindah_kontrakans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users');
-            $table->string('slug')->unique();
-            $table->foreignId('sewa_id')->constrained()->onDelete('cascade');
-            $table->foreignId('kontrakan_lama_id')->constrained('kontrakans');
-            $table->foreignId('kontrakan_baru_id')->constrained('kontrakans');
-            $table->text('alasan');
-            $table->enum('status', ['menunggu', 'disetujui', 'ditolak'])->default('menunggu');
-            $table->text('catatan')->nullable();
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('sewa_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('kontrakan_lama_id')->constrained('kontrakans')->cascadeOnDelete();
+            $table->foreignId('kontrakan_baru_id')->constrained('kontrakans')->cascadeOnDelete();
             $table->foreignId('admin_id')->nullable()->constrained('admins')->nullOnDelete();
+            $table->string('slug', 100)->unique();
+            $table->text('alasan', 500);
+            $table->enum('status', ['menunggu', 'disetujui', 'ditolak'])->default('menunggu');
+            $table->text('catatan', 500)->nullable();
             $table->timestamps();
         });
     }

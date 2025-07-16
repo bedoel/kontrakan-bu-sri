@@ -52,7 +52,7 @@ class PengaduanController extends Controller
     {
         $sewa = $this->cekSewaAktif();
         $request->validate([
-            'pesan' => 'required|string|max:2000',
+            'pesan' => 'required|string|max:500',
             'gambar' => 'nullable|mimes:jpg,jpeg,png|max:2048',
         ], [
             'pesan.required' => 'Pesan wajib diisi.',
@@ -97,7 +97,7 @@ class PengaduanController extends Controller
 
         $sewa = $this->cekSewaAktif();
         $request->validate([
-            'pesan' => 'required|string|max:1000',
+            'pesan' => 'required|string|max:255',
         ]);
 
         if ($pengaduan->user_id !== auth('user')->id()) {
