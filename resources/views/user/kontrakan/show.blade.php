@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="page-title dark-background" data-aos="fade"
-        style="background-image: url('{{ asset('front/assets/img/hero-2.jpg') }}');">
+        style="background-image: url('{{ asset('front/assets/img/hero-bg2.jpeg') }}');">
         <div class="container position-relative">
             <h1>{{ $kontrakan->nama }}</h1>
             <p>Detail informasi kontrakan yang tersedia.</p>
@@ -49,7 +49,17 @@
                                 </div>
                             @empty
                                 <div class="swiper-slide">
-                                    <img src="https://picsum.photos/800/400?random=1" alt="Default"
+                                    <img src="{{ asset('front/assets/img/default/default1.jpeg') }}" alt="Default"
+                                        style="height: 400px; width: 100%; object-fit: cover; border-radius: 8px;">
+
+                                </div>
+                                <div class="swiper-slide">
+                                    <img src="{{ asset('front/assets/img/default/default2.jpeg') }}" alt="Default"
+                                        style="height: 400px; width: 100%; object-fit: cover; border-radius: 8px;">
+
+                                </div>
+                                <div class="swiper-slide">
+                                    <img src="{{ asset('front/assets/img/default/default3.jpeg') }}" alt="Default"
                                         style="height: 400px; width: 100%; object-fit: cover; border-radius: 8px;">
 
                                 </div>

@@ -956,7 +956,7 @@ section,
   font-size: 24px;
 }
 
-.hero .btn-get-started {
+.btn-get-started {
   background: var(--accent-color);
   color: var(--contrast-color);
   font-weight: 400;
@@ -969,8 +969,9 @@ section,
   text-transform: uppercase;
 }
 
-.hero .btn-get-started:hover {
+.btn-get-started:hover {
   background: color-mix(in srgb, var(--accent-color), transparent 20%);
+  color: var(--contrast-color);
 }
 
 .hero .btn-watch-video {

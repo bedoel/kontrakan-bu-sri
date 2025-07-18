@@ -5,7 +5,7 @@
 @section('content')
     <!-- Page Title -->
     <div class="page-title dark-background" data-aos="fade"
-        style="background-image: url('{{ asset('front/assets/img/hero-2.jpg') }}');">
+        style="background-image: url('{{ asset('front/assets/img/hero-bg2.jpeg') }}');">
         <div class="container position-relative">
             <h1>Detail Pengaduan</h1>
             <p>Lihat status dan balasan dari admin</p>

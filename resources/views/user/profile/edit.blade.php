@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="page-title dark-background" data-aos="fade"
-        style="background-image: url('{{ asset('front/assets/img/hero-2.jpg') }}');">
+        style="background-image: url('{{ asset('front/assets/img/hero-bg2.jpeg') }}');">
         <div class="container position-relative">
             <h1>Edit Profil</h1>
             <p>Ubah data akun dan informasi pribadi Anda.</p>

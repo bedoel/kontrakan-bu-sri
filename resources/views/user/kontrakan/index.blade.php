@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="page-title dark-background" data-aos="fade"
-        style="background-image: url('{{ asset('front/assets/img/hero-2.jpg') }}');">
+        style="background-image: url('{{ asset('front/assets/img/hero-bg2.jpeg') }}');">
         <div class="container position-relative">
             <h1>Daftar Kontrakan</h1>
             <p>Temukan kontrakan terbaik dan sesuai kebutuhan Anda.</p>
@@ -42,7 +42,7 @@
                                     {{-- Gambar --}}
                                     <img src="{{ $kontrakan->foto_kontrakans->first()
                                         ? asset('storage/' . $kontrakan->foto_kontrakans->first()->path)
-                                        : 'https://picsum.photos/600/400?random=' . $loop->iteration }}"
+                                        : asset('front/assets/img/default/default1.jpeg') }}"
                                         class="img-fluid w-100" style="height: 250px; object-fit: cover;"
                                         alt="{{ $kontrakan->nama }}">
 

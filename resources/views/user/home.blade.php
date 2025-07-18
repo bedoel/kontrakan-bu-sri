@@ -6,7 +6,7 @@
     <!-- Hero Carousel -->
     <section id="hero" class="hero section dark-background">
 
-        <img src="{{ asset('front/assets/img/hero-2.jpg') }}" alt="" data-aos="fade-in">
+        <img src="{{ asset('front/assets/img/hero-bg3.jpeg') }}" alt="" data-aos="fade-in">
 
         <div class="container d-flex flex-column align-items-center">
             <h2 data-aos="fade-up" data-aos-delay="100">Temukan Hunian Nyaman Anda</h2>
@@ -40,10 +40,10 @@
                             <div class="img">
                                 @if ($kontrakan->foto_kontrakans->first())
                                     <img src="{{ asset('storage/' . $kontrakan->foto_kontrakans->first()->path) }}"
-                                        class="img-fluid" alt="{{ $kontrakan->nama }}">
+                                        class="img-fluid w-100" alt="{{ $kontrakan->nama }}">
                                 @else
-                                    <img src="https://picsum.photos/600/400?random={{ $loop->iteration }}" class="img-fluid"
-                                        alt="Foto Kontrakan">
+                                    <img src="{{ asset('front/assets/img/default/default1.jpeg') }}" class="img-fluid w-100"
+                                        alt="Foto Kontrakan" style="height: 250px; object-fit: cover;">
                                 @endif
                             </div>
 
@@ -68,7 +68,7 @@
 
             <!-- Tombol Lihat Lebih Banyak -->
             <div class="text-center mt-5">
-                <a href="{{ route('user.kontrakan.index') }}" class="btn btn-primary px-4 py-2">
+                <a href="{{ route('user.kontrakan.index') }}" class="btn-get-started">
                     <i class="bi bi-box-arrow-in-right me-1"></i> Lihat Lebih Banyak Kontrakan
                 </a>
             </div>
@@ -144,7 +144,7 @@
                 <!-- Kolom Deskripsi dan Gambar -->
                 <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
                     <h3>Kenapa Memilih Kontrakan Bu Sri?</h3>
-                    <img src="{{ asset('front/assets/img/about.jpg') }}" class="img-fluid rounded-4 mb-4"
+                    <img src="{{ asset('front/assets/img/about3.jpeg') }}" class="img-fluid rounded-4 mb-4"
                         alt="Tentang Kontrakan Bu Sri" />
                     <p>
                         Kontrakan Bu Sri adalah hunian yang nyaman dan terjangkau di kawasan <strong>Cakung, Jakarta
@@ -168,13 +168,13 @@
 
                         <h5 class="mb-2"><i class="bi bi-geo-alt-fill text-danger me-2"></i>Alamat Lengkap</h5>
                         <p>
-                            Jl. Teratai No.21, RT.04/RW.02, Kel. Cakung Timur, Kec. Cakung, Kota Jakarta Timur, DKI Jakarta
-                            13910
+                            Jl. Buaran 1, RT 04 / RW 08 No.36
+                            Cakung, Jatinegara, Jakarta Timur
                         </p>
 
                         <div class="ratio ratio-16x9 rounded-4 shadow-sm overflow-hidden">
                             <iframe
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.3917650113256!2d106.93987437413195!3d-6.212735293776281!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e698b2743d95f1f%3A0x1b0e33f14a9b2c1e!2sJl.%20Teratai%20No.21%2C%20Cakung%20Timur%2C%20Cakung%2C%20Kota%20Jakarta%20Timur!5e0!3m2!1sid!2sid!4v1719834899194!5m2!1sid!2sid"
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d495.79642683942365!2d106.91875423610685!3d-6.2146511!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e698ca9e6898e41%3A0x55dc3ee92a3fbf6c!2sJl.%20Waru%20Doyong%2C%20RT.4%2FRW.8%2C%20Jatinegara%2C%20Kec.%20Cakung%2C%20Kota%20Jakarta%20Timur%2C%20Daerah%20Khusus%20Ibukota%20Jakarta%2013930!5e0!3m2!1sen!2sid!4v1752844471481!5m2!1sen!2sid"
                                 width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
                                 referrerpolicy="no-referrer-when-downgrade"></iframe>
                         </div>
@@ -194,7 +194,7 @@
 
     <!-- Testimonials Section -->
     <section id="testimonials" class="testimonials section dark-background">
-        <img src="{{ asset('front/assets/img/testimonials-bg.jpg') }}" class="testimonials-bg" alt="">
+        <img src="{{ asset('front/assets/img/footer.png') }}" class="testimonials-bg" alt="">
         <div class="container" data-aos="fade-up" data-aos-delay="100">
             <div class="swiper init-swiper">
                 <script type="application/json" class="swiper-config">

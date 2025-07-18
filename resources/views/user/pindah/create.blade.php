@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="page-title dark-background" data-aos="fade"
-        style="background-image: url('{{ asset('assets/img/page-title-bg.webp') }}');">
+        style="background-image: url('{{ asset('front/assets/img/hero-bg2.jpeg') }}');">
         <div class="container position-relative">
             <h1>Pengajuan Pindah Kontrakan</h1>
             <p>Ajukan permintaan pindah kontrakan Anda secara langsung.</p>
