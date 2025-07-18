@@ -53,10 +53,16 @@
                 </div>
 
                 <div class="mb-3" id="buktiTransferField" style="display: none;">
+                    <div class="alert alert-info">
+                        <strong>Transfer ke Rekening:</strong><br>
+                        Bank BCA - 1234567890 a.n. Bu Sri
+                    </div>
+
                     <label for="bukti_transfer" class="form-label">Upload Bukti Transfer</label>
                     <input type="file" name="bukti_transfer" class="form-control" accept="image/*">
                     <small class="text-muted">Hanya isi jika metode transfer</small>
                 </div>
+
 
                 <div class="mb-3">
                     <label for="catatan" class="form-label">Catatan (Opsional)</label>
