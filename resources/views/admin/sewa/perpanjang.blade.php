@@ -5,7 +5,7 @@
 @section('content')
     <h4 class="mb-4">Perpanjangan Sewa</h4>
 
-    <form action="{{ route('admin.sewa.perpanjang.simpan', $sewa->id) }}" method="POST">
+    <form action="{{ route('admin.sewa.perpanjang.simpan', $sewa->slug) }}" method="POST">
         @csrf
 
         <div class="mb-3">

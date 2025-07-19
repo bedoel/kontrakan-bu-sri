@@ -46,14 +46,6 @@
         </a>
     </li>
 
-    <!-- Konfirmasi Pindah -->
-    <li class="nav-item {{ request()->is('admin/pindah*') ? 'active' : '' }}">
-        <a class="nav-link" href="{{ route('admin.pindah.index') }}">
-            <i class="fas fa-exchange-alt"></i>
-            <span>Konfirmasi Pindah</span>
-        </a>
-    </li>
-
     <!-- Tanggapi Pengaduan -->
     <li class="nav-item {{ request()->is('admin/pengaduan*') ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('admin.pengaduan.index') }}">

@@ -28,32 +28,33 @@ class TransaksiController extends Controller
     }
 
 
-    public function show(Transaksi $transaksi)
+    public function show($invoice_number)
     {
+        $transaksi = Transaksi::with('sewa')
+            ->where('invoice_number', $invoice_number)
+            ->firstOrFail();
+
         if ($transaksi->sewa->user_id !== auth('user')->id()) {
             return redirect()->route('user.transaksi.index')->with('error', 'Anda tidak memiliki akses ke data ini.');
-        }
-
-        if ($transaksi->sewa->user_id !== Auth::guard('user')->id()) {
-            abort(403, 'Unauthorized access to this transaksi.');
         }
 
         return view('user.transaksi.show', compact('transaksi'));
     }
 
-    public function invoice(Transaksi $transaksi)
+    public function invoice($invoice_number)
     {
+        $transaksi = Transaksi::with('sewa')
+            ->where('invoice_number', $invoice_number)
+            ->firstOrFail();
+
         if ($transaksi->sewa->user_id !== auth('user')->id()) {
             return redirect()->route('user.transaksi.index')->with('error', 'Anda tidak memiliki akses ke data ini.');
         }
 
-        if ($transaksi->sewa->user_id !== Auth::guard('user')->id()) {
-            abort(403, 'Unauthorized access to this transaksi.');
-        }
-
-        $pdf = Pdf::loadView('user.transaksi.invoice', compact('transaksi'));
+        $pdf = PDF::loadView('user.transaksi.invoice', compact('transaksi'));
         return $pdf->download('invoice-' . $transaksi->invoice_number . '.pdf');
     }
+
 
     public function create(Sewa $sewa)
     {

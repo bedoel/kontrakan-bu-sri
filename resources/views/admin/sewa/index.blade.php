@@ -58,13 +58,13 @@
                                     {{ $sewa->admin ? $sewa->admin->name : '-' }}
                                 </td>
                                 <td>
-                                    <a href="{{ route('admin.sewa.show', $sewa->id) }}"
+                                    <a href="{{ route('admin.sewa.show', $sewa->slug) }}"
                                         class="btn btn-info btn-sm">Detail</a>
-                                    <a href="{{ route('admin.sewa.edit', $sewa->id) }}"
+                                    <a href="{{ route('admin.sewa.edit', $sewa->slug) }}"
                                         class="btn btn-warning btn-sm">Edit</a>
-                                    <a href="{{ route('admin.sewa.perpanjang.form', $sewa->id) }}"
+                                    <a href="{{ route('admin.sewa.perpanjang.form', $sewa->slug) }}"
                                         class="btn btn-success btn-sm">Perpanjang</a>
-                                    <form action="{{ route('admin.sewa.destroy', $sewa->id) }}" method="POST"
+                                    <form action="{{ route('admin.sewa.destroy', $sewa->slug) }}" method="POST"
                                         class="d-inline">
                                         @csrf @method('DELETE')
                                         <button class="btn btn-danger btn-sm"

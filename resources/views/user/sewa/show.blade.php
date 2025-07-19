@@ -66,13 +66,13 @@
 
                     @if ($sewa->status === 'menunggu_pembayaran' && !$sewa->transaksi)
                         <div class="mt-4">
-                            <a href="{{ route('user.transaksi.create', $sewa->id) }}" class="btn btn-success w-100">
+                            <a href="{{ route('user.transaksi.create', $sewa->slug) }}" class="btn btn-success w-100">
                                 <i class="bi bi-credit-card"></i> Lanjut ke Pembayaran
                             </a>
                         </div>
                     @endif
                     @if (in_array($sewa->status, ['menunggu_pembayaran']))
-                        <form action="{{ route('user.sewa.batal', $sewa->id) }}" method="POST" class="mt-3">
+                        <form action="{{ route('user.sewa.batal', $sewa->slug) }}" method="POST" class="mt-3">
                             @csrf @method('PUT')
                             <button class="btn btn-danger w-100"
                                 onclick="return confirm('Yakin ingin membatalkan sewa ini?')">

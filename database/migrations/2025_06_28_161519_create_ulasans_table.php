@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('ulasans', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->string('slug', 100)->unique();
             $table->text('pesan', 500);
             $table->unsignedTinyInteger('rating');
             $table->string('gambar', 255)->nullable();

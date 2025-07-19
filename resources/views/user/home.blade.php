@@ -52,7 +52,7 @@
                                 <div class="icon">
                                     <i class="bi bi-house-door"></i>
                                 </div>
-                                <a href="{{ route('user.kontrakan.show', $kontrakan->id) }}" class="stretched-link">
+                                <a href="{{ route('user.kontrakan.show', $kontrakan->slug) }}" class="stretched-link">
                                     <h3>{{ $kontrakan->nama }}</h3>
                                 </a>
                                 <p>

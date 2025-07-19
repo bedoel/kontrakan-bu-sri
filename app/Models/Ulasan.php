@@ -8,6 +8,7 @@ class Ulasan extends Model
 {
     protected $fillable = [
         'user_id',
+        'slug',
         'pesan',
         'rating',
         'gambar',
@@ -17,5 +18,10 @@ class Ulasan extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
 }

@@ -32,7 +32,7 @@
 
             <div class="card shadow">
                 <div class="card-body">
-                    <form action="{{ route('user.transaksi.store', $sewa->id) }}" method="POST"
+                    <form action="{{ route('user.transaksi.store', $sewa->slug) }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
 

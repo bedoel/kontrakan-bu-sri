@@ -46,10 +46,10 @@
                             </h5>
                             <p class="mb-2">{{ $t->pesan }}</p>
                             <div class="d-flex align-items-center mt-3">
-                                <a href="{{ route('user.ulasan.edit', $t->id) }}" class="btn btn-sm btn-warning me-2">
+                                <a href="{{ route('user.ulasan.edit', $t->slug) }}" class="btn btn-sm btn-warning me-2">
                                     Edit
                                 </a>
-                                <form action="{{ route('user.ulasan.destroy', $t->id) }}" method="POST"
+                                <form action="{{ route('user.ulasan.destroy', $t->slug) }}" method="POST"
                                     onsubmit="return confirm('Yakin ingin menghapus ulasan ini?')">
                                     @csrf
                                     @method('DELETE')

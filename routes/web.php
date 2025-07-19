@@ -13,7 +13,6 @@ use App\Http\Controllers\Admin\LaporanController;
 use App\Http\Controllers\Auth\UserAuthController;
 use App\Http\Controllers\UserKontrakanController;
 use App\Http\Controllers\Auth\AdminAuthController;
-use App\Http\Controllers\PindahKontrakanController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Controllers\Admin\SewaController as AdminSewaController;
 use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
@@ -22,7 +21,6 @@ use App\Http\Controllers\Admin\KontrakanController as AdminKontrakanController;
 
 use App\Http\Controllers\Admin\PengaduanController as AdminPengaduanController;
 use App\Http\Controllers\Admin\TransaksiController as AdminTransaksiController;
-use App\Http\Controllers\Admin\PindahKontrakanController as AdminPindahKontrakanController;
 
 // Tampilkan halaman setelah klik link
 Route::get('/email/verify', function () {
@@ -73,11 +71,11 @@ Route::middleware(['auth:user'])->group(function () {
 });
 Route::middleware(['auth:user', 'verified'])->group(function () {
     // Sewa Kontrakan
-    Route::get('/user/sewa/create/{kontrakan}', [SewaController::class, 'create'])->name('user.sewa.create');
+    Route::get('/user/sewa/create/{kontrakan:slug}', [SewaController::class, 'create'])->name('user.sewa.create');
     Route::post('/user/sewa/store', [SewaController::class, 'store'])->name('user.sewa.store');
-    Route::get('/user/sewa/{sewa}', [SewaController::class, 'show'])->name('user.sewa.show');
+    Route::get('/user/sewa/{sewa:slug}', [SewaController::class, 'show'])->name('user.sewa.show');
     Route::get('/sewa', [SewaController::class, 'index'])->name('user.sewa.index');
-    Route::put('/sewa/{id}/batal', [SewaController::class, 'batal'])->name('user.sewa.batal');
+    Route::put('/sewa/{sewa}/batal', [SewaController::class, 'batal'])->name('user.sewa.batal');
     Route::post('/sewa/{sewa}/perpanjang', [SewaController::class, 'perpanjang'])->name('user.sewa.perpanjang');
 
     // Transaksi
@@ -86,12 +84,8 @@ Route::middleware(['auth:user', 'verified'])->group(function () {
 
     Route::name('user.')->group(function () {
         Route::get('/transaksi', [TransaksiController::class, 'index'])->name('transaksi.index');
-        Route::get('/transaksi/{transaksi}', [TransaksiController::class, 'show'])->name('transaksi.show');
-        Route::get('/transaksi/{transaksi}/invoice', [TransaksiController::class, 'invoice'])->name('transaksi.invoice');
-
-        // Pindah Kontrakan
-        Route::get('/pindah-kontrakan', [PindahKontrakanController::class, 'create'])->name('pindah.create');
-        Route::post('/pindah-kontrakan', [PindahKontrakanController::class, 'store'])->name('pindah.store');
+        Route::get('/transaksi/{invoice_number}', [TransaksiController::class, 'show'])->name('transaksi.show');
+        Route::get('/transaksi/{invoice_number}/invoice', [TransaksiController::class, 'invoice'])->name('transaksi.invoice');
 
         // Pengaduan
         Route::get('/pengaduan', [PengaduanController::class, 'index'])->name('pengaduan.index');
@@ -129,12 +123,6 @@ Route::middleware(['auth:admin'])->prefix('admin')->name('admin.')->group(functi
     Route::resource('sewa', AdminSewaController::class)->names('sewa');
     Route::resource('transaksi', AdminTransaksiController::class)->names('transaksi');
 
-    // Pindah Kontrakan
-    Route::get('/pindah', [AdminPindahKontrakanController::class, 'index'])->name('pindah.index');
-    Route::get('/pindah/{pindah}', [AdminPindahKontrakanController::class, 'destroy'])->name('pindah.destroy');
-    Route::get('/pindah/{pindah}/show', [AdminPindahKontrakanController::class, 'show'])->name('pindah.show');
-    Route::post('/pindah/{pindah}/konfirmasi', [AdminPindahKontrakanController::class, 'konfirmasi'])->name('pindah.konfirmasi');
-
     // Pengaduan
     Route::get('/pengaduan', [AdminPengaduanController::class, 'index'])->name('pengaduan.index');
     Route::get('/pengaduan/{pengaduan}', [AdminPengaduanController::class, 'show'])->name('pengaduan.show');
@@ -143,17 +131,16 @@ Route::middleware(['auth:admin'])->prefix('admin')->name('admin.')->group(functi
     Route::post('/pengaduan/{pengaduan}/ubah-status', [AdminPengaduanController::class, 'ubahStatus'])->name('pengaduan.ubahStatus');
 
     Route::get('/ulasan', [\App\Http\Controllers\Admin\UlasanController::class, 'index'])->name('ulasan.index');
-    Route::get('/ulasan/{id}', [\App\Http\Controllers\Admin\UlasanController::class, 'show'])->name('ulasan.show');
-    Route::delete('/ulasan/{id}', [\App\Http\Controllers\Admin\UlasanController::class, 'destroy'])->name('ulasan.destroy');
+    Route::get('/ulasan/{ulasan}', [\App\Http\Controllers\Admin\UlasanController::class, 'show'])->name('ulasan.show');
+    Route::delete('/ulasan/{ulasan}', [\App\Http\Controllers\Admin\UlasanController::class, 'destroy'])->name('ulasan.destroy');
 });
 
-// ===================================
 // Public Kontrakan Routes
-// ===================================
 Route::prefix('kontrakan')->name('user.kontrakan.')->group(function () {
     Route::get('/', [UserKontrakanController::class, 'index'])->name('index');
-    Route::get('/{id}', [UserKontrakanController::class, 'show'])->name('show');
+    Route::get('/{slug}', [UserKontrakanController::class, 'show'])->name('show');
 });
+
 
 
 Route::prefix('admin')->middleware('auth:admin')->name('admin.')->group(function () {
@@ -178,9 +165,6 @@ Route::prefix('admin/laporan')->name('admin.laporan.')->group(function () {
 
     Route::get('pengaduan/excel', [LaporanController::class, 'exportPengaduanExcel'])->name('pengaduan.excel');
     Route::get('pengaduan/pdf', [LaporanController::class, 'exportPengaduanPdf'])->name('pengaduan.pdf');
-
-    Route::get('pindah/excel', [LaporanController::class, 'exportPindahExcel'])->name('pindah.excel');
-    Route::get('pindah/pdf', [LaporanController::class, 'exportPindahPdf'])->name('pindah.pdf');
 
     Route::get('sewa/excel', [LaporanController::class, 'exportSewaExcel'])->name('sewa.excel');
     Route::get('sewa/pdf', [LaporanController::class, 'exportSewaPdf'])->name('sewa.pdf');

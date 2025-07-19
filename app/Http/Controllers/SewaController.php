@@ -8,7 +8,6 @@ use App\Models\Kontrakan;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\PermintaanPindahKontrakan;
 
 class SewaController extends Controller
 {
@@ -16,27 +15,18 @@ class SewaController extends Controller
     {
         $user = auth('user')->user();
 
-        $sewaAktif = \App\Models\Sewa::with('kontrakan')
+        $sewaAktif = Sewa::with('kontrakan')
             ->where('user_id', $user->id)
             ->whereIn('status', ['aktif', 'menunggu_konfirmasi', 'menunggu_pembayaran'])
             ->get();
 
-        $riwayatSewa = \App\Models\Sewa::with('kontrakan')
+        $riwayatSewa = Sewa::with('kontrakan')
             ->where('user_id', $user->id)
             ->whereIn('status', ['selesai', 'kadaluarsa', 'batal', 'ditolak'])
             ->latest()
             ->get();
 
-        $punyaPermintaanMenunggu = PermintaanPindahKontrakan::where('user_id', $user->id)
-            ->where('status', 'menunggu')
-            ->exists();
-
-        $permintaanDisetujui = PermintaanPindahKontrakan::where('user_id', $user->id)
-            ->where('status', 'disetujui')
-            ->get()
-            ->keyBy('sewa_id');
-
-        return view('user.sewa.index', compact('sewaAktif', 'riwayatSewa', 'punyaPermintaanMenunggu', 'permintaanDisetujui'));
+        return view('user.sewa.index', compact('sewaAktif', 'riwayatSewa'));
     }
 
     public function create(Kontrakan $kontrakan)
@@ -98,10 +88,16 @@ class SewaController extends Controller
             $diskon = 50000 * $jumlahBulan;
         }
 
+        $namaUser = Str::slug(Str::words($user->name, 2, ''));
+        $namaKontrakan = Str::slug(Str::words($kontrakan->nama, 3, ''));
+        $tanggal = now()->format('d-m-Y');
+        $unik = Str::lower(Str::random(6));
+        $slug = "{$namaUser}-{$namaKontrakan}-{$tanggal}-{$unik}";
+
         $sewa = Sewa::create([
             'user_id' => $user->id,
             'kontrakan_id' => $kontrakan->id,
-            'slug' => Str::uuid(),
+            'slug' => $slug,
             'tanggal_mulai' => $tanggalMulai,
             'tanggal_akhir' => $tanggalAkhir,
             'lama_sewa_bulan' => $jumlahBulan,
@@ -113,7 +109,7 @@ class SewaController extends Controller
             'status' => 'disewa',
         ]);
 
-        return redirect()->route('user.sewa.show', $sewa->id)
+        return redirect()->route('user.sewa.show', $sewa->slug)
             ->with('success', 'Pengajuan sewa berhasil, silakan lanjutkan ke pembayaran.');
     }
 
@@ -127,24 +123,21 @@ class SewaController extends Controller
         return view('user.sewa.show', compact('sewa'));
     }
 
-    public function batal($id)
+    public function batal(Sewa $sewa)
     {
-        $sewa = Sewa::where('id', $id)
-            ->where('user_id', auth('user')->id())
-            ->whereIn('status', ['menunggu_pembayaran'])
-            ->firstOrFail();
-
-        if ($sewa->user_id !== auth('user')->id()) {
+        if (
+            $sewa->user_id !== auth('user')->id() ||
+            $sewa->status !== 'menunggu_pembayaran'
+        ) {
             return redirect()->route('user.sewa.index')->with('error', 'Anda tidak memiliki akses ke data ini.');
         }
 
-        $sewa->status = 'batal';
-        $sewa->save();
-
-        $sewa->kontrakan->update(['status' => 'tersedia']);
+        $sewa->update(['status' => 'batal']);
+        $sewa->kontrakan()->update(['status' => 'tersedia']);
 
         return redirect()->route('user.sewa.index')->with('success', 'Sewa berhasil dibatalkan.');
     }
+
 
     public function perpanjang(Request $request, Sewa $sewa)
     {
@@ -189,11 +182,19 @@ class SewaController extends Controller
             $denda = 25000; // misal denda tetap
         }
 
+        $kontrakan = $sewa->kontrakan;
+
+        $namaUser = Str::slug(Str::words($user->name, 2, ''));
+        $namaKontrakan = Str::slug(Str::words($kontrakan->nama, 3, ''));
+        $tanggal = now()->format('d-m-Y');
+        $unik = Str::lower(Str::random(6));
+        $slug = "{$namaUser}-{$namaKontrakan}-{$tanggal}-{$unik}";
+
 
         $sewaBaru = Sewa::create([
             'user_id' => $user->id,
             'kontrakan_id' => $sewa->kontrakan_id,
-            'slug' => Str::uuid(),
+            'slug' => $slug,
             'tanggal_mulai' => $tanggalMulai,
             'tanggal_akhir' => $tanggalAkhir,
             'lama_sewa_bulan' => $jumlahBulan,
@@ -202,6 +203,6 @@ class SewaController extends Controller
             'denda'             => $denda,
         ]);
 
-        return redirect()->route('user.sewa.show', $sewaBaru->id)->with('success', 'Pengajuan perpanjangan berhasil.');
+        return redirect()->route('user.sewa.show', $sewaBaru->slug)->with('success', 'Pengajuan perpanjangan berhasil.');
     }
 }

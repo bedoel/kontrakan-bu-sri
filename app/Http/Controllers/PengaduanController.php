@@ -64,9 +64,14 @@ class PengaduanController extends Controller
             ? $request->file('gambar')->store('pengaduan', 'public')
             : null;
 
+        $user = auth('user')->user();
+        $tanggal = now()->format('Y-m-d');
+        $namaUser = Str::slug(Str::words($user->name, 2, ''));
+        $slug = $namaUser . '-' . $tanggal . '-' . Str::random(5);
+
         $pengaduan = Pengaduan::create([
-            'user_id' => auth('user')->id(),
-            'slug' => Str::uuid(),
+            'user_id' => $user->id,
+            'slug' => $slug,
             'pesan' => $request->pesan,
             'status' => 'menunggu',
             'gambar' => $gambar,

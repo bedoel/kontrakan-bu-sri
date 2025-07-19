@@ -37,49 +37,9 @@
                             <strong>Status:</strong> {!! statusBadge($sewa->status) !!}
                         </p>
 
-                        {{-- Info Pindahan --}}
-                        @php
-                            $pindahDisetujui = $permintaanDisetujui[$sewa->id] ?? null;
-                        @endphp
-
-                        @if ($pindahDisetujui && $pindahDisetujui->kontrakanLama)
-                            <div class="alert alert-info small mb-3">
-                                <strong>Pindahan dari:</strong> {{ $pindahDisetujui->kontrakanLama->nama }}
-                                @if ($pindahDisetujui->created_at)
-                                    (disetujui pada {{ $pindahDisetujui->created_at->translatedFormat('d M Y') }})
-                                @endif
-                            </div>
-                        @endif
-
                         {{-- Tombol detail --}}
-                        <a href="{{ route('user.sewa.show', $sewa->id) }}" class="btn btn-sm btn-outline-primary">Detail</a>
-
-                        {{-- Pengajuan Pindah --}}
-                        @php
-                            $pindah = \App\Models\PermintaanPindahKontrakan::with('kontrakanBaru')
-                                ->where('sewa_id', $sewa->id)
-                                ->whereIn('status', ['menunggu', 'disetujui'])
-                                ->latest()
-                                ->first();
-                        @endphp
-
-                        @if ($sewa->status === 'aktif')
-                            @if (!$punyaPermintaanMenunggu)
-                                <a href="{{ route('user.pindah.create') }}" class="btn btn-sm btn-outline-warning">Ajukan
-                                    Pindah</a>
-                            @else
-                                <div class="alert alert-warning">Anda sudah mengajukan permintaan pindah. Mohon tunggu
-                                    konfirmasi admin.</div>
-                            @endif
-                            @if ($pindah)
-                                <div class="alert alert-warning mt-2 small">
-                                    <strong>Pengajuan Pindah:</strong><br>
-                                    Ke: <strong>{{ $pindah->kontrakanBaru->nama ?? '-' }}</strong><br>
-                                    Status: <strong>{!! statusBadge($pindah->status) !!}
-                                    </strong>
-                                </div>
-                            @endif
-                        @endif
+                        <a href="{{ route('user.sewa.show', $sewa->slug) }}"
+                            class="btn btn-sm btn-outline-primary">Detail</a>
 
                         {{-- Perpanjang --}}
                         @php
@@ -92,7 +52,7 @@
 
 
                         @if ($sewa->status == 'aktif' && $now->between($hMin7, $hPlus7))
-                            <button type="button" class="btn btn-sm btn-outline-success mt-2" data-bs-toggle="modal"
+                            <button type="button" class="btn btn-sm btn-outline-success" data-bs-toggle="modal"
                                 data-bs-target="#perpanjangModal{{ $sewa->id }}">Perpanjang</button>
 
                             <!-- Modal -->
@@ -100,7 +60,7 @@
                                 aria-labelledby="perpanjangModalLabel{{ $sewa->id }}" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
-                                        <form action="{{ route('user.sewa.perpanjang', $sewa->id) }}" method="POST">
+                                        <form action="{{ route('user.sewa.perpanjang', $sewa->slug) }}" method="POST">
                                             @csrf
                                             <div class="modal-header">
                                                 <h5 class="modal-title" id="perpanjangModalLabel{{ $sewa->id }}">

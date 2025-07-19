@@ -29,4 +29,9 @@ class Pengaduan extends Model
     {
         return $this->hasMany(BalasanPengaduan::class);
     }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }

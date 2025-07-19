@@ -47,9 +47,4 @@ class Admin extends Authenticatable
     {
         return $this->hasMany(BalasanPengaduan::class);
     }
-
-    public function permintaan_pindah()
-    {
-        return $this->hasMany(PermintaanPindahKontrakan::class);
-    }
 }

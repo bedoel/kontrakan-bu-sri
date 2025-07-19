@@ -51,7 +51,7 @@
                 <div class="alert alert-success">{{ session('success') }}</div>
             @endif
 
-            <form action="{{ route('user.pengaduan.balas', $pengaduan->id) }}" method="POST">
+            <form action="{{ route('user.pengaduan.balas', $pengaduan->slug) }}" method="POST">
                 @csrf
                 <div class="mb-3">
                     <label for="pesanBalasan" class="form-label">Pesan Anda</label>

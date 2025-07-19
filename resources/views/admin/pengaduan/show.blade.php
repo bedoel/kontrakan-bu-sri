@@ -43,7 +43,7 @@
                                 @endif
                             </table>
                         </div>
-                        <form action="{{ route('admin.pengaduan.ubahStatus', $pengaduan->id) }}" method="POST">
+                        <form action="{{ route('admin.pengaduan.ubahStatus', $pengaduan->slug) }}" method="POST">
                             @csrf
                             <div class="mb-3">
                                 <label class="form-label">Ubah Status:</label>
@@ -90,7 +90,7 @@
                     <h6 class="mb-0 text-white fs-6"><i class="bi bi-reply-fill"></i> Balas Pengaduan</h6>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('admin.pengaduan.balas', $pengaduan->id) }}" method="POST">
+                    <form action="{{ route('admin.pengaduan.balas', $pengaduan->slug) }}" method="POST">
                         @csrf
                         @if ($errors->any())
                             <div class="alert alert-danger small">

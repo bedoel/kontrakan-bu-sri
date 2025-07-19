@@ -132,22 +132,21 @@ class SewaController extends Controller
         ], [
             'user_id.required' => 'Pengguna wajib dipilih.',
             'user_id.exists' => 'Pengguna tidak ditemukan.',
-
             'kontrakan_id.required' => 'Kontrakan wajib dipilih.',
             'kontrakan_id.exists' => 'Kontrakan tidak valid.',
-
             'tanggal_mulai.required' => 'Tanggal mulai wajib diisi.',
             'tanggal_mulai.date' => 'Tanggal mulai harus berupa tanggal yang valid.',
-
             'tanggal_akhir.required' => 'Tanggal akhir wajib diisi.',
             'tanggal_akhir.date' => 'Tanggal akhir harus berupa tanggal yang valid.',
             'tanggal_akhir.after' => 'Tanggal akhir harus setelah tanggal mulai.',
-
             'status.required' => 'Status sewa wajib diisi.',
             'status.in' => 'Status tidak valid.',
         ]);
 
+        // Simpan ID dan status lama
+        $kontrakanLamaId = $sewa->kontrakan_id;
 
+        // Update data sewa
         $sewa->update([
             'user_id' => $request->user_id,
             'kontrakan_id' => $request->kontrakan_id,
@@ -157,8 +156,22 @@ class SewaController extends Controller
             'admin_id' => auth('admin')->id(),
         ]);
 
+        if ($request->kontrakan_id != $kontrakanLamaId) {
+            Kontrakan::where('id', $kontrakanLamaId)
+                ->update(['status' => 'tersedia']);
+            Kontrakan::where('id', $request->kontrakan_id)
+                ->update(['status' => 'disewa']);
+        }
+
+        if (in_array($request->status, ['selesai', 'ditolak', 'kadaluarsa', 'batal'])) {
+            Kontrakan::where('id', $request->kontrakan_id)
+                ->update(['status' => 'tersedia']);
+        }
+
         return redirect()->route('admin.sewa.index')->with('success', 'Data sewa berhasil diperbarui.');
     }
+
+
 
     public function destroy(Sewa $sewa)
     {

@@ -42,9 +42,9 @@
                                 </td>
 
                                 <td>
-                                    <a href="{{ route('admin.kontrakan.edit', $kontrakan->id) }}"
+                                    <a href="{{ route('admin.kontrakan.edit', $kontrakan->slug) }}"
                                         class="btn btn-sm btn-warning">Edit</a>
-                                    <form action="{{ route('admin.kontrakan.destroy', $kontrakan->id) }}" method="POST"
+                                    <form action="{{ route('admin.kontrakan.destroy', $kontrakan->slug) }}" method="POST"
                                         style="display:inline-block;">
                                         @csrf @method('DELETE')
                                         <button class="btn btn-sm btn-danger"

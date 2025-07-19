@@ -46,7 +46,7 @@
             <blockquote>{{ $pengaduan->catatan }}</blockquote>
         @endif
 
-        <a class="btn" href="{{ route('user.pengaduan.show', $pengaduan->id) }}">
+        <a class="btn" href="{{ route('user.pengaduan.show', $pengaduan->slug) }}">
             Lihat Pengaduan
         </a>
 

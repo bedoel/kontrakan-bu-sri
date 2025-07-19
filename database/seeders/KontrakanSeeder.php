@@ -23,7 +23,7 @@ class KontrakanSeeder extends Seeder
 
             Kontrakan::create([
                 'nama' => $nama,
-                'slug' => Str::slug($nama) . '-' . $i,
+                'slug' => Str::slug($nama),
                 'harga' => $harga,
                 'deskripsi' => $deskripsi,
                 'status' => 'tersedia',

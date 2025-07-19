@@ -26,7 +26,7 @@
         </div>
 
         <div class="container" data-aos="fade-up">
-            <form action="{{ route('user.transaksi.store', $sewa->id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('user.transaksi.store', $sewa->slug) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @if ($errors->any())
                     <div class="alert alert-danger">
@@ -70,7 +70,7 @@
                 </div>
 
                 <button class="btn btn-primary"><i class="bi bi-send-check"></i> Kirim Pembayaran</button>
-                <a href="{{ route('user.sewa.show', $sewa->id) }}" class="btn btn-secondary">Kembali</a>
+                <a href="{{ route('user.sewa.show', $sewa->slug) }}" class="btn btn-secondary">Kembali</a>
             </form>
         </div>
     </section>

@@ -90,7 +90,7 @@
 
                     {{-- Tombol Sewa --}}
                     @if ($kontrakan->status == 'tersedia')
-                        <a href="{{ route('user.sewa.create', $kontrakan->id) }}"
+                        <a href="{{ route('user.sewa.create', $kontrakan->slug) }}"
                             class="btn btn-primary btn-block mt-3 w-100">
                             <i class="bi bi-cart-check"></i> Sewa Sekarang
                         </a>

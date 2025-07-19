@@ -5,7 +5,7 @@
 @section('content')
     <h1 class="h3 mb-4 text-gray-800">Edit Kontrakan</h1>
 
-    <form action="{{ route('admin.kontrakan.update', $kontrakan->id) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('admin.kontrakan.update', $kontrakan->slug) }}" method="POST" enctype="multipart/form-data">
         @csrf @method('PUT')
         @if ($errors->any())
             <div class="alert alert-danger">

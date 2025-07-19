@@ -38,8 +38,9 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{ route('admin.ulasan.show', $t->id) }}" class="btn btn-sm btn-info">Lihat</a>
-                                    <form action="{{ route('admin.ulasan.destroy', $t->id) }}" method="POST"
+                                    <a href="{{ route('admin.ulasan.show', $t->slug) }}"
+                                        class="btn btn-sm btn-info">Lihat</a>
+                                    <form action="{{ route('admin.ulasan.destroy', $t->slug) }}" method="POST"
                                         class="d-inline" onsubmit="return confirm('Hapus ulasan ini?')">
                                         @csrf @method('DELETE')
                                         <button class="btn btn-sm btn-danger">Hapus</button>

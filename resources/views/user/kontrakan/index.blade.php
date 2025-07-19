@@ -54,7 +54,7 @@
                                             <i class="bi bi-zoom-in"></i>
                                         </a>
 
-                                        <a href="{{ route('user.kontrakan.show', $kontrakan->id) }}" title="Lihat Detail"
+                                        <a href="{{ route('user.kontrakan.show', $kontrakan->slug) }}" title="Lihat Detail"
                                             class="details-link">
                                             <i class="bi bi-link-45deg"></i>
                                         </a>

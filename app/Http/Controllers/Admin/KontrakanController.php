@@ -74,9 +74,9 @@ class KontrakanController extends Controller
             ->with('success', 'Data kontrakan berhasil disimpan.');
     }
 
-    public function edit($id)
+    public function edit(Kontrakan $kontrakan)
     {
-        $kontrakan = Kontrakan::with('foto_kontrakans')->findOrFail($id);
+        $kontrakan->load('foto_kontrakans');
         return view('admin.kontrakan.edit', compact('kontrakan'));
     }
 

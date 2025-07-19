@@ -33,7 +33,7 @@
                         <div class="card-body">
                             <h4 class="mb-4">Form Edit Ulasan</h4>
 
-                            <form action="{{ route('user.ulasan.update', $ulasan->id) }}" method="POST"
+                            <form action="{{ route('user.ulasan.update', $ulasan->slug) }}" method="POST"
                                 enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')

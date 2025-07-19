@@ -54,7 +54,7 @@
                         </div>
                     @endif
 
-                    <a href="{{ route('user.transaksi.invoice', $transaksi->id) }}" target="_blank"
+                    <a href="{{ route('user.transaksi.invoice', $transaksi->invoice_number) }}" target="_blank"
                         class="btn btn-primary">
                         <i class="bi bi-printer"></i> Cetak Invoice
                     </a>

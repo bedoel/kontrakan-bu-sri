@@ -5,7 +5,7 @@
 @section('content')
     <h1 class="h3 mb-4 text-gray-800">Edit Sewa</h1>
 
-    <form action="{{ route('admin.sewa.update', $sewa->id) }}" method="POST">
+    <form action="{{ route('admin.sewa.update', $sewa->slug) }}" method="POST">
         @csrf
         @method('PUT')
 
@@ -58,13 +58,14 @@
             <label>Status</label>
             <select name="status" class="form-control" required>
                 <option value="menunggu_konfirmasi" {{ $sewa->status == 'menunggu_konfirmasi' ? 'selected' : '' }}>Menunggu
+                    Konfirmasi
                 </option>
                 <option value="menunggu_pembayaran" {{ $sewa->status == 'menunggu_pembayaran' ? 'selected' : '' }}>
                     Menunggu Pembayaran</option>
                 <option value="aktif" {{ $sewa->status == 'aktif' ? 'selected' : '' }}>Aktif</option>
                 <option value="selesai" {{ $sewa->status == 'selesai' ? 'selected' : '' }}>Selesai</option>
                 <option value="ditolak" {{ $sewa->status == 'ditolak' ? 'selected' : '' }}>Ditolak</option>
-                <option value="kadaluarsa" {{ $sewa->status == 'kadaluarsa' ? 'selected' : '' }}>kadaluarsa</option>
+                <option value="kadaluarsa" {{ $sewa->status == 'kadaluarsa' ? 'selected' : '' }}>Kadaluarsa</option>
                 <option value="batal" {{ $sewa->status == 'batal' ? 'selected' : '' }}>Batal</option>
             </select>
         </div>

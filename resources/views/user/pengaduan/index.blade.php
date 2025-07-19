@@ -54,7 +54,7 @@
                                     {{ $p->balasan->count() > 0 ? $p->balasan->count() . ' Balasan' : 'Belum ada balasan' }}
                                 </td>
                                 <td>
-                                    <a href="{{ route('user.pengaduan.show', $p->id) }}"
+                                    <a href="{{ route('user.pengaduan.show', $p->slug) }}"
                                         class="btn btn-sm btn-outline-info">
                                         <i class="bi bi-eye"></i> Detail
                                     </a>

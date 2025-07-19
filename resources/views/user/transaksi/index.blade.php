@@ -53,11 +53,11 @@
                                 <td>{!! statusBadge($trx->status) !!}</td>
                                 <td>{{ $trx->created_at->format('d M Y H:i') }}</td>
                                 <td>
-                                    <a href="{{ route('user.transaksi.show', $trx->id) }}"
+                                    <a href="{{ route('user.transaksi.show', $trx->invoice_number) }}"
                                         class="btn btn-sm btn-outline-info">
                                         <i class="bi bi-eye"></i> Detail
                                     </a>
-                                    <a href="{{ route('user.transaksi.invoice', $trx->id) }}" target="_blank"
+                                    <a href="{{ route('user.transaksi.invoice', $trx->invoice_number) }}" target="_blank"
                                         class="btn btn-sm btn-outline-primary">
                                         <i class="bi bi-printer"></i> Invoice
                                     </a>

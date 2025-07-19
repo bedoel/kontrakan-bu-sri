@@ -18,10 +18,9 @@ class UserKontrakanController extends Controller
     }
 
 
-
-    public function show($id)
+    public function show($slug)
     {
-        $kontrakan = Kontrakan::with('foto_kontrakans')->findOrFail($id);
+        $kontrakan = Kontrakan::with('foto_kontrakans')->where('slug', $slug)->firstOrFail();
 
         return view('user.kontrakan.show', compact('kontrakan'));
     }

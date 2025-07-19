@@ -9,6 +9,13 @@ use Illuminate\Support\Str;
 
 class UlasanController extends Controller
 {
+    protected function authorizeUlasan(Ulasan $ulasan)
+    {
+        if ($ulasan->user_id !== auth('user')->id()) {
+            return redirect()->route('user.ulasan.index')->with('error', 'Anda tidak berhak mengakses ulasan ini.');
+        }
+    }
+
     public function index()
     {
         $ulasans = Ulasan::latest()->get();
@@ -43,6 +50,7 @@ class UlasanController extends Controller
 
         Ulasan::create([
             'user_id' => Auth::id(),
+            'slug' => Str::uuid(),
             'pesan' => $request->pesan,
             'rating' => $request->rating,
             'gambar' => $gambar,
@@ -53,19 +61,12 @@ class UlasanController extends Controller
 
     public function edit(Ulasan $ulasan)
     {
-        if ($ulasan->user_id !== auth('user')->id()) {
-            return redirect()->route('user.ulasan.index')->with('error', 'Anda tidak berhak mengakses ulasan ini.');
-        }
-
         $this->authorizeUlasan($ulasan);
         return view('user.ulasan.edit', compact('ulasan'));
     }
 
     public function update(Request $request, Ulasan $ulasan)
     {
-        if ($ulasan->user_id !== auth('user')->id()) {
-            return redirect()->route('user.ulasan.index')->with('error', 'Anda tidak berhak mengakses ulasan ini.');
-        }
         $this->authorizeUlasan($ulasan);
 
         $request->validate([
@@ -95,12 +96,5 @@ class UlasanController extends Controller
         $this->authorizeUlasan($ulasan);
         $ulasan->delete();
         return redirect()->route('user.ulasan.index')->with('success', 'Ulasan berhasil dihapus.');
-    }
-
-    protected function authorizeUlasan(Ulasan $ulasan)
-    {
-        if ($ulasan->user_id !== auth('user')->id()) {
-            abort(403);
-        }
     }
 }

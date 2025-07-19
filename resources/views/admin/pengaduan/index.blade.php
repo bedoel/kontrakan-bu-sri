@@ -58,9 +58,9 @@
                                 </td>
                                 <td><span class="badge bg-info text-white">{{ $p->balasan->count() }} Balasan</span></td>
                                 <td>
-                                    <a href="{{ route('admin.pengaduan.show', $p->id) }}"
+                                    <a href="{{ route('admin.pengaduan.show', $p->slug) }}"
                                         class="btn btn-primary btn-sm">Detail</a>
-                                    <form action="{{ route('admin.pengaduan.destroy', $p->id) }}" method="POST"
+                                    <form action="{{ route('admin.pengaduan.destroy', $p->slug) }}" method="POST"
                                         class="d-inline">
                                         @csrf @method('DELETE')
                                         <button class="btn btn-danger btn-sm"
