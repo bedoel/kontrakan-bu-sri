@@ -17,12 +17,12 @@ class SewaController extends Controller
 
         $sewaAktif = Sewa::with('kontrakan')
             ->where('user_id', $user->id)
-            ->whereIn('status', ['aktif', 'menunggu_konfirmasi', 'menunggu_pembayaran'])
+            ->whereIn('status', ['aktif', 'menunggu_konfirmasi', 'menunggu_pembayaran', 'kadaluarsa'])
             ->get();
 
         $riwayatSewa = Sewa::with('kontrakan')
             ->where('user_id', $user->id)
-            ->whereIn('status', ['selesai', 'kadaluarsa', 'batal', 'ditolak'])
+            ->whereIn('status', ['selesai', 'batal', 'ditolak'])
             ->latest()
             ->get();
 
@@ -31,6 +31,16 @@ class SewaController extends Controller
 
     public function create(Kontrakan $kontrakan)
     {
+        $kadaluarsa = Sewa::where('user_id', auth('user')->id())
+            ->where('status', 'kadaluarsa')
+            ->whereDate('tanggal_akhir', '<=', now()->subDays(7))
+            ->exists();
+
+        if ($kadaluarsa) {
+            return redirect()->route('user.sewa.index')
+                ->with('error', 'Sewa Anda telah kadaluarsa lebih dari 7 hari. Silakan hubungi admin untuk perpanjangan.');
+        }
+
         $user = Auth::guard('user')->user();
         $existing = Sewa::where('user_id', $user->id)
             ->whereIn('status', ['menunggu_pembayaran', 'menunggu_konfirmasi', 'aktif'])
@@ -45,6 +55,16 @@ class SewaController extends Controller
 
     public function store(Request $request)
     {
+        $kadaluarsa = Sewa::where('user_id', auth('user')->id())
+            ->where('status', 'kadaluarsa')
+            ->whereDate('tanggal_akhir', '<=', now()->subDays(7))
+            ->exists();
+
+        if ($kadaluarsa) {
+            return redirect()->route('user.sewa.index')
+                ->with('error', 'Sewa Anda telah kadaluarsa lebih dari 7 hari. Silakan hubungi admin untuk perpanjangan.');
+        }
+
         $request->validate([
             'kontrakan_id' => 'required|exists:kontrakans,id',
             'tanggal_mulai' => 'required|date|after_or_equal:today',
@@ -141,6 +161,16 @@ class SewaController extends Controller
 
     public function perpanjang(Request $request, Sewa $sewa)
     {
+        $kadaluarsa = Sewa::where('user_id', auth('user')->id())
+            ->where('status', 'kadaluarsa')
+            ->whereDate('tanggal_akhir', '<=', now()->subDays(7))
+            ->exists();
+
+        if ($kadaluarsa) {
+            return redirect()->route('user.sewa.index')
+                ->with('error', 'Sewa Anda telah kadaluarsa lebih dari 7 hari. Silakan hubungi admin untuk perpanjangan.');
+        }
+
         $user = auth('user')->user();
 
         if ($sewa->user_id !== $user->id) {
@@ -179,7 +209,7 @@ class SewaController extends Controller
 
         $denda = 0;
         if (now()->greaterThan($sewa->tanggal_akhir)) {
-            $denda = 25000; // misal denda tetap
+            $denda = 25000;
         }
 
         $kontrakan = $sewa->kontrakan;

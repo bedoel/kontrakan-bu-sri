@@ -146,7 +146,7 @@ class TransaksiController extends Controller
             ));
         }
 
-        return redirect()->route('user.sewa.show', $sewa->id)
+        return redirect()->route('user.sewa.show', $sewa->slug)
             ->with('success', 'Pembayaran berhasil diajukan. Menunggu konfirmasi admin.');
     }
 }

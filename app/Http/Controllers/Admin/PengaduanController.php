@@ -59,15 +59,12 @@ class PengaduanController extends Controller
 
     public function destroy(Pengaduan $pengaduan)
     {
-        // Hapus gambar jika ada
         if ($pengaduan->gambar) {
             Storage::disk('public')->delete($pengaduan->gambar);
         }
 
-        // Hapus semua balasan terlebih dahulu
         $pengaduan->balasan()->delete();
 
-        // Hapus pengaduan
         $pengaduan->delete();
 
         return back()->with('success', 'Pengaduan berhasil dihapus.');

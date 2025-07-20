@@ -27,6 +27,12 @@
 
         <div class="container" data-aos="fade-up">
             @forelse ($sewaAktif as $sewa)
+                @if ($sewa->status === 'kadaluarsa' && $sewa->tanggal_akhir->diffInDays(now(), false) < -7)
+                    <div class="alert alert-warning">
+                        Masa sewa Anda telah melewati batas 7 hari. Silakan datang ke admin untuk memperpanjang dan membayar
+                        denda Rp50.000.
+                    </div>
+                @endif
                 <div class="card mb-3 shadow-sm">
                     <div class="card-body">
                         <h5 class="card-title">{{ $sewa->kontrakan->nama }}</h5>
@@ -165,7 +171,7 @@
                             <strong>Status:</strong> {!! statusBadge($sewa->status) !!}
 
                         </p>
-                        <a href="{{ route('user.sewa.show', $sewa->id) }}" class="btn btn-sm btn-outline-secondary">Lihat
+                        <a href="{{ route('user.sewa.show', $sewa->slug) }}" class="btn btn-sm btn-outline-secondary">Lihat
                             Detail</a>
                     </div>
                 </div>

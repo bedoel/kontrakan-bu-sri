@@ -52,7 +52,7 @@ class TransaksiController extends Controller
                 ->first();
 
             if ($sewaLama) {
-                $sewaLama->update(['status' => 'kadaluarsa']);
+                $sewaLama->update(['status' => 'selesai']);
             }
         } elseif ($request->status === 'ditolak') {
             $sewa->update(['status' => 'ditolak']);

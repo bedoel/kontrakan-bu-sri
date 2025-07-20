@@ -10,6 +10,7 @@ use App\Console\Commands\ReminderJatuhTempo;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Http\Middleware\TrustProxies;
 use App\Http\Middleware\SuperAdminMiddleware;
+use App\Console\Commands\TandaiSewaKadaluarsa;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 
@@ -49,11 +50,12 @@ return Application::configure(basePath: dirname(__DIR__))
         });
     })
     ->withSchedule(function (Schedule $schedule) {
-        $schedule->command('reminder:jatuh-tempo')->dailyAt('07:00'); // atau '08:00' sesuai kebutuhan
-        $schedule->command('sewa:tandai-selesai')->everyFiveMinutes();
+        $schedule->command('reminder:jatuh-tempo')->dailyAt('07:00');
+        $schedule->command('sewa:tandai-kadaluarsa')->everyMinute();
     })
     ->create();
 
 app(Kernel::class)->commands([
     ReminderJatuhTempo::class,
+    TandaiSewaKadaluarsa::class,
 ]);

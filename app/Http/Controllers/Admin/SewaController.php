@@ -10,7 +10,6 @@ use App\Models\Transaksi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
 
 class SewaController extends Controller
 {
@@ -76,11 +75,20 @@ class SewaController extends Controller
                 ->withErrors(['user_id' => 'User ini sudah memiliki sewa aktif atau dalam proses pembayaran.']);
         }
 
+        $user = User::findOrFail($request->user_id);
+        $kontrakan = Kontrakan::findOrFail($request->kontrakan_id);
+
+        $namaUser = Str::slug(Str::words($user->name, 2, ''));
+        $namaKontrakan = Str::slug(Str::words($kontrakan->nama, 3, ''));
+        $tanggal = now()->format('d-m-Y');
+        $unik = Str::lower(Str::random(6));
+
+        $slug = "{$namaUser}-{$namaKontrakan}-{$tanggal}-{$unik}";
 
         $sewa = Sewa::create([
             'user_id' => $request->user_id,
             'kontrakan_id' => $kontrakan->id,
-            'slug' => Str::uuid(),
+            'slug' => $slug,
             'tanggal_mulai' => $tanggalMulai,
             'tanggal_akhir' => $tanggalAkhir,
             'lama_sewa_bulan' => $jumlahBulan,
@@ -163,7 +171,7 @@ class SewaController extends Controller
                 ->update(['status' => 'disewa']);
         }
 
-        if (in_array($request->status, ['selesai', 'ditolak', 'kadaluarsa', 'batal'])) {
+        if (in_array($request->status, ['selesai', 'ditolak', 'batal'])) {
             Kontrakan::where('id', $request->kontrakan_id)
                 ->update(['status' => 'tersedia']);
         }
@@ -214,19 +222,24 @@ class SewaController extends Controller
         $diskon = 0;
         if ($jumlahBulan >= 3 && $jumlahBulan <= 5) {
             $diskon = 25000 * $jumlahBulan;
-        } elseif ($jumlahBulan >= 6) {
+        } elseif ($jumlahBulan >= 6 && $jumlahBulan <= 12) {
             $diskon = 50000 * $jumlahBulan;
         }
 
         $denda = 0;
-        if (now()->greaterThan($sewa->tanggal_akhir)) {
-            $denda = 25000;
+        if (now()->greaterThan($sewa->tanggal_akhir->addDays(7))) {
+            $denda = 50000;
         }
 
+        $namaUser = Str::slug(Str::words($sewa->user->name, 2, ''));
+        $namaKontrakan = Str::slug(Str::words($sewa->kontrakan->nama, 3, ''));
+        $tanggal = now()->format('d-m-Y');
+        $unik = Str::lower(Str::random(6));
+        $slug = "{$namaUser}-{$namaKontrakan}-{$tanggal}-{$unik}";
 
         $sewaBaru = Sewa::create([
             'user_id'           => $sewa->user_id,
-            'slug'              => Str::uuid(),
+            'slug'              => $slug,
             'kontrakan_id'      => $sewa->kontrakan_id,
             'tanggal_mulai'     => $tanggalMulai,
             'tanggal_akhir'     => $tanggalAkhir,
@@ -249,7 +262,7 @@ class SewaController extends Controller
                 'admin_id' => auth('admin')->id(),
             ]);
 
-            $sewa->update(['status' => 'kadaluarsa']);
+            $sewa->update(['status' => 'selesai']);
         }
 
         return redirect()

@@ -42,8 +42,10 @@ class Sewa extends Model
     public function scopeKadaluarsaLebih7Hari($query)
     {
         return $query->where('status', 'aktif')
-            ->whereDate('tanggal_akhir', '<=', now()->subDays(7));
+            ->where('tanggal_akhir', '<=', now()->subDays(7)); // tanpa whereDate
     }
+
+
 
     public function admin()
     {
