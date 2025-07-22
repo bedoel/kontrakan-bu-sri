@@ -43,7 +43,6 @@ class ReminderJatuhTempo extends Command
 
         foreach ($sewas as $sewa) {
             Mail::to($sewa->user->email)->send(new PengingatJatuhTempo($sewa));
-            \Log::info("Email pengingat jatuh tempo dikirim ke: " . $sewa->user->email);
         }
     }
 }
