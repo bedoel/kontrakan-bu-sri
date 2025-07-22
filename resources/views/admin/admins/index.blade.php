@@ -3,17 +3,14 @@
 @section('title', 'Kelola Admin')
 
 @section('content')
-    <h1 class="h3 mb-4 text-gray-800">Kelola Admin</h1>
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Kelola Admin</h1>
+        <a href="{{ route('admin.admins.create') }}" class="btn btn-sm btn-primary">Tambah Admin</a>
+    </div>
 
     @if (session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
-
-    <div class="mb-3">
-        <a href="{{ route('admin.admins.create') }}" class="btn btn-primary">
-            Tambah Admin
-        </a>
-    </div>
 
     <div class="card shadow-sm">
         <div class="card-body">

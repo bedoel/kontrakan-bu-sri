@@ -56,6 +56,9 @@ class PengingatJatuhTempo extends Mailable
     public function build()
     {
         return $this->subject('Pengingat Jatuh Tempo Sewa')
-            ->markdown('emails.pengingat');
+            ->view('emails.pengingat')
+            ->with([
+                'sewa' => $this->sewa
+            ]);
     }
 }

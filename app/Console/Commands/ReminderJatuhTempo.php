@@ -30,7 +30,11 @@ class ReminderJatuhTempo extends Command
     public function handle()
     {
         $today = Carbon::today();
-        $reminderDates = [$today, $today->copy()->addDays(7)];
+        $reminderDates = [
+            $today->copy()->addDays(7),
+            $today->copy()->addDays(3),
+            $today,
+        ];
 
         $sewas = Sewa::whereIn('tanggal_akhir', $reminderDates)
             ->where('status', 'aktif')
@@ -39,7 +43,7 @@ class ReminderJatuhTempo extends Command
 
         foreach ($sewas as $sewa) {
             Mail::to($sewa->user->email)->send(new PengingatJatuhTempo($sewa));
-            \Log::info("Email pengingat dikirim ke: " . $sewa->user->email);
+            \Log::info("Email pengingat jatuh tempo dikirim ke: " . $sewa->user->email);
         }
     }
 }

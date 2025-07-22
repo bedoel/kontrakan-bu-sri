@@ -63,7 +63,7 @@ class UserAuthController extends Controller
 
         $user->sendEmailVerificationNotification();
 
-        Auth::guard('user')->login($user); // langsung login
+        Auth::guard('user')->login($user);
         return redirect()->route('verification.notice');
     }
 

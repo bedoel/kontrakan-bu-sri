@@ -64,6 +64,8 @@ class AdminNotificationMail extends Mailable
             ->with([
                 'messageText' => $this->messageText,
                 'url' => $this->url,
+                'userName' => auth('user')->user()->name,
+                'timestamp' => now()->translatedFormat('d F Y, H:i'),
             ]);
     }
 }
