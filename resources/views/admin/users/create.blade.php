@@ -4,7 +4,8 @@
 
 @section('content')
     <div class="container-fluid">
-        <h1 class="h3 mb-4 text-gray-800">Tambah Penyewa Baru</h1>
+        <h1 class="h3 mb-4 text-gray-800 text-center text-md-start">Tambah Penyewa Baru</h1>
+
 
         <div class="card shadow-sm">
             <div class="card-body">
@@ -62,13 +63,27 @@
                         </div>
                     </div>
 
-                    <div class="d-flex justify-content-between mt-4">
-                        <a href="{{ route('admin.users.index') }}" class="btn btn-secondary me-2">
-                            <i class="bi bi-arrow-left-circle"></i> Batal
-                        </a>
-                        <button type="submit" class="btn btn-primary">
-                            <i class="bi bi-save"></i> Simpan User
-                        </button>
+                    <div class="mt-4">
+                        <div class="d-grid gap-3 d-md-none">
+                            {{-- Tampilan MOBILE: Stack dengan jarak --}}
+                            <button type="submit" class="btn btn-primary w-100">
+                                <i class="bi bi-save"></i> Simpan
+                            </button>
+                            <div class="my-2"></div>
+                            <a href="{{ route('admin.users.index') }}" class="btn btn-secondary w-100">
+                                <i class="bi bi-arrow-left-circle"></i> Kembali
+                            </a>
+                        </div>
+
+                        <div class="d-none d-md-flex justify-content-between gap-3">
+                            {{-- Tampilan DESKTOP: Horizontal sejajar --}}
+                            <a href="{{ route('admin.users.index') }}" class="btn btn-secondary">
+                                <i class="bi bi-arrow-left-circle"></i> Kembali
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-save"></i> Simpan
+                            </button>
+                        </div>
                     </div>
                 </form>
             </div>

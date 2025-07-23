@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Verifikasi Email</title>
+    <link href="{{ asset('front/assets/img/logo.png') }}" rel="icon">
+    <link href="{{ asset('front/assets/img/logo.png') }}" rel="apple-touch-icon">
+
     <link href="{{ asset('front/assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('front/assets/css/style.css') }}" rel="stylesheet">
 

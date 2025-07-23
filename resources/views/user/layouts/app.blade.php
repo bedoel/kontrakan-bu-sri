@@ -11,8 +11,8 @@
     <meta name="keywords" content="kontrakan, sewa, rumah, jakarta timur">
 
     <!-- Favicons -->
-    <link href="{{ asset('front/assets/img/favicon.png') }}" rel="icon">
-    <link href="{{ asset('front/assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+    <link href="{{ asset('front/assets/img/logo.png') }}" rel="icon">
+    <link href="{{ asset('front/assets/img/logo.png') }}" rel="apple-touch-icon">
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect" />
@@ -41,10 +41,11 @@
 
     <!-- Header -->
     <header id="header" class="header d-flex align-items-center fixed-top">
-        <div class="container-fluid container-xl d-flex align-items-center">
+        <div class="container-fluid container-xl position-relative d-flex align-items-center">
 
-            <a href="{{ route('user.home') }}" class="logo me-auto">
-                <h1 class="sitename">Kontrakan Bu Sri</h1>
+            <a href="{{ route('user.home') }}" class="logo me-auto d-flex align-items-center">
+                <img src="{{ asset('front/assets/img/logo.png') }}" alt="Logo Kontrakan Bu Sri"
+                    style="height: 60px; max-height: 100%; object-fit: contain;" class="me-3">
             </a>
 
             <nav id="navmenu" class="navmenu">
@@ -166,9 +167,9 @@
     </footer>
 
 
-    <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i
+    {{-- <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i
             class="bi bi-arrow-up-short"></i></a>
-    <div id="preloader"></div>
+    <div id="preloader"></div> --}}
 
     {{-- jQuery (required by DataTables) --}}
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>

@@ -75,7 +75,7 @@
 
                 <div class="d-flex justify-content-end">
                     <button type="submit" class="btn btn-primary">
-                        <i class="bi bi-save"></i> Simpan Perubahan
+                        <i class="bi bi-save"></i> Simpan
                     </button>
                 </div>
             </form>

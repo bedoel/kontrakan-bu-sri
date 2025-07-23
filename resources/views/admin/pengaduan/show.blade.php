@@ -106,7 +106,7 @@
                             <textarea name="pesan" id="pesan" class="form-control form-control-sm" rows="4" required></textarea>
                         </div>
                         <div class="text-end">
-                            <button class="btn btn-success btn-sm">
+                            <button class="btn btn-success">
                                 <i class="bi bi-send"></i> Kirim Balasan
                             </button>
                         </div>

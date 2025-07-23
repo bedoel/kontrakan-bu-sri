@@ -71,13 +71,27 @@
                         </div>
                     </div>
 
-                    <div class="d-flex justify-content-between">
-                        <a href="{{ route('admin.sewa.index') }}" class="btn btn-secondary">
-                            <i class="bi bi-arrow-left-circle"></i> Kembali
-                        </a>
-                        <button type="submit" class="btn btn-primary">
-                            <i class="bi bi-save"></i> Simpan
-                        </button>
+                    <div class="mt-4">
+                        <div class="d-grid gap-3 d-md-none">
+                            {{-- Tampilan MOBILE: Stack dengan jarak --}}
+                            <button type="submit" class="btn btn-primary w-100">
+                                <i class="bi bi-save"></i> Simpan
+                            </button>
+                            <div class="my-2"></div>
+                            <a href="{{ route('admin.sewa.index') }}" class="btn btn-secondary w-100">
+                                <i class="bi bi-arrow-left-circle"></i> Kembali
+                            </a>
+                        </div>
+
+                        <div class="d-none d-md-flex justify-content-between gap-3">
+                            {{-- Tampilan DESKTOP: Horizontal sejajar --}}
+                            <a href="{{ route('admin.sewa.index') }}" class="btn btn-secondary">
+                                <i class="bi bi-arrow-left-circle"></i> Kembali
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-save"></i> Simpan
+                            </button>
+                        </div>
                     </div>
                 </form>
             </div>

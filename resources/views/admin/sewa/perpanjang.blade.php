@@ -20,7 +20,7 @@
 
         <div class="mb-3">
             <label>Jumlah Bulan</label>
-            <select name="jumlah_bulan" id="jumlah_bulan" class="form-select" required onchange="updateTotal()">
+            <select name="jumlah_bulan" id="jumlah_bulan" class="form-control" required onchange="updateTotal()">
                 @for ($i = 1; $i <= 12; $i++)
                     <option value="{{ $i }}">{{ $i }} bulan</option>
                 @endfor
@@ -29,7 +29,7 @@
 
         <div class="mb-3">
             <label>Metode Pembayaran</label>
-            <select name="metode" class="form-select" required>
+            <select name="metode" class="form-control" required>
                 <option value="cash">Cash</option>
                 <option value="transfer">Transfer</option>
             </select>
@@ -43,6 +43,30 @@
                     {{ number_format($sewa->kontrakan->harga) }}</span></p>
         </div>
 
+        <div class="mt-4">
+            <div class="d-grid gap-3 d-md-none">
+                {{-- Tampilan MOBILE: Stack dengan jarak --}}
+
+
+                <button type="submit" class="btn btn-primary w-100">
+                    <i class="bi bi-save"></i> Simpan Perubahan
+                </button>
+                <div class="my-2"></div>
+                <a href="{{ route('admin.transaksi.index') }}" class="btn btn-secondary w-100">
+                    <i class="bi bi-arrow-left-circle"></i> Kembali
+                </a>
+            </div>
+
+            <div class="d-none d-md-flex justify-content-between gap-3">
+                {{-- Tampilan DESKTOP: Horizontal sejajar --}}
+                <a href="{{ route('admin.transaksi.index') }}" class="btn btn-secondary">
+                    <i class="bi bi-arrow-left-circle"></i> Kembali
+                </a>
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-save"></i> Simpan Perubahan
+                </button>
+            </div>
+        </div>
         <button type="submit" class="btn btn-primary">Simpan</button>
         <a href="{{ route('admin.sewa.index') }}" class="btn btn-secondary">Batal</a>
     </form>

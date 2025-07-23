@@ -14,18 +14,19 @@ class UlasanController extends Controller
         return view('admin.ulasan.index', compact('ulasans'));
     }
 
-    public function show($id)
+    public function show(Ulasan $ulasan)
     {
-        $ulasan = Ulasan::with('user')->findOrFail($id);
+        // Otomatis menggunakan slug karena getRouteKeyName() di model
+        $ulasan->load('user');
         return view('admin.ulasan.show', compact('ulasan'));
     }
 
-    public function destroy($id)
+    public function destroy(Ulasan $ulasan)
     {
-        $ulasan = Ulasan::findOrFail($id);
         if ($ulasan->gambar) {
             Storage::disk('public')->delete($ulasan->gambar);
         }
+
         $ulasan->delete();
 
         return back()->with('success', 'Ulasan berhasil dihapus.');
