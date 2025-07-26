@@ -46,6 +46,14 @@
                         <li class="list-group-item"><strong>Catatan:</strong> {{ $transaksi->catatan ?? '-' }}</li>
                     </ul>
 
+                    @if ($transaksi->catatan)
+                        <div class="alert alert-info mt-3">
+                            <h5 class="mb-2"><i class="bi bi-chat-dots me-2"></i>Pesan dari Admin</h5>
+                            <p class="mb-0">{{ $transaksi->pesan }}</p>
+                        </div>
+                    @endif
+
+
                     @if ($transaksi->bukti_transfer)
                         <div class="mb-4">
                             <h5>Bukti Transfer</h5>

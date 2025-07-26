@@ -55,7 +55,7 @@
                 <div class="mb-3" id="buktiTransferField" style="display: none;">
                     <div class="alert alert-info">
                         <strong>Transfer ke Rekening:</strong><br>
-                        Bank BCA - 1234567890 a.n. Bu Sri
+                        Bank BCA - 6331725207 a.n. SRI AMBARWATI
                     </div>
 
                     <label for="bukti_transfer" class="form-label">Upload Bukti Transfer</label>

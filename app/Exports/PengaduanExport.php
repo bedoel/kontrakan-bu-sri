@@ -27,7 +27,6 @@ class PengaduanExport implements FromCollection, WithHeadings, WithMapping
             $p->user->name,
             $p->pesan,
             ucfirst($p->status),
-            statusBadge($p->status),
         ];
     }
 }

@@ -35,7 +35,7 @@ class LaporanController extends Controller
     public function exportTransaksiPdf()
     {
         $transaksis = Transaksi::with('sewa.kontrakan', 'sewa.user')->get();
-        $pdf = PDF::loadView('admin.laporan.transaksi_pdf', compact('transaksis'));
+        $pdf = PDF::loadView('admin.laporan.transaksi', compact('transaksis'));
         return $pdf->download('transaksi.pdf');
     }
 
@@ -47,7 +47,7 @@ class LaporanController extends Controller
     public function exportPengaduanPdf()
     {
         $pengaduans = Pengaduan::with('user')->get();
-        $pdf = PDF::loadView('admin.laporan.pengaduan_pdf', compact('pengaduans'));
+        $pdf = PDF::loadView('admin.laporan.pengaduan', compact('pengaduans'));
         return $pdf->download('pengaduan.pdf');
     }
 }

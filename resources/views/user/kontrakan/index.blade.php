@@ -75,8 +75,9 @@
                 </div>
 
                 <div class="d-flex justify-content-center mt-4">
-                    {{ $kontrakans->links('pagination::bootstrap-5') }}
+                    {{ $kontrakans->links('pagination::bootstrap-4') }}
                 </div>
+
             </div>
         </div>
     </section>

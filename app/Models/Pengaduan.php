@@ -30,6 +30,11 @@ class Pengaduan extends Model
         return $this->hasMany(BalasanPengaduan::class);
     }
 
+    public function status_diubah_oleh()
+    {
+        return $this->belongsTo(Admin::class, 'admin_id');
+    }
+
     public function getRouteKeyName()
     {
         return 'slug';

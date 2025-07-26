@@ -50,7 +50,9 @@ class PengaduanController extends Controller
 
         $pengaduan->update([
             'status' => $request->status,
+            'admin_id' => auth('admin')->id(),
         ]);
+
 
         Mail::to($pengaduan->user->email)->send(new UserPengaduanStatusUpdated($pengaduan));
 
