@@ -18,7 +18,6 @@
     @if (session('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             {{ session('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Tutup"></button>
         </div>
     @endif
 
@@ -59,12 +58,23 @@
                                 <td><span class="badge bg-info text-white">{{ $p->balasan->count() }} Balasan</span></td>
                                 <td>
                                     <a href="{{ route('admin.pengaduan.show', $p->slug) }}"
-                                        class="btn btn-primary btn-sm">Detail</a>
+                                        class="btn btn-info btn-icon-split btn-sm">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-eye"></i>
+                                        </span>
+                                        <span class="text">Detail</span>
+                                    </a>
+                                    <div class="my-2"></div>
                                     <form action="{{ route('admin.pengaduan.destroy', $p->slug) }}" method="POST"
                                         class="d-inline">
                                         @csrf @method('DELETE')
-                                        <button class="btn btn-danger btn-sm"
-                                            onclick="return confirm('Yakin hapus?')">Hapus</button>
+                                        <button class="btn btn-danger btn-icon-split btn-sm"
+                                            onclick="return confirm('Yakin hapus?')">
+                                            <span class="icon text-white-50">
+                                                <i class="fas fa-trash"></i>
+                                            </span>
+                                            <span class="text">Hapus</span>
+                                        </button>
                                     </form>
                                 </td>
                             </tr>

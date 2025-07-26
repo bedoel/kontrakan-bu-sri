@@ -41,7 +41,7 @@
 
     <!-- Header -->
     <header id="header" class="header d-flex align-items-center fixed-top">
-        <div class="container-fluid container-xl position-relative d-flex align-items-center">
+        <div class="container-fluid container-xl d-flex align-items-center">
 
             <a href="{{ route('user.home') }}" class="logo me-auto d-flex align-items-center">
                 <img src="{{ asset('front/assets/img/logo.png') }}" alt="Logo Kontrakan Bu Sri"
@@ -167,9 +167,8 @@
     </footer>
 
 
-    {{-- <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i
+    <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i
             class="bi bi-arrow-up-short"></i></a>
-    <div id="preloader"></div> --}}
 
     {{-- jQuery (required by DataTables) --}}
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>

@@ -22,8 +22,11 @@
     @endif
 
     <div class="mb-3">
-        <a href="{{ route('admin.sewa.create') }}" class="btn btn-primary">
-            Tambah Sewa
+        <a href="{{ route('admin.sewa.create') }}" class="btn btn-primary btn-icon-split btn-sm mb-2">
+            <span class="icon text-white-50">
+                <i class="fas fa-file-signature"></i>
+            </span>
+            <span class="text">Tambah Sewa</span>
         </a>
     </div>
 
@@ -59,17 +62,39 @@
                                 </td>
                                 <td>
                                     <a href="{{ route('admin.sewa.show', $sewa->slug) }}"
-                                        class="btn btn-info btn-sm">Detail</a>
+                                        class="btn btn-info btn-icon-split btn-sm">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-eye"></i>
+                                        </span>
+                                        <span class="text">Detail</span>
+                                    </a>
+                                    <div class="my-2"></div>
                                     <a href="{{ route('admin.sewa.edit', $sewa->slug) }}"
-                                        class="btn btn-warning btn-sm">Edit</a>
+                                        class="btn btn-warning btn-icon-split btn-sm">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-edit"></i>
+                                        </span>
+                                        <span class="text">Edit</span>
+                                    </a>
+                                    <div class="my-2"></div>
                                     <a href="{{ route('admin.sewa.perpanjang.form', $sewa->slug) }}"
-                                        class="btn btn-success btn-sm">Perpanjang</a>
+                                        class="btn btn-success btn-icon-split btn-sm">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-redo"></i>
+                                        </span>
+                                        <span class="text">Perpanjang</span>
+                                    </a>
+                                    <div class="my-2"></div>
                                     <form action="{{ route('admin.sewa.destroy', $sewa->slug) }}" method="POST"
                                         class="d-inline">
                                         @csrf @method('DELETE')
-                                        <button class="btn btn-danger btn-sm"
-                                            onclick="return confirm('Yakin hapus?')">Hapus</button>
+                                        <button class="btn btn-danger btn-icon-split btn-sm"
+                                            onclick="return confirm('Yakin hapus?')"><span class="icon text-white-50">
+                                                <i class="fas fa-trash"></i>
+                                            </span><span class="text">Hapus</span></button>
                                     </form>
+
+
                                 </td>
                             </tr>
                         @endforeach

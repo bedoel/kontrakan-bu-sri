@@ -5,7 +5,12 @@
 @section('content')
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Kelola Penyewa</h1>
-        <a href="{{ route('admin.users.create') }}" class="btn btn-sm btn-primary">Tambah User</a>
+        <a href="{{ route('admin.users.create') }}" class="btn btn-primary btn-icon-split btn-sm mb-2">
+            <span class="icon text-white-50">
+                <i class="fas fa-user-plus"></i>
+            </span>
+            <span class="text">Tambah User</span>
+        </a>
     </div>
 
     @if (session('success'))
@@ -49,14 +54,34 @@
                                         <span class="badge bg-secondary text-white">Belum diisi</span>
                                     @endif
                                 </td>
+
                                 <td>
-                                    <a href="{{ route('admin.users.show', $u->id) }}" class="btn btn-sm btn-info">Detail</a>
+                                    <a href="{{ route('admin.users.show', $u->id) }}"
+                                        class="btn btn-info btn-icon-split btn-sm">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-eye"></i>
+                                        </span>
+                                        <span class="text">Detail</span>
+                                    </a>
+                                    <div class="my-2"></div>
                                     <a href="{{ route('admin.users.edit', $u->id) }}"
-                                        class="btn btn-sm btn-warning">Edit</a>
+                                        class="btn btn-warning btn-icon-split btn-sm">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-edit"></i>
+                                        </span>
+                                        <span class="text">Edit</span>
+                                    </a>
+                                    <div class="my-2"></div>
                                     <form action="{{ route('admin.users.destroy', $u->id) }}" method="POST"
-                                        class="d-inline" onsubmit="return confirm('Yakin ingin menghapus user ini?')">
+                                        class="d-inline">
                                         @csrf @method('DELETE')
-                                        <button class="btn btn-sm btn-danger">Hapus</button>
+                                        <button class="btn btn-danger btn-icon-split btn-sm"
+                                            onclick="return confirm('Yakin hapus?')">
+                                            <span class="icon text-white-50">
+                                                <i class="fas fa-trash"></i>
+                                            </span>
+                                            <span class="text">Hapus</span>
+                                        </button>
                                     </form>
                                 </td>
                             </tr>

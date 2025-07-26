@@ -58,12 +58,23 @@
                                 <td>{{ $trx->admin->name ?? '-' }}</td>
                                 <td>
                                     <a href="{{ route('admin.transaksi.edit', $trx->id) }}"
-                                        class="btn btn-warning btn-sm">Edit</a>
+                                        class="btn btn-warning btn-icon-split btn-sm">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-edit"></i>
+                                        </span>
+                                        <span class="text">Edit</span>
+                                    </a>
+                                    <div class="my-2"></div>
                                     <form action="{{ route('admin.transaksi.destroy', $trx->id) }}" method="POST"
                                         class="d-inline">
                                         @csrf @method('DELETE')
-                                        <button class="btn btn-danger btn-sm"
-                                            onclick="return confirm('Yakin hapus?')">Hapus</button>
+                                        <button class="btn btn-danger btn-icon-split btn-sm"
+                                            onclick="return confirm('Yakin hapus?')">
+                                            <span class="icon text-white-50">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </span>
+                                            <span class="text">Hapus</span>
+                                        </button>
                                     </form>
                                 </td>
                             </tr>

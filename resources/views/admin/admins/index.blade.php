@@ -5,7 +5,12 @@
 @section('content')
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Kelola Admin</h1>
-        <a href="{{ route('admin.admins.create') }}" class="btn btn-sm btn-primary">Tambah Admin</a>
+        <a href="{{ route('admin.admins.create') }}" class="btn btn-primary btn-icon-split btn-sm mb-2">
+            <span class="icon text-white-50">
+                <i class="fas fa-user-plus"></i>
+            </span>
+            <span class="text">Tambah Admin</span>
+        </a>
     </div>
 
     @if (session('success'))
@@ -54,16 +59,35 @@
                                         {{ ucfirst(str_replace('_', ' ', $admin->role)) }}
                                     </span>
                                 </td>
+
                                 <td>
                                     <a href="{{ route('admin.admins.show', $admin->id) }}"
-                                        class="btn btn-sm btn-info">Detail</a>
+                                        class="btn btn-info btn-icon-split btn-sm">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-eye"></i>
+                                        </span>
+                                        <span class="text">Detail</span>
+                                    </a>
+                                    <div class="my-2"></div>
                                     <a href="{{ route('admin.admins.edit', $admin->id) }}"
-                                        class="btn btn-sm btn-warning">Edit</a>
+                                        class="btn btn-warning btn-icon-split btn-sm">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-edit"></i>
+                                        </span>
+                                        <span class="text">Edit</span>
+                                    </a>
+                                    <div class="my-2"></div>
                                     @if (auth('admin')->user()->id !== $admin->id)
                                         <form action="{{ route('admin.admins.destroy', $admin->id) }}" method="POST"
-                                            class="d-inline" onsubmit="return confirm('Yakin ingin menghapus admin ini?')">
+                                            class="d-inline">
                                             @csrf @method('DELETE')
-                                            <button class="btn btn-sm btn-danger">Hapus</button>
+                                            <button class="btn btn-danger btn-icon-split btn-sm"
+                                                onclick="return confirm('Yakin hapus?')">
+                                                <span class="icon text-white-50">
+                                                    <i class="fas fa-trash"></i>
+                                                </span>
+                                                <span class="text">Hapus</span>
+                                            </button>
                                         </form>
                                     @endif
                                 </td>

@@ -5,7 +5,12 @@
 @section('content')
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Data Kontrakan</h1>
-        <a href="{{ route('admin.kontrakan.create') }}" class="btn btn-sm btn-primary">Tambah Kontrakan</a>
+        <a href="{{ route('admin.kontrakan.create') }}" class="btn btn-primary btn-icon-split btn-sm mb-2">
+            <span class="icon text-white-50">
+                <i class="fas fa-home"></i>
+            </span>
+            <span class="text">Tambah Kontrakan</span>
+        </a>
     </div>
 
     @if (session('success'))
@@ -43,14 +48,26 @@
 
                                 <td>
                                     <a href="{{ route('admin.kontrakan.edit', $kontrakan->slug) }}"
-                                        class="btn btn-sm btn-warning">Edit</a>
+                                        class="btn btn-warning btn-icon-split btn-sm">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-edit"></i>
+                                        </span>
+                                        <span class="text">Edit</span>
+                                    </a>
+                                    <div class="my-2"></div>
                                     <form action="{{ route('admin.kontrakan.destroy', $kontrakan->slug) }}" method="POST"
-                                        style="display:inline-block;">
+                                        class="d-inline">
                                         @csrf @method('DELETE')
-                                        <button class="btn btn-sm btn-danger"
-                                            onclick="return confirm('Yakin hapus?')">Hapus</button>
+                                        <button class="btn btn-danger btn-icon-split btn-sm"
+                                            onclick="return confirm('Yakin hapus?')">
+                                            <span class="icon text-white-50">
+                                                <i class="fas fa-trash"></i>
+                                            </span>
+                                            <span class="text">Hapus</span>
+                                        </button>
                                     </form>
                                 </td>
+
                             </tr>
                         @endforeach
                     </tbody>
