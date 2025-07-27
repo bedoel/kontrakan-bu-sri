@@ -20,11 +20,11 @@
     <p>Status transaksi Anda saat ini: <strong>{!! statusBadge($transaksi->status) !!}</strong>.</p>
 @endif
 
-{{-- Tampilkan catatan admin di semua kondisi --}}
-@if ($transaksi->catatan)
+{{-- Tampilkan pesan admin di semua kondisi --}}
+@if ($transaksi->pesan)
     <div class="alert alert-info mt-3">
         <h5 class="mb-2"><i class="bi bi-chat-dots me-2"></i>Pesan dari Admin</h5>
-        <p class="mb-0">{{ $transaksi->catatan }}</p>
+        <p class="mb-0">{{ $transaksi->pesan }}</p>
     </div>
 @endif
 

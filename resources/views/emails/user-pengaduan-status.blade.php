@@ -41,11 +41,6 @@
         <p><strong>Isi pengaduan:</strong></p>
         <blockquote>{{ $pengaduan->pesan }}</blockquote>
 
-        @if ($pengaduan->catatan)
-            <p><strong>Catatan dari Admin:</strong></p>
-            <blockquote>{{ $pengaduan->catatan }}</blockquote>
-        @endif
-
         <a class="btn" href="{{ route('user.pengaduan.show', $pengaduan->slug) }}">
             Lihat Pengaduan
         </a>

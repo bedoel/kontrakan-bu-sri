@@ -4,7 +4,9 @@
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('admin.dashboard') }}">
         <div class="sidebar-brand-icon rotate-n-15">
-            <i class="fas fa-home"></i>
+            <img src="{{ asset('front/assets/img/logo.png') }}" alt="Logo Kontrakan Bu Sri"
+                style="height: 60px; max-height: 100%; object-fit: contain; filter: brightness(0) invert(1);"
+                class="me-3">
         </div>
         <div class="sidebar-brand-text mx-3">Kontrakan Admin</div>
     </a>

@@ -11,6 +11,9 @@
     <title>@yield('title', 'Kontrakan Bu Sri - Admin')</title>
     <link href="{{ asset('back/assets/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,300,400,600,700,800,900" rel="stylesheet">
+    <!-- Favicons -->
+    <link href="{{ asset('front/assets/img/logo.png') }}" rel="icon">
+    <link href="{{ asset('front/assets/img/logo.png') }}" rel="apple-touch-icon">
     <link href="{{ asset('back/assets/css/sb-admin-2.min.css') }}" rel="stylesheet">
     <link href="{{ asset('back/assets/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
     <!-- Bootstrap Icons -->

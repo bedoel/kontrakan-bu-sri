@@ -26,9 +26,7 @@ use App\Http\Controllers\Admin\UlasanController as AdminUlasanController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\LaporanController;
 
-// ===================================
 // Email Verification Routes
-// ===================================
 Route::middleware('auth:user')->group(function () {
     Route::get('/email/verify', fn() => view('auth.verify-email'))->name('verification.notice');
 
@@ -43,15 +41,11 @@ Route::middleware('auth:user')->group(function () {
     })->middleware('throttle:6,1')->name('verification.send');
 });
 
-// ===================================
 // Guest Routes
-// ===================================
 Route::get('/', [UserHomeController::class, 'index'])->name('user.home');
 Route::get('/ulasan', [UlasanController::class, 'index'])->name('ulasan.index');
 
-// ===================================
 // Auth Routes
-// ===================================
 // -- User
 Route::get('/user/login', [UserAuthController::class, 'showLogin'])->name('user.login');
 Route::get('/login', fn() => redirect()->route('user.login'))->name('login');
@@ -64,9 +58,7 @@ Route::get('/admin/login', [AdminAuthController::class, 'showLogin'])->name('adm
 Route::get('/admin-login', fn() => redirect()->route('admin.login'))->name('login.admin');
 Route::post('/admin/login', [AdminAuthController::class, 'login']);
 
-// ===================================
 // User Routes (Auth & Verified)
-// ===================================
 Route::middleware(['auth:user'])->group(function () {
     Route::post('/logout', [UserAuthController::class, 'logout'])->name('user.logout');
 
@@ -113,9 +105,7 @@ Route::middleware(['auth:user'])->group(function () {
     });
 });
 
-// ===================================
 // Admin Routes (Auth)
-// ===================================
 Route::prefix('admin')->middleware('auth:admin')->name('admin.')->group(function () {
     // Dashboard & Logout
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
@@ -166,9 +156,7 @@ Route::prefix('admin')->middleware('auth:admin')->name('admin.')->group(function
     });
 });
 
-// ===================================
 // Public Kontrakan Routes
-// ===================================
 Route::prefix('kontrakan')->name('user.kontrakan.')->group(function () {
     Route::get('/', [UserKontrakanController::class, 'index'])->name('index');
     Route::get('/{slug}', [UserKontrakanController::class, 'show'])->name('show');

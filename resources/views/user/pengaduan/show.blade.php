@@ -44,21 +44,23 @@
                 <div class="alert alert-info">Belum ada balasan untuk pengaduan ini.</div>
             @endforelse
 
-            <hr class="my-4">
+            @if ($pengaduan->status !== 'selesai')
+                <hr class="my-4">
 
-            <h5>Balas Pengaduan</h5>
-            @if (session('success'))
-                <div class="alert alert-success">{{ session('success') }}</div>
+                <h5>Balas Pengaduan</h5>
+                @if (session('success'))
+                    <div class="alert alert-success">{{ session('success') }}</div>
+                @endif
+
+                <form action="{{ route('user.pengaduan.balas', $pengaduan->slug) }}" method="POST">
+                    @csrf
+                    <div class="mb-3">
+                        <label for="pesanBalasan" class="form-label">Pesan Anda</label>
+                        <textarea name="pesan" id="pesanBalasan" class="form-control" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-success"><i class="bi bi-reply"></i> Kirim Balasan</button>
+                </form>
             @endif
-
-            <form action="{{ route('user.pengaduan.balas', $pengaduan->slug) }}" method="POST">
-                @csrf
-                <div class="mb-3">
-                    <label for="pesanBalasan" class="form-label">Pesan Anda</label>
-                    <textarea name="pesan" id="pesanBalasan" class="form-control" rows="4" required></textarea>
-                </div>
-                <button type="submit" class="btn btn-success"><i class="bi bi-reply"></i> Kirim Balasan</button>
-            </form>
 
 
             <a href="{{ route('user.pengaduan.index') }}" class="btn btn-secondary mt-4">Kembali</a>
